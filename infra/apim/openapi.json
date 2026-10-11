@@ -123,6 +123,55 @@
         }
       }
     },
+    "/api/analytics/summary": {
+      "get": {
+        "summary": "Analytics Summary",
+        "description": "Run-aggregate analytics: counts, averages, peer benchmarks, flags.\n\nRequires the ``analytics:read`` scope. Benchmarks are computed against\ndeterministic synthetic peer distributions (labeled as such).",
+        "operationId": "analytics_summary_api_analytics_summary_get",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Analytics Summary Api Analytics Summary Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/agents/rd_formulation/run": {
       "post": {
         "summary": "Run Rd Formulation",
