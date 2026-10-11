@@ -1,8 +1,12 @@
-"""Chat clients: Azure OpenAI (live) and a scripted fake (offline/tests).
+"""Chat clients: live LLM (direct OpenAI or Azure OpenAI) and a scripted fake.
 
 The fake implements the Microsoft Agent Framework 1.0 chat-client
 interface (``BaseChatClient._inner_get_response``) so framework ``Agent``
 runs work identically offline — no network, fully deterministic.
+
+Live mode (``build_chat_client(live=True)``) prefers **direct OpenAI**
+(``OPENAI_API_KEY``) and falls back to **Azure OpenAI** when that is not
+set. See ``docs/real-llm.md`` for the go-live guide.
 """
 
 from __future__ import annotations
@@ -17,6 +21,11 @@ from agent_framework import (
     FunctionInvocationLayer,
     Message,
 )
+
+# Environment variables for the direct-OpenAI live path.
+OPENAI_API_KEY_VAR = "OPENAI_API_KEY"
+OPENAI_MODEL_VAR = "OPENAI_MODEL"
+DEFAULT_OPENAI_MODEL = "gpt-4o"
 
 # Environment variables for the live Azure OpenAI path.
 AZURE_OPENAI_ENDPOINT_VAR = "AZURE_OPENAI_ENDPOINT"
@@ -119,10 +128,18 @@ def build_chat_client(live: bool = False) -> BaseChatClient:
     - ``live=False`` (default): raises — offline runs must use an explicit
       :class:`FakeChatClient` with a script (see
       :mod:`ingredion_ai.framework.demo_script`).
-    - ``live=True``: builds the framework's unified ``OpenAIChatClient``
-      against Azure OpenAI from the environment (see ``.env.example``).
-      Uses ``AZURE_OPENAI_API_KEY`` when set, otherwise
-      ``DefaultAzureCredential``.
+    - ``live=True``: builds the framework's unified ``OpenAIChatClient``.
+      Provider selection, in order:
+
+      1. **Direct OpenAI** — when ``OPENAI_API_KEY`` is set. Uses
+         ``OPENAI_MODEL`` (default ``"gpt-4o"``). No Azure resources needed;
+         this is the simplest way to go live with a personal API key.
+      2. **Azure OpenAI** — when the direct key is absent. Uses
+         ``AZURE_OPENAI_ENDPOINT`` + ``AZURE_OPENAI_CHAT_DEPLOYMENT`` (both
+         required), with ``AZURE_OPENAI_API_KEY`` when set, otherwise
+         ``DefaultAzureCredential``.
+
+      See ``docs/real-llm.md`` for the go-live guide and cost warning.
     """
     if not live:
         raise ValueError(
@@ -131,6 +148,15 @@ def build_chat_client(live: bool = False) -> BaseChatClient:
         )
     from agent_framework.openai import OpenAIChatClient
 
+    # 1. Direct OpenAI: a single API key, no Azure footprint.
+    openai_api_key = os.environ.get(OPENAI_API_KEY_VAR)
+    if openai_api_key:
+        return OpenAIChatClient(
+            model=os.environ.get(OPENAI_MODEL_VAR, DEFAULT_OPENAI_MODEL),
+            api_key=openai_api_key,
+        )
+
+    # 2. Azure OpenAI fallback.
     endpoint = os.environ.get(AZURE_OPENAI_ENDPOINT_VAR)
     deployment = os.environ.get(AZURE_OPENAI_DEPLOYMENT_VAR)
     missing = [
@@ -143,7 +169,8 @@ def build_chat_client(live: bool = False) -> BaseChatClient:
     ]
     if missing:
         raise RuntimeError(
-            "Live mode needs Azure OpenAI configuration; missing: "
+            "Live mode needs an LLM provider; either set OPENAI_API_KEY "
+            "(direct OpenAI, simplest) or configure Azure OpenAI — missing: "
             + ", ".join(missing)
             + ". Copy .env.example to .env and fill in the values."
         )

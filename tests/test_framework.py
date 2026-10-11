@@ -147,13 +147,53 @@ def test_build_chat_client_offline_raises():
 
 def test_build_chat_client_live_missing_env_raises_helpful_error(monkeypatch):
     for var in (
+        "OPENAI_API_KEY",
         "AZURE_OPENAI_ENDPOINT",
         "AZURE_OPENAI_CHAT_DEPLOYMENT",
         "AZURE_OPENAI_API_KEY",
     ):
         monkeypatch.delenv(var, raising=False)
-    with pytest.raises(RuntimeError, match="AZURE_OPENAI_ENDPOINT"):
+    with pytest.raises(RuntimeError, match="OPENAI_API_KEY"):
         build_chat_client(live=True)
+
+
+def _clear_proxy_env(monkeypatch):
+    # Constructing a real OpenAIChatClient reads proxy env vars via httpx;
+    # sandbox/CI runners sometimes set unparsable ones — clear for hermeticity.
+    for var in (
+        "HTTP_PROXY",
+        "HTTPS_PROXY",
+        "http_proxy",
+        "https_proxy",
+        "ALL_PROXY",
+        "all_proxy",
+        "NO_PROXY",
+        "no_proxy",
+    ):
+        monkeypatch.delenv(var, raising=False)
+
+
+def test_build_chat_client_live_direct_openai_preferred(monkeypatch):
+    from agent_framework.openai import OpenAIChatClient
+
+    _clear_proxy_env(monkeypatch)
+    monkeypatch.setenv("OPENAI_API_KEY", "sk-test-direct-key")
+    monkeypatch.setenv("OPENAI_MODEL", "gpt-4o-mini")
+    # Azure vars set too — direct OpenAI must still win.
+    monkeypatch.setenv("AZURE_OPENAI_ENDPOINT", "https://example.openai.azure.com/")
+    monkeypatch.setenv("AZURE_OPENAI_CHAT_DEPLOYMENT", "unused-deployment")
+    client = build_chat_client(live=True)
+    assert isinstance(client, OpenAIChatClient)
+
+
+def test_build_chat_client_live_direct_openai_default_model(monkeypatch):
+    from agent_framework.openai import OpenAIChatClient
+
+    _clear_proxy_env(monkeypatch)
+    monkeypatch.setenv("OPENAI_API_KEY", "sk-test-direct-key")
+    monkeypatch.delenv("OPENAI_MODEL", raising=False)
+    client = build_chat_client(live=True)
+    assert isinstance(client, OpenAIChatClient)
 
 
 def test_demo_scripts_cover_all_agents():

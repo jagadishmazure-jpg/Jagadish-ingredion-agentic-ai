@@ -72,7 +72,7 @@ AGENT_SKILL: Dict[str, str] = {
 }
 
 #: Prefix of the RuntimeError raised when live-mode env config is missing.
-_LIVE_CONFIG_PREFIX = "Live mode needs Azure OpenAI configuration"
+_LIVE_CONFIG_PREFIX = "Live mode needs an LLM provider"
 
 app = FastAPI(title=SERVICE_NAME, version=SERVICE_VERSION)
 
@@ -306,7 +306,7 @@ def _remember_idempotent(request: Request, subject: str, status: int, body: Dict
 
 
 class _LiveConfigError(Exception):
-    """Live mode was requested but Azure OpenAI env config is missing."""
+    """Live mode was requested but no LLM provider env config is set."""
 
 
 def _live_guarded_call(run_fn: Callable[..., Any], *args: Any) -> Any:
@@ -483,7 +483,7 @@ async def reformulate(
                 _run_workflow_sync, ctx, live=req.live
             )
         except _LiveConfigError as exc:
-            # Live requested but Azure OpenAI env config missing: fail, don't degrade.
+            # Live requested but no LLM provider configured: fail, don't degrade.
             raise PipelineRejected(503, str(exc)) from exc
         result = {
             "blackboard": to_jsonable(blackboard),
