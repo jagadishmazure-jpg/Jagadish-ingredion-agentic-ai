@@ -40,8 +40,14 @@ spec:
       containers:
         - name: svc
           # CI substitutes the real image on deploy (see .github/workflows/deploy.yml).
+          # Production: pin the image digest (img:tag@sha256:...) for immutability.
           image: __ACR_LOGIN_SERVER__/ingredion-agentic-ai:__IMAGE_TAG__
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
           ports:
             - containerPort: 8000
               name: http

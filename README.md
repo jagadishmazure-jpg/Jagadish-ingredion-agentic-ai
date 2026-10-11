@@ -74,7 +74,7 @@ Run the tests:
 uv run pytest -q        # or: python -m pytest -q
 ```
 
-Expected: **461 tests, all passing, fully offline** — no network, no API
+Expected: **511 tests, all passing, fully offline** — no network, no API
 keys. The framework agents run against the scripted `FakeChatClient`.
 
 ## Deploy on Foundry
@@ -133,6 +133,7 @@ keys). Live-LLM failures degrade gracefully to the offline pipeline
 | SLIs/SLOs, burn-rate alerting, App Insights KQL | [docs/monitoring.md](docs/monitoring.md) |
 | Legacy intelligence layer (wrap-don't-replace, L0→L3) | [docs/legacy-intelligence.md](docs/legacy-intelligence.md) |
 | Tool-calling patterns (OpenAPI gen, chains, resilience) | [docs/tool-calling.md](docs/tool-calling.md) |
+| Threat model, controls, production checklist | [docs/security.md](docs/security.md) |
 
 Peer benchmarks are computed against deterministic synthetic
 distributions and are always labeled as such — they demonstrate the
@@ -238,6 +239,9 @@ ingredion_ai/
                    retries/fallback chains/partial success, JSON-schema
                    sandbox with timeouts
   data/            Synthetic JSON/CSV datasets + loader (all fictional)
+  guardrails/      input/output safety: injection + jailbreak detection,
+                   PII detection, domain-scope enforcement, claim grounding,
+                   confidence thresholds; strictness policies via env
   demo.py          Runnable end-to-end narrative: python -m ingredion_ai.demo
                    (--live for Azure OpenAI; --scenario …; --audit-log …)
 evals/             Regression expectations for the demo (deterministic)
@@ -255,7 +259,7 @@ infra/
                    HPA, probes, workload-identity SA, Key Vault CSI
   monitoring/      Prometheus alert rules, Grafana dashboard JSON
 Dockerfile         Multi-stage service image (python:3.12-slim, non-root)
-tests/             380+ offline pytest tests
+tests/             510+ offline pytest tests
 ```
 
 ## Key design decisions

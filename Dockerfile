@@ -5,7 +5,9 @@
 
 # syntax=docker/dockerfile:1
 
-FROM python:3.12-slim AS builder
+# Base image pinned by digest (python:3.12-slim, amd64, resolved 2026-10-11).
+# Re-pin on rebuilds: docker buildx imagetools inspect python:3.12-slim.
+FROM python:3.12-slim@sha256:2b4f19dae3a777dfc3b76730bda1e82e1f66ab2a2686fa93ca78edbfb4f04ffe AS builder
 
 COPY --from=ghcr.io/astral-sh/uv:0.7 /uv /uvx /bin/
 
@@ -16,7 +18,7 @@ COPY pyproject.toml README.md LICENSE ./
 COPY ingredion_ai ./ingredion_ai
 RUN uv pip install --system --no-cache .
 
-FROM python:3.12-slim AS runtime
+FROM python:3.12-slim@sha256:2b4f19dae3a777dfc3b76730bda1e82e1f66ab2a2686fa93ca78edbfb4f04ffe AS runtime
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
