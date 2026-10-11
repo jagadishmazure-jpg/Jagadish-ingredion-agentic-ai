@@ -93,6 +93,7 @@ deployment happens only when you run the scripts below under your own login.
 ## Path 1 — Local demo (fastest, free)
 
 ```bash
+chmod +x scripts/*.sh   # one time: file modes don't survive every push method
 ./scripts/deploy-local.sh
 ```
 
