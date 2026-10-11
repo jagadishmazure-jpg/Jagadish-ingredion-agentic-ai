@@ -17,6 +17,11 @@ NON_CLEAN_LABEL_MARKERS = [
     ("sodium benzoate", "synthetic preservative"),
     ("polysorbate", "synthetic emulsifier"),
     ("tbhq", "synthetic antioxidant"),
+    # Markers for the extended demo DB (fictional ingredients).
+    ("butylshield", "synthetic antioxidant (ButylShield)"),
+    ("sunsetyellow", "synthetic color (SunsetYellow)"),
+    ("caffeineboost", "synthetic caffeine stimulant"),
+    ("sweetplus", "synthetic high-intensity sweetener"),
 ]
 
 

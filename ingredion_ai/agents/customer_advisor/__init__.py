@@ -91,7 +91,25 @@ class CustomerAdvisorAgent(Agent):
             if valid_claims is None:
                 claim_results = bb.get("validate_claims", {}).get("claims", [])
                 valid_claims = [c["claim"] for c in claim_results if c["valid"]]
-            return {"pricing": pricing.estimate_pricing(formula, valid_claims)}
+            result = {"pricing": pricing.estimate_pricing(formula, valid_claims)}
+            account_id = payload.get("account_id")
+            if account_id:
+                # Enterprise wiring: personalize the proposal with CRM context.
+                # Offline this resolves to the synthetic DemoCRMAdapter.
+                from ingredion_ai.integrations.crm import crm_from_env
+
+                crm = crm_from_env()
+                account = crm.get_account(account_id)
+                result["account_context"] = {
+                    "account": account,
+                    "open_opportunities": crm.list_opportunities(account_id),
+                    "open_cases": crm.list_cases(account_id),
+                    "tier_note": (
+                        f"{account['tier'].title()}-tier {account['segment']} "
+                        "account (demo CRM record)"
+                    ),
+                }
+            return result
 
         if task_name == "generate_tech_sheet":
             formula = payload["formula"]

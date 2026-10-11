@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingredion-agent-svc
+  namespace: ingredion-ai
+spec:
+  type: ClusterIP
+  selector:
+    app: ingredion-agent-svc
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

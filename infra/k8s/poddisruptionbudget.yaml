@@ -1,0 +1,13 @@
+# Keep at least one replica available during voluntary disruptions
+# (node upgrades, drains). With minReplicas: 2 on the Deployment, the
+# service survives single-node maintenance without downtime.
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ingredion-agent-svc
+  namespace: ingredion-ai
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: ingredion-agent-svc

@@ -1,0 +1,33 @@
+# Public entry point. Replace __APP_HOST__ with your DNS name
+# (e.g. agents.example.com) and wire TLS via cert-manager or your
+# ingress controller's mechanism (left manual — see runbook).
+#
+# APIM BACKEND CHOICE: API Management (Developer SKU, see infra/terraform/apim.tf)
+# has no VNET integration, so it reaches the service through this PUBLIC
+# ingress hostname (var.app_host must match __APP_HOST__). The service keeps
+# its own bearer-token check, and APIM enforces Entra ID JWT validation at
+# the edge — defense in depth.
+# Production path: APIM Premium (VNET-injected) + an INTERNAL ingress class
+# (e.g. ingressClassName: nginx-internal with the controller's
+# --ingress-class flag and an internal Azure load balancer annotation) +
+# Private Link, so backend traffic never traverses the public internet.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingredion-agent-svc
+  namespace: ingredion-ai
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: __APP_HOST__
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ingredion-agent-svc
+                port:
+                  number: 80

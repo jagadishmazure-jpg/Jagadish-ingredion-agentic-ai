@@ -6,6 +6,7 @@ from typing import Any, Dict
 
 from ingredion_ai.agents.rd_formulation import (
     analyzer,
+    cycle_time,
     documentation,
     nutrition,
     predictor,
@@ -70,6 +71,18 @@ class RDFormulationAgent(Agent):
                 "Validate label claims per region",
                 regulatory.validate_claims,
                 {"formula": "formula dict", "claims": "claim list"},
+            )
+        )
+        self.tools.register(
+            Tool(
+                "estimate_cycle_time",
+                "Estimate reformulation cycle time vs demo baseline",
+                cycle_time.estimate_cycle_time,
+                {
+                    "formula": "formula dict",
+                    "substitutions": "substitution list",
+                    "prediction": "prediction dict",
+                },
             )
         )
 
@@ -190,5 +203,19 @@ class RDFormulationAgent(Agent):
                 calc["nutrition_reformulated"],
             )
             return {"spec_markdown": spec, "tech_sheet_markdown": sheet}
+
+        if task_name == "estimate_cycle_time":
+            suggest = bb.get("suggest_substitutes") or self.execute(
+                "suggest_substitutes", payload
+            )
+            prediction = (
+                bb.get("predict_texture_shelf_life", {}).get("prediction")
+                or predictor.predict(formula, suggest["substitutions"])
+            )
+            return {
+                "cycle_time": cycle_time.estimate_cycle_time(
+                    formula, suggest["substitutions"], prediction
+                )
+            }
 
         raise ValueError(f"unknown task for {self.name}: {task_name}")

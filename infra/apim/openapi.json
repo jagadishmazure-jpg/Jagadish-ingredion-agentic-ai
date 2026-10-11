@@ -1,0 +1,537 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ingredion-agentic-ai-demo",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health",
+        "description": "Liveness/readiness probe (public).",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Health Api Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scenarios": {
+      "get": {
+        "summary": "Scenarios",
+        "description": "Available demo scenarios (public).",
+        "operationId": "scenarios_api_scenarios_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Scenarios Api Scenarios Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agent-cards": {
+      "get": {
+        "summary": "Agent Cards",
+        "description": "The four A2A agent cards (public discovery).",
+        "operationId": "agent_cards_api_agent_cards_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Agent Cards Api Agent Cards Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reformulate": {
+      "post": {
+        "summary": "Reformulate",
+        "description": "Run the full 4-agent reformulation workflow (offline by default).\n\nRequest flows through the 8-stage agentic pipeline\n(:mod:`ingredion_ai.service.pipeline`). Supports ``Idempotency-Key``.\nLive failures degrade gracefully to the offline fake client\n(``degraded: true`` + ``X-Service-Degraded``).",
+        "operationId": "reformulate_api_reformulate_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReformulateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agents/rd_formulation/run": {
+      "post": {
+        "summary": "Run Rd Formulation",
+        "operationId": "run_rd_formulation_api_agents_rd_formulation_run_post",
+        "parameters": [
+          {
+            "name": "_agent_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "rd_formulation",
+              "title": " Agent Name"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentRunRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agents/supply_chain/run": {
+      "post": {
+        "summary": "Run Supply Chain",
+        "operationId": "run_supply_chain_api_agents_supply_chain_run_post",
+        "parameters": [
+          {
+            "name": "_agent_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "supply_chain",
+              "title": " Agent Name"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentRunRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agents/esg/run": {
+      "post": {
+        "summary": "Run Esg",
+        "operationId": "run_esg_api_agents_esg_run_post",
+        "parameters": [
+          {
+            "name": "_agent_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "esg",
+              "title": " Agent Name"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentRunRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agents/customer_advisor/run": {
+      "post": {
+        "summary": "Run Customer Advisor",
+        "operationId": "run_customer_advisor_api_agents_customer_advisor_run_post",
+        "parameters": [
+          {
+            "name": "_agent_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "customer_advisor",
+              "title": " Agent Name"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentRunRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AgentRunRequest": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Prompt for the agent",
+            "default": "Run your demo task."
+          },
+          "formula_id": {
+            "type": "string",
+            "title": "Formula Id",
+            "default": "sweet_bakery_cake"
+          },
+          "target_claims": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Claims"
+          },
+          "region": {
+            "type": "string",
+            "title": "Region",
+            "default": "NA"
+          },
+          "live": {
+            "type": "boolean",
+            "title": "Live",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "AgentRunRequest",
+        "description": "Run a single domain agent (R&D pre-phase runs first when needed)."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ReformulateRequest": {
+        "properties": {
+          "scenario": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scenario",
+            "description": "Scenario id, e.g. sweet_bakery_cake"
+          },
+          "formula_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Formula Id"
+          },
+          "target_claims": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Claims"
+          },
+          "region": {
+            "type": "string",
+            "title": "Region",
+            "default": "NA"
+          },
+          "live": {
+            "type": "boolean",
+            "title": "Live",
+            "description": "Use Azure OpenAI (needs .env)",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ReformulateRequest",
+        "description": "Run the full reformulation workflow.\n\nEither ``scenario`` (one of GET /api/scenarios) or explicit\n``formula_id``/``target_claims``/``region``. Explicit fields override\nthe scenario's when both are given."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

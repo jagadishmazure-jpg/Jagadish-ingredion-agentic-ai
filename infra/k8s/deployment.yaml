@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingredion-agent-svc
+  namespace: ingredion-ai
+  labels:
+    app: ingredion-agent-svc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ingredion-agent-svc
+  template:
+    metadata:
+      labels:
+        app: ingredion-agent-svc
+        azure.workload.identity/use: "true"
+    spec:
+      serviceAccountName: ingredion-svc
+      # Reliability: spread replicas across nodes (with zones on the node
+      # pool, also across availability zones) so a single node/zone failure
+      # can't take down all replicas. HPA (2-6 replicas) + PDB(minAvailable: 1)
+      # keep capacity through disruptions. See docs/reliability.md.
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values: [ingredion-agent-svc]
+                topologyKey: kubernetes.io/hostname
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: svc
+          # CI substitutes the real image on deploy (see .github/workflows/deploy.yml).
+          image: __ACR_LOGIN_SERVER__/ingredion-agentic-ai:__IMAGE_TAG__
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              name: http
+          env:
+            - name: AZURE_OPENAI_ENDPOINT
+              value: __AZURE_OPENAI_ENDPOINT__
+            - name: AZURE_OPENAI_CHAT_DEPLOYMENT
+              value: gpt-4o-mini
+            # Optional API-key fallback from Key Vault (workload identity is primary).
+            - name: AZURE_OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ingredion-secrets
+                  key: AZURE_OPENAI_API_KEY
+                  optional: true
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "2"
+              memory: 2Gi
+          volumeMounts:
+            - name: kv-secrets
+              mountPath: /mnt/secrets-store
+              readOnly: true
+      volumes:
+        - name: kv-secrets
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: ingredion-kv
