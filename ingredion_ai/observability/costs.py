@@ -222,6 +222,89 @@ class BudgetTracker:
 
 
 # ---------------------------------------------------------------------------
+# Spend forecasting
+# ---------------------------------------------------------------------------
+
+
+def forecast_spend(
+    costs: List[float],
+    days_ahead: int = 30,
+    window: int = 7,
+) -> Dict[str, Any]:
+    """Project future spend from a chronological list of per-run costs.
+
+    Method (deterministic, stdlib only): take the mean of the last
+    ``window`` runs as the daily average, fit a least-squares trend line
+    over the full history for the daily growth slope, then project the
+    average daily cost over the horizon as ``daily_average + slope *
+    days_ahead / 2`` (the midpoint of the linear trend).
+
+    Returns ``{"projected_spend", "daily_average", "trend",
+    "trend_pct_per_day", "confidence_note"}`` where ``trend`` is one of
+    ``"growing"`` / ``"stable"`` / ``"declining"``. Empty history yields
+    zeros with an "insufficient data" note — never an exception.
+    """
+    result: Dict[str, Any] = {
+        "projected_spend": 0.0,
+        "daily_average": 0.0,
+        "trend": "stable",
+        "trend_pct_per_day": 0.0,
+        "confidence_note": "no run history — cannot forecast",
+    }
+    n = len(costs)
+    if n == 0 or days_ahead <= 0:
+        return result
+
+    recent = costs[-window:] if window > 0 else costs
+    daily_average = sum(recent) / len(recent)
+
+    # Least-squares slope of cost vs run index (0..n-1).
+    slope = 0.0
+    if n > 1:
+        xs = list(range(n))
+        mean_x = sum(xs) / n
+        mean_y = sum(costs) / n
+        denom = sum((x - mean_x) ** 2 for x in xs)
+        if denom:
+            slope = sum(
+                (x - mean_x) * (y - mean_y) for x, y in zip(xs, costs)
+            ) / denom
+
+    trend_pct = (slope / daily_average * 100) if daily_average else 0.0
+    if trend_pct > 1.0:
+        trend = "growing"
+    elif trend_pct < -1.0:
+        trend = "declining"
+    else:
+        trend = "stable"
+
+    projected_daily = max(0.0, daily_average + slope * days_ahead / 2)
+    projected_spend = round(projected_daily * days_ahead, 2)
+
+    if n < 7:
+        confidence = (
+            f"low — only {n} data point(s); treat the projection as directional"
+        )
+    elif n < 30:
+        confidence = "medium — under 30 data points; re-run weekly"
+    else:
+        confidence = "high — 30+ data points of history"
+    if abs(trend_pct) > 10.0:
+        confidence += "; steep trend — validate the driver before budgeting"
+
+    result.update(
+        {
+            "projected_spend": projected_spend,
+            "daily_average": round(daily_average, 6),
+            "trend": trend,
+            "trend_pct_per_day": round(trend_pct, 2),
+            "confidence_note": confidence,
+        }
+    )
+    return result
+
+
+# ---------------------------------------------------------------------------
 # Optimization recommendations
 # ---------------------------------------------------------------------------
 

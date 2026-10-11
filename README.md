@@ -273,7 +273,7 @@ docs/              Architecture, Foundry deployment, identity, governance,
                    architecture alignment, attachments coverage, usecases,
                    context-engineering, harness, loops, graph, reliability,
                    deployment runbook, stack alignment, analytics, finops,
-                   monitoring, azure-integration
+                   monitoring, azure-integration, microsoft alignment
 infra/
   terraform/       Azure IaC: RG, ACR, AKS (zonal, workload identity),
                    Key Vault, App Insights, Foundry account + model
