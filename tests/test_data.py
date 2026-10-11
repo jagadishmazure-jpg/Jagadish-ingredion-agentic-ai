@@ -47,7 +47,7 @@ def test_get_ingredient_unknown_raises():
 
 def test_formulas_valid_and_sum_to_100():
     formulas = loader.load_formulas()
-    assert len(formulas) == 3
+    assert len(formulas) == 8  # 3 original + 5 bakery/beverage expansion formulas
     for formula in formulas:
         total = sum(i["pct"] for i in formula["ingredients"])
         assert abs(total - 100.0) < 0.01, formula["id"]

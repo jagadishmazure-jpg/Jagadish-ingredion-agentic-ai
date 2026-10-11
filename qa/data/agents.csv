@@ -1,0 +1,5 @@
+agent,scope,message
+rd_formulation,formulation:write,Reformulate the demo cake for clean label
+supply_chain,supply:read,Forecast demand for the demo formula
+esg,esg:read,Draft the ESG report for the demo formula
+customer_advisor,proposal:read,Estimate pricing for the demo formula
