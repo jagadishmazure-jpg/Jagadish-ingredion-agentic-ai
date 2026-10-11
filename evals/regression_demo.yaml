@@ -1,0 +1,15 @@
+# Regression expectations for the sweet-bakery-cake demo.
+# All values are produced by the deterministic demo pipeline; every number
+# is synthetic demo data. If the pipeline changes intentionally, update these.
+demo: sweet_bakery_cake_reformulation
+expected:
+  formula_id: sweet_bakery_cake
+  flagged_count: 7
+  substituted_count: 6
+  removed_count: 1
+  texture_match_pct: 92.2
+  shelf_life_days: 8.2
+  claims:
+    "no artificial ingredients": true
+    "reduced sugar": true
+    "natural": false

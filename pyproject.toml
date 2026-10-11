@@ -1,0 +1,15 @@
+[project]
+name = "jagadish-ingredion-agentic-ai"
+version = "0.1.0"
+description = "Multi-agent AI demo for clean-label ingredient manufacturing. 100% synthetic demo data; independent portfolio project, not affiliated with Ingredion."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Jagadish Meduri" }]
+dependencies = ["pyyaml>=6.0"]
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
