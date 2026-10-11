@@ -41,6 +41,10 @@ from ingredion_ai.observability.logging import get_json_logger
 from ingredion_ai.rag.retrieval import Retriever
 from ingredion_ai.service.memory import SessionStore, session_store as default_store
 
+# Lifecycle events (Azure Event Grid in production; in-memory offline).
+# Imported lazily inside methods to keep this module importable even if the
+# integration package is absent, and so publisher swaps stay one-liners.
+
 logger = get_json_logger("ingredion_ai.service.pipeline")
 
 #: (stage_key, human label) in execution order.
@@ -178,6 +182,7 @@ class AgenticPipeline:
             session_id=session_id or f"ses-{uuid.uuid4().hex[:12]}",
         )
         self._executor = executor
+        self._emit_lifecycle("run.started", ctx)
         for key, _label in STAGES:
             start = time.perf_counter()
             await getattr(self, f"stage_{key}")(ctx)
@@ -315,10 +320,37 @@ class AgenticPipeline:
         state["last_result_keys"] = result_keys
         self.store.set(ctx.session_id, state)
 
+    # -- lifecycle events (best-effort; never break the pipeline) ------------
+
+    @staticmethod
+    def _emit_lifecycle(kind: str, ctx: "PipelineContext") -> None:
+        try:
+            from ingredion_ai.azure_integration import events as lifecycle
+
+            event_type = {
+                "run.started": lifecycle.RUN_STARTED,
+                "run.completed": lifecycle.RUN_COMPLETED,
+            }[kind]
+            lifecycle.emit_lifecycle_event(
+                event_type,
+                subject=f"pipeline/{ctx.session_id}",
+                data={
+                    "kind": ctx.request.kind,
+                    "agent": ctx.request.agent_name,
+                    "subject": ctx.identity_subject,
+                    "session_id": ctx.session_id,
+                    "live": ctx.request.live,
+                    "degraded": ctx.degraded,
+                },
+            )
+        except Exception:  # noqa: BLE001 - lifecycle events are best-effort
+            pass
+
     # -- stage 8: feedback -------------------------------------------------------
 
     async def stage_feedback(self, ctx: PipelineContext) -> None:
         """Structured log line per request (eval/log feedback loop)."""
+        self._emit_lifecycle("run.completed", ctx)
         logger.info(
             "pipeline_run",
             extra={
