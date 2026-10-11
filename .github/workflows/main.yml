@@ -23,9 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
       - name: Bash syntax check on deploy scripts
         run: |
           bash -n scripts/deploy-azure.sh
           bash -n scripts/deploy-local.sh
       - name: Validate docker-compose.yml
-        run: python3 -c "import yaml; yaml.safe_load(open('docker-compose.yml'))"
+        run: uv run --with pyyaml python -c "import yaml; yaml.safe_load(open('docker-compose.yml'))"
