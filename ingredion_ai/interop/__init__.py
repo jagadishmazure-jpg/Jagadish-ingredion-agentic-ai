@@ -27,6 +27,17 @@ from ingredion_ai.interop.auth import (
     verify_token,
 )
 
+from ingredion_ai.interop.vendor_agents import (
+    VENDOR_AGENT_KEY,
+    VENDOR_SCOPE,
+    VENDOR_SKILL_ID,
+    build_vendor_card,
+    register_vendor_agent,
+    score_supplier_risk,
+    vendor_adapter,
+    vendor_risk_executor,
+)
+
 __all__ = [
     "A2AAdapter",
     "AgentCard",
@@ -47,4 +58,12 @@ __all__ = [
     "required_scopes_for",
     "require_scopes",
     "verify_token",
+    "VENDOR_AGENT_KEY",
+    "VENDOR_SCOPE",
+    "VENDOR_SKILL_ID",
+    "build_vendor_card",
+    "register_vendor_agent",
+    "score_supplier_risk",
+    "vendor_adapter",
+    "vendor_risk_executor",
 ]
