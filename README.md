@@ -74,7 +74,7 @@ Run the tests:
 uv run pytest -q        # or: python -m pytest -q
 ```
 
-Expected: **339 tests, all passing, fully offline** — no network, no API
+Expected: **461 tests, all passing, fully offline** — no network, no API
 keys. The framework agents run against the scripted `FakeChatClient`.
 
 ## Deploy on Foundry
@@ -118,6 +118,25 @@ keys). Live-LLM failures degrade gracefully to the offline pipeline
 > **Note:** `.github/workflows/deploy.yml` can't be pushed via the
 > repo's automation identity — add it manually like `ci.yml`, then set
 > the repo secrets listed at the top of the file.
+
+## Analytics & monitoring
+
+| Capability | Location |
+|---|---|
+| Run aggregates + peer benchmarking + proactive flags | `ingredion_ai/analytics/`, `GET /api/analytics/summary` (`analytics:read` scope) |
+| SVG charts in the demo UI (cost vs peers, shelf-life, claim coverage) | `ingredion_ai/service/ui.py` |
+| Versioned data layer (registry, schema validation, lineage) | `ingredion_ai/datalayer/` |
+| LLM cost tracking, budgets, optimization recommendations | `ingredion_ai/observability/costs.py` |
+| Prometheus `/metrics` + alert rules + Grafana dashboard | `ingredion_ai/service/metrics.py`, `infra/monitoring/` |
+| Analytics methodology (incl. synthetic-data caveats) | [docs/analytics.md](docs/analytics.md) |
+| FinOps (budgets, SKU right-sizing, Azure cost notes) | [docs/finops.md](docs/finops.md) |
+| SLIs/SLOs, burn-rate alerting, App Insights KQL | [docs/monitoring.md](docs/monitoring.md) |
+| Legacy intelligence layer (wrap-don't-replace, L0→L3) | [docs/legacy-intelligence.md](docs/legacy-intelligence.md) |
+| Tool-calling patterns (OpenAPI gen, chains, resilience) | [docs/tool-calling.md](docs/tool-calling.md) |
+
+Peer benchmarks are computed against deterministic synthetic
+distributions and are always labeled as such — they demonstrate the
+benchmarking pattern, not real market data.
 
 ## Agent catalog
 
@@ -205,6 +224,19 @@ ingredion_ai/
   loops/           reflection loop (draft→critique→revise), HITL gate loop
   graph/           nodes/edges/conditional routing/cycles; graph-based
                    reformulation variant
+  datalayer/       versioned dataset registry, schema validation (fail-fast),
+                   lineage (version + content hash), FileConnector
+                   (Fabric/OneLake/Blob/SQL path documented)
+  analytics/       run aggregates, synthetic peer benchmarking, trend
+                   helpers, proactive anomaly flags
+  legacy/          intelligence layer over traditional systems: bridges
+                   (uniform envelope, timeouts, error translation),
+                   versioned capability catalog, CDC poller + webhooks,
+                   L0→L3 autonomy ladder with promotion criteria
+  tools/           deeper tool calling: OpenAPI 3.x tool generation
+                   (synthetic LIMS doc), chains + fan-out composition,
+                   retries/fallback chains/partial success, JSON-schema
+                   sandbox with timeouts
   data/            Synthetic JSON/CSV datasets + loader (all fictional)
   demo.py          Runnable end-to-end narrative: python -m ingredion_ai.demo
                    (--live for Azure OpenAI; --scenario …; --audit-log …)
@@ -213,15 +245,17 @@ docs/              Architecture, Foundry deployment, identity, governance,
                    integrations, benefits, demo guide, glossary, SOC +
                    architecture alignment, attachments coverage, usecases,
                    context-engineering, harness, loops, graph, reliability,
-                   deployment runbook, stack alignment
+                   deployment runbook, stack alignment, analytics, finops,
+                   monitoring
 infra/
   terraform/       Azure IaC: RG, ACR, AKS (zonal, workload identity),
                    Key Vault, App Insights, Foundry account + model
                    deployment, least-privilege RBAC
   k8s/             Kustomize manifests: namespace, PDB, anti-affinity,
                    HPA, probes, workload-identity SA, Key Vault CSI
+  monitoring/      Prometheus alert rules, Grafana dashboard JSON
 Dockerfile         Multi-stage service image (python:3.12-slim, non-root)
-tests/             300+ offline pytest tests
+tests/             380+ offline pytest tests
 ```
 
 ## Key design decisions

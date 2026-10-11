@@ -20,6 +20,7 @@ AGENT_POLICIES: Dict[str, Dict[str, List[str]]] = {
             "validate_claims",
             "generate_documentation",
             "estimate_cycle_time",
+            "lims_quality_lookup",
         ],
         "deny": [
             "approve_production",

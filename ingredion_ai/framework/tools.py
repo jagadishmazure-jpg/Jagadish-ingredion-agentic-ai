@@ -123,6 +123,35 @@ def build_tool_functions(ctx: Dict[str, Any]) -> Dict[str, List[Callable[..., st
             ),
         )
 
+    def lims_quality_lookup(sample_id: str = "SMP-1001") -> str:
+        """Look up the legacy LIMS sample record + test results (demo).
+
+        Live demo path for the deeper tool-calling stack: OpenAPI-generated
+        tools (``getSample``, ``getTestResults``) composed into a chain with
+        output->input mapping, running against the synthetic LIMS transport
+        offline (production swaps in real HTTP).
+        """
+        from ingredion_ai.tools.composition import chain
+        from ingredion_ai.tools.openapi import (
+            load_lims_openapi,
+            synthetic_lims_transport,
+            tools_from_openapi,
+        )
+
+        lims_tools = tools_from_openapi(load_lims_openapi(), synthetic_lims_transport)
+        # Adapt (args_dict) -> envelope for the chain runner.
+        get_sample = lambda args: lims_tools["getSample"](**args)  # noqa: E731
+        get_tests = lambda args: lims_tools["getTestResults"](**args)  # noqa: E731
+        lims_chain = chain(
+            [("get_sample", get_sample), ("get_tests", get_tests)],
+            arg_maps={
+                "get_sample": {"sampleId": sample_id},
+                "get_tests": {"sampleId": "$get_sample.sample_id"},
+            },
+        )
+        result = lims_chain({})
+        return _store(ctx, "lims_quality_lookup", {"sample_id": sample_id, **result})
+
     return {
         "rd_formulation": [
             analyze_ingredients,
@@ -131,6 +160,7 @@ def build_tool_functions(ctx: Dict[str, Any]) -> Dict[str, List[Callable[..., st
             calculate_nutrition,
             validate_claims,
             generate_documentation,
+            lims_quality_lookup,
         ],
         "supply_chain": [forecast_demand],
         "esg": [collect_esg, esg_report],
