@@ -175,7 +175,19 @@ def test_agent_run_unknown_agent_is_404():
     assert r.status_code == 404
 
 
-def test_reformulate_live_without_env_is_503():
+def test_reformulate_live_without_env_is_503(monkeypatch):
+    # Hermetic: the test's promise is "no provider config → 503", so clear
+    # every provider variable — a dev machine may legitimately have a real
+    # OPENAI_API_KEY exported, which must not leak into this test.
+    for var in (
+        "OPENAI_API_KEY",
+        "OPENAI_MODEL",
+        "AZURE_OPENAI_ENDPOINT",
+        "AZURE_OPENAI_CHAT_DEPLOYMENT",
+        "AZURE_OPENAI_API_KEY",
+        "AZURE_OPENAI_API_VERSION",
+    ):
+        monkeypatch.delenv(var, raising=False)
     r = client.post(
         "/api/reformulate",
         json={"scenario": "sweet_bakery_cake", "live": True},
