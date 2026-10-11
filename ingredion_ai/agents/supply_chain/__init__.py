@@ -78,12 +78,22 @@ class SupplyChainAgent(Agent):
                 }
             else:
                 forecasts_weekly = payload.get("forecasts_weekly", {})
+            inv = payload.get("inventory")
+            plant_id = payload.get("plant_id")
+            source = "payload"
+            if inv is None and plant_id:
+                # Enterprise wiring: pull live-ish inventory from SAP.
+                # Offline this resolves to the synthetic DemoSAPAdapter.
+                from ingredion_ai.integrations.sap import sap_from_env
+
+                inv = sap_from_env().get_inventory(plant_id)
+                source = f"sap:{plant_id}"
             purchases = inventory.suggest_purchases(
-                payload.get("inventory", {}),
+                inv or {},
                 forecasts_weekly,
                 lead_time_days=payload.get("lead_time_days", 7.0),
             )
-            return {"purchases": purchases}
+            return {"purchases": purchases, "inventory_source": source}
 
         if task_name == "schedule_production":
             return scheduler.schedule_production(

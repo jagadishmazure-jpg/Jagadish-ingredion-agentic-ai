@@ -23,9 +23,33 @@ DEMO_SUBSTITUTION_MAP: Dict[str, List[str]] = {
     "P60": ["SL-70"],
     "TD-99": [],
     "TBHQ": ["RE-77"],
+    # Extended demo DB mappings (fictional ingredients).
+    "AB-66": ["NV-60"],  # artificial berry flavor -> natural vanilla
+    "AO-67": ["NV-60"],  # artificial orange flavor -> natural vanilla
+    "BHA-68": ["RE-77"],  # synthetic antioxidant -> rosemary extract
+    "YS-58": ["BC-12"],  # synthetic color -> beetroot color
+    "CAF-71": [],  # synthetic caffeine: no clean-label stimulant; removed
+    "SPS-72": ["MNK-77"],  # synthetic sweetener -> monk fruit sweetener
 }
 
 WATER_ID = "WTR-00"
+
+
+def _cost_aware_key(candidate: Dict[str, Any]) -> tuple:
+    """Sort key for cost-aware candidate ranking.
+
+    Rationale (paraphrased from public clean-label manufacturer research):
+    ingredient cost is the #1 barrier to reformulation, so when several
+    clean-label candidates share a function, the demo ranks the cheapest
+    first and uses texture impact only as a tie-breaker (lower impact means
+    less reformulation risk).
+    """
+    return (candidate["cost_index"], candidate["texture_impact"])
+
+
+def rank_cost_aware(candidates: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Rank clean-label *candidates* cheapest-first (cost-aware demo ranking)."""
+    return sorted(candidates, key=_cost_aware_key)
 
 
 def _candidates_for(old: Dict[str, Any]) -> List[Dict[str, Any]]:
@@ -40,7 +64,8 @@ def _candidates_for(old: Dict[str, Any]) -> List[Dict[str, Any]]:
         for c in pool
         if c["clean_label"] and c["function"] == old["function"] and c["id"] != old["id"]
     ]
-    return sorted(same_function, key=lambda c: c["cost_index"])
+    # Cost-aware fallback ranking (see _cost_aware_key rationale above).
+    return rank_cost_aware(same_function)
 
 
 def suggest_substitutes(

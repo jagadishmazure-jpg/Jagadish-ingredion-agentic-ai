@@ -1,1 +1,1453 @@
-[{"category":"starch","clean_label":true,"cost_index":1.2,"function":"thickener","id":"PF-200","name":"PureField Starch PF-200","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":85,"fat_g":0.1,"kcal":350,"protein_g":0.5,"sodium_mg":10,"sugar_g":0.5},"regions":["NA","EU","LATAM","APAC"],"texture_impact":2.0,"usage_max":8.0,"usage_min":1.0},{"category":"starch","clean_label":true,"cost_index":1.3,"function":"stabilizer","id":"PF-410","name":"PureField Starch PF-410","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":84,"fat_g":0.1,"kcal":340,"protein_g":0.4,"sodium_mg":15,"sugar_g":0.4},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.5,"usage_max":5.0,"usage_min":0.5},{"category":"starch","clean_label":true,"cost_index":1.4,"function":"gelling","id":"CG-90","name":"ClearGel Starch CG-90","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":86,"fat_g":0.1,"kcal":345,"protein_g":0.3,"sodium_mg":12,"sugar_g":0.3},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.8,"usage_max":6.0,"usage_min":1.0},{"category":"starch","clean_label":false,"cost_index":0.9,"function":"thickener","id":"MCS-10","name":"ModifiedCornStarch MCS-10","natural":false,"note":"DEMO non-clean-label ingredient: chemically modified starch.","nutrition":{"carbs_g":88,"fat_g":0.1,"kcal":350,"protein_g":0.4,"sodium_mg":20,"sugar_g":0.5},"regions":["NA","LATAM","APAC"],"texture_impact":2.5,"usage_max":8.0,"usage_min":1.0},{"category":"flour","clean_label":true,"cost_index":1.0,"function":"structure","id":"HB-10","name":"HarvestBlend Flour HB-10","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":72,"fat_g":2.0,"kcal":360,"protein_g":10,"sodium_mg":5,"sugar_g":1.5},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.0,"usage_max":45.0,"usage_min":10.0},{"category":"flour","clean_label":true,"cost_index":1.5,"function":"structure","id":"AG-30","name":"AncientGrain Flour AG-30","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":68,"fat_g":2.5,"kcal":355,"protein_g":12,"sodium_mg":8,"sugar_g":2.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.2,"usage_max":45.0,"usage_min":10.0},{"category":"flour","clean_label":true,"cost_index":1.2,"function":"structure","id":"OF-50","name":"OatFlour OF-50","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":66,"fat_g":7.0,"kcal":380,"protein_g":13,"sodium_mg":5,"sugar_g":1.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.0,"usage_max":20.0,"usage_min":5.0},{"category":"flour","clean_label":true,"cost_index":0.8,"function":"structure","id":"WF-01","name":"WheatFlour WF-01","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":76,"fat_g":1.0,"kcal":364,"protein_g":10,"sodium_mg":5,"sugar_g":1.5},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.8,"usage_max":50.0,"usage_min":10.0},{"category":"protein","clean_label":true,"cost_index":1.8,"function":"protein_enrichment","id":"VP-80","name":"VerdantPea Protein VP-80","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":5,"fat_g":6.0,"kcal":400,"protein_g":80,"sodium_mg":200,"sugar_g":2.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":2.2,"usage_max":10.0,"usage_min":1.0},{"category":"protein","clean_label":true,"cost_index":1.7,"function":"protein_enrichment","id":"FB-70","name":"FavaBean Protein FB-70","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":8,"fat_g":5.0,"kcal":390,"protein_g":70,"sodium_mg":150,"sugar_g":3.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":2.0,"usage_max":10.0,"usage_min":1.0},{"category":"protein","clean_label":true,"cost_index":1.6,"function":"protein_enrichment","id":"RP-60","name":"RiceProtein RP-60","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":10,"fat_g":4.0,"kcal":380,"protein_g":60,"sodium_mg":100,"sugar_g":2.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.8,"usage_max":8.0,"usage_min":1.0},{"category":"sweetener","clean_label":true,"cost_index":1.6,"function":"sweetener","id":"FS-40","name":"FruitSweet Blend FS-40","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":70,"fat_g":0.2,"kcal":280,"protein_g":0.5,"sodium_mg":20,"sugar_g":60.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.5,"usage_max":10.0,"usage_min":1.0},{"category":"sweetener","clean_label":true,"cost_index":1.8,"function":"sweetener","id":"HG-20","name":"HoneyGranule HG-20","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":82,"fat_g":0.1,"kcal":300,"protein_g":0.3,"sodium_mg":10,"sugar_g":80.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.2,"usage_max":8.0,"usage_min":1.0},{"category":"sweetener","clean_label":true,"cost_index":1.7,"function":"sweetener","id":"DS-15","name":"DateSugar DS-15","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":75,"fat_g":0.3,"kcal":290,"protein_g":1.5,"sodium_mg":15,"sugar_g":65.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.4,"usage_max":8.0,"usage_min":1.0},{"category":"sweetener","clean_label":true,"cost_index":2.5,"function":"sweetener","id":"SL-95","name":"SteviaLeaf Extract SL-95","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":5,"fat_g":0,"kcal":0,"protein_g":0,"sodium_mg":0,"sugar_g":5.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.3,"usage_max":0.5,"usage_min":0.05},{"category":"sweetener","clean_label":true,"cost_index":0.9,"function":"sweetener","id":"RCS-01","name":"RefinedCaneSugar RCS-01","natural":false,"note":"DEMO: refined sugar counts as clean-label here but is NOT natural-claim eligible.","nutrition":{"carbs_g":100,"fat_g":0,"kcal":400,"protein_g":0,"sodium_mg":5,"sugar_g":99.8},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.5,"usage_max":30.0,"usage_min":1.0},{"category":"sweetener","clean_label":false,"cost_index":0.8,"function":"sweetener","id":"HFCS-42","name":"HighFructoseCornSyrup HFCS-42","natural":false,"note":"DEMO non-clean-label ingredient.","nutrition":{"carbs_g":76,"fat_g":0,"kcal":280,"protein_g":0,"sodium_mg":10,"sugar_g":76.0},"regions":["NA","LATAM","APAC"],"texture_impact":1.0,"usage_max":12.0,"usage_min":1.0},{"category":"color","clean_label":true,"cost_index":2.0,"function":"color","id":"BC-12","name":"BeetRoot Color BC-12","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":9,"fat_g":0.1,"kcal":40,"protein_g":1,"sodium_mg":50,"sugar_g":7.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.5,"usage_max":1.0,"usage_min":0.05},{"category":"color","clean_label":true,"cost_index":1.9,"function":"color","id":"TC-08","name":"TurmericColor TC-08","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":65,"fat_g":10.0,"kcal":350,"protein_g":9,"sodium_mg":40,"sugar_g":3.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.4,"usage_max":0.8,"usage_min":0.05},{"category":"color","clean_label":true,"cost_index":2.4,"function":"color","id":"SB-05","name":"SpirulinaBlue SB-05","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":24,"fat_g":7.0,"kcal":290,"protein_g":57,"sodium_mg":100,"sugar_g":3.0},"regions":["NA","EU","APAC"],"texture_impact":0.4,"usage_max":0.5,"usage_min":0.05},{"category":"color","clean_label":true,"cost_index":1.8,"function":"color","id":"CO-22","name":"CarrotOrange CO-22","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":8,"fat_g":0.2,"kcal":35,"protein_g":0.8,"sodium_mg":60,"sugar_g":5.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.4,"usage_max":1.0,"usage_min":0.05},{"category":"color","clean_label":false,"cost_index":1.0,"function":"whitener","id":"TD-99","name":"TitaniumDioxide TD-99","natural":false,"note":"DEMO non-clean-label ingredient: synthetic whitener.","nutrition":{"carbs_g":0,"fat_g":0,"kcal":0,"protein_g":0,"sodium_mg":0,"sugar_g":0},"regions":["NA","LATAM"],"texture_impact":0.2,"usage_max":1.0,"usage_min":0.05},{"category":"color","clean_label":false,"cost_index":0.9,"function":"color","id":"R40","name":"Red40 Color R40","natural":false,"note":"DEMO non-clean-label ingredient: synthetic color.","nutrition":{"carbs_g":0,"fat_g":0,"kcal":0,"protein_g":0,"sodium_mg":0,"sugar_g":0},"regions":["NA","LATAM"],"texture_impact":0.3,"usage_max":0.5,"usage_min":0.05},{"category":"emulsifier","clean_label":true,"cost_index":1.5,"function":"emulsifier","id":"SL-70","name":"SunflowerLecithin SL-70","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":0,"fat_g":100.0,"kcal":800,"protein_g":0,"sodium_mg":10,"sugar_g":0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.0,"usage_max":2.0,"usage_min":0.2},{"category":"emulsifier","clean_label":true,"cost_index":1.7,"function":"stabilizer","id":"AG-100","name":"AcaciaGum AG-100","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":85,"fat_g":0.5,"kcal":350,"protein_g":2,"sodium_mg":20,"sugar_g":0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.8,"usage_max":3.0,"usage_min":0.2},{"category":"emulsifier","clean_label":false,"cost_index":0.9,"function":"emulsifier","id":"P60","name":"Polysorbate60 P60","natural":false,"note":"DEMO non-clean-label ingredient: synthetic emulsifier.","nutrition":{"carbs_g":0,"fat_g":100.0,"kcal":800,"protein_g":0,"sodium_mg":10,"sugar_g":0},"regions":["NA","LATAM"],"texture_impact":1.2,"usage_max":2.0,"usage_min":0.2},{"category":"fat","clean_label":true,"cost_index":1.1,"function":"fat","id":"HO-30","name":"HighOleicSunflowerOil HO-30","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":0,"fat_g":100.0,"kcal":884,"protein_g":0,"sodium_mg":0,"sugar_g":0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.6,"usage_max":20.0,"usage_min":2.0},{"category":"fat","clean_label":true,"cost_index":1.2,"function":"fat","id":"CO-45","name":"CoconutOil CO-45","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":0,"fat_g":100.0,"kcal":862,"protein_g":0,"sodium_mg":0,"sugar_g":0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.8,"usage_max":15.0,"usage_min":2.0},{"category":"leavening","clean_label":true,"cost_index":0.7,"function":"leavening","id":"BS-01","name":"BakingSoda BS-01","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":0,"fat_g":0,"kcal":0,"protein_g":0,"sodium_mg":27000,"sugar_g":0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.3,"usage_max":2.0,"usage_min":0.2},{"category":"leavening","clean_label":true,"cost_index":1.4,"function":"leavening","id":"CT-02","name":"CreamOfTartar CT-02","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":0,"fat_g":0,"kcal":0,"protein_g":0,"sodium_mg":50,"sugar_g":0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.3,"usage_max":1.5,"usage_min":0.2},{"category":"preservative","clean_label":true,"cost_index":1.9,"function":"preservative","id":"CD-55","name":"CulturedDextrose CD-55","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":100,"fat_g":0,"kcal":400,"protein_g":0,"sodium_mg":100,"sugar_g":10.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.0,"usage_max":2.0,"usage_min":0.2},{"category":"preservative","clean_label":true,"cost_index":1.3,"function":"preservative","id":"VP-33","name":"VinegarPowder VP-33","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":90,"fat_g":0,"kcal":350,"protein_g":0,"sodium_mg":200,"sugar_g":5.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.8,"usage_max":1.5,"usage_min":0.2},{"category":"antioxidant","clean_label":true,"cost_index":2.2,"function":"antioxidant","id":"RE-77","name":"RosemaryExtract RE-77","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":0,"fat_g":0,"kcal":0,"protein_g":0,"sodium_mg":0,"sugar_g":0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.3,"usage_max":0.5,"usage_min":0.05},{"category":"preservative","clean_label":false,"cost_index":0.8,"function":"preservative","id":"SBZ","name":"SodiumBenzoate SBZ","natural":false,"note":"DEMO non-clean-label ingredient: synthetic preservative.","nutrition":{"carbs_g":0,"fat_g":0,"kcal":0,"protein_g":0,"sodium_mg":60000,"sugar_g":0},"regions":["NA","LATAM"],"texture_impact":0.6,"usage_max":0.5,"usage_min":0.1},{"category":"antioxidant","clean_label":false,"cost_index":0.9,"function":"antioxidant","id":"TBHQ","name":"TBHQ Antioxidant TBHQ","natural":false,"note":"DEMO non-clean-label ingredient: synthetic antioxidant.","nutrition":{"carbs_g":0,"fat_g":0,"kcal":0,"protein_g":0,"sodium_mg":0,"sugar_g":0},"regions":["NA","LATAM"],"texture_impact":0.2,"usage_max":0.02,"usage_min":0.01},{"category":"flavor","clean_label":true,"cost_index":2.0,"function":"flavor","id":"NV-60","name":"NaturalVanilla NV-60","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":75,"fat_g":0,"kcal":300,"protein_g":0,"sodium_mg":10,"sugar_g":60.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.5,"usage_max":1.5,"usage_min":0.1},{"category":"flavor","clean_label":true,"cost_index":1.6,"function":"flavor","id":"NC-44","name":"NaturalCocoa NC-44","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":55,"fat_g":22.0,"kcal":400,"protein_g":20,"sodium_mg":20,"sugar_g":5.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.8,"usage_max":8.0,"usage_min":1.0},{"category":"flavor","clean_label":false,"cost_index":0.8,"function":"flavor","id":"AV-01","name":"ArtificialVanilla AV-01","natural":false,"note":"DEMO non-clean-label ingredient: artificial flavor.","nutrition":{"carbs_g":75,"fat_g":0,"kcal":300,"protein_g":0,"sodium_mg":10,"sugar_g":60.0},"regions":["NA","LATAM"],"texture_impact":0.5,"usage_max":1.5,"usage_min":0.1},{"category":"fiber","clean_label":true,"cost_index":1.8,"function":"texture","id":"CF-18","name":"CitrusFiber CF-18","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":80,"fat_g":1.0,"kcal":200,"protein_g":5,"sodium_mg":50,"sugar_g":5.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.2,"usage_max":5.0,"usage_min":0.5},{"category":"fiber","clean_label":true,"cost_index":1.4,"function":"texture","id":"OFB-25","name":"OatFiber OFB-25","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":70,"fat_g":3.0,"kcal":250,"protein_g":8,"sodium_mg":30,"sugar_g":2.0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":1.0,"usage_max":5.0,"usage_min":0.5},{"category":"acidulant","clean_label":true,"cost_index":0.9,"function":"acidulant","id":"CA-10","name":"CitricAcid CA-10","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":0,"fat_g":0,"kcal":0,"protein_g":0,"sodium_mg":0,"sugar_g":0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.2,"usage_max":1.0,"usage_min":0.05},{"category":"salt","clean_label":true,"cost_index":0.8,"function":"flavor_enhancer","id":"SS-01","name":"SeaSalt SS-01","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":0,"fat_g":0,"kcal":0,"protein_g":0,"sodium_mg":39000,"sugar_g":0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.2,"usage_max":2.0,"usage_min":0.1},{"category":"gum","clean_label":true,"cost_index":1.5,"function":"thickener","id":"GG-20","name":"GuarGum GG-20","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":80,"fat_g":0.5,"kcal":350,"protein_g":5,"sodium_mg":50,"sugar_g":0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.8,"usage_max":1.0,"usage_min":0.1},{"category":"gum","clean_label":true,"cost_index":1.9,"function":"thickener","id":"LBG-10","name":"LocustBeanGum LBG-10","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":85,"fat_g":0.5,"kcal":350,"protein_g":4,"sodium_mg":30,"sugar_g":0},"regions":["NA","EU","APAC"],"texture_impact":0.9,"usage_max":1.0,"usage_min":0.1},{"category":"water","clean_label":true,"cost_index":0.1,"function":"moisture","id":"WTR-00","name":"Water WTR-00","natural":true,"note":"Synthetic demo ingredient.","nutrition":{"carbs_g":0,"fat_g":0,"kcal":0,"protein_g":0,"sodium_mg":0,"sugar_g":0},"regions":["NA","EU","LATAM","APAC"],"texture_impact":0.0,"usage_max":80.0,"usage_min":1.0}]
+[
+ {
+  "category": "starch",
+  "clean_label": true,
+  "cost_index": 1.2,
+  "function": "thickener",
+  "id": "PF-200",
+  "name": "PureField Starch PF-200",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 85,
+   "fat_g": 0.1,
+   "kcal": 350,
+   "protein_g": 0.5,
+   "sodium_mg": 10,
+   "sugar_g": 0.5
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 2.0,
+  "usage_max": 8.0,
+  "usage_min": 1.0
+ },
+ {
+  "category": "starch",
+  "clean_label": true,
+  "cost_index": 1.3,
+  "function": "stabilizer",
+  "id": "PF-410",
+  "name": "PureField Starch PF-410",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 84,
+   "fat_g": 0.1,
+   "kcal": 340,
+   "protein_g": 0.4,
+   "sodium_mg": 15,
+   "sugar_g": 0.4
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.5,
+  "usage_max": 5.0,
+  "usage_min": 0.5
+ },
+ {
+  "category": "starch",
+  "clean_label": true,
+  "cost_index": 1.4,
+  "function": "gelling",
+  "id": "CG-90",
+  "name": "ClearGel Starch CG-90",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 86,
+   "fat_g": 0.1,
+   "kcal": 345,
+   "protein_g": 0.3,
+   "sodium_mg": 12,
+   "sugar_g": 0.3
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.8,
+  "usage_max": 6.0,
+  "usage_min": 1.0
+ },
+ {
+  "category": "starch",
+  "clean_label": false,
+  "cost_index": 0.9,
+  "function": "thickener",
+  "id": "MCS-10",
+  "name": "ModifiedCornStarch MCS-10",
+  "natural": false,
+  "note": "DEMO non-clean-label ingredient: chemically modified starch.",
+  "nutrition": {
+   "carbs_g": 88,
+   "fat_g": 0.1,
+   "kcal": 350,
+   "protein_g": 0.4,
+   "sodium_mg": 20,
+   "sugar_g": 0.5
+  },
+  "regions": [
+   "NA",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 2.5,
+  "usage_max": 8.0,
+  "usage_min": 1.0
+ },
+ {
+  "category": "flour",
+  "clean_label": true,
+  "cost_index": 1.0,
+  "function": "structure",
+  "id": "HB-10",
+  "name": "HarvestBlend Flour HB-10",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 72,
+   "fat_g": 2.0,
+   "kcal": 360,
+   "protein_g": 10,
+   "sodium_mg": 5,
+   "sugar_g": 1.5
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.0,
+  "usage_max": 45.0,
+  "usage_min": 10.0
+ },
+ {
+  "category": "flour",
+  "clean_label": true,
+  "cost_index": 1.5,
+  "function": "structure",
+  "id": "AG-30",
+  "name": "AncientGrain Flour AG-30",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 68,
+   "fat_g": 2.5,
+   "kcal": 355,
+   "protein_g": 12,
+   "sodium_mg": 8,
+   "sugar_g": 2.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.2,
+  "usage_max": 45.0,
+  "usage_min": 10.0
+ },
+ {
+  "category": "flour",
+  "clean_label": true,
+  "cost_index": 1.2,
+  "function": "structure",
+  "id": "OF-50",
+  "name": "OatFlour OF-50",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 66,
+   "fat_g": 7.0,
+   "kcal": 380,
+   "protein_g": 13,
+   "sodium_mg": 5,
+   "sugar_g": 1.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.0,
+  "usage_max": 20.0,
+  "usage_min": 5.0
+ },
+ {
+  "category": "flour",
+  "clean_label": true,
+  "cost_index": 0.8,
+  "function": "structure",
+  "id": "WF-01",
+  "name": "WheatFlour WF-01",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 76,
+   "fat_g": 1.0,
+   "kcal": 364,
+   "protein_g": 10,
+   "sodium_mg": 5,
+   "sugar_g": 1.5
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.8,
+  "usage_max": 50.0,
+  "usage_min": 10.0
+ },
+ {
+  "category": "protein",
+  "clean_label": true,
+  "cost_index": 1.8,
+  "function": "protein_enrichment",
+  "id": "VP-80",
+  "name": "VerdantPea Protein VP-80",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 5,
+   "fat_g": 6.0,
+   "kcal": 400,
+   "protein_g": 80,
+   "sodium_mg": 200,
+   "sugar_g": 2.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 2.2,
+  "usage_max": 10.0,
+  "usage_min": 1.0
+ },
+ {
+  "category": "protein",
+  "clean_label": true,
+  "cost_index": 1.7,
+  "function": "protein_enrichment",
+  "id": "FB-70",
+  "name": "FavaBean Protein FB-70",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 8,
+   "fat_g": 5.0,
+   "kcal": 390,
+   "protein_g": 70,
+   "sodium_mg": 150,
+   "sugar_g": 3.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 2.0,
+  "usage_max": 10.0,
+  "usage_min": 1.0
+ },
+ {
+  "category": "protein",
+  "clean_label": true,
+  "cost_index": 1.6,
+  "function": "protein_enrichment",
+  "id": "RP-60",
+  "name": "RiceProtein RP-60",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 10,
+   "fat_g": 4.0,
+   "kcal": 380,
+   "protein_g": 60,
+   "sodium_mg": 100,
+   "sugar_g": 2.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.8,
+  "usage_max": 8.0,
+  "usage_min": 1.0
+ },
+ {
+  "category": "sweetener",
+  "clean_label": true,
+  "cost_index": 1.6,
+  "function": "sweetener",
+  "id": "FS-40",
+  "name": "FruitSweet Blend FS-40",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 70,
+   "fat_g": 0.2,
+   "kcal": 280,
+   "protein_g": 0.5,
+   "sodium_mg": 20,
+   "sugar_g": 60.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.5,
+  "usage_max": 10.0,
+  "usage_min": 1.0
+ },
+ {
+  "category": "sweetener",
+  "clean_label": true,
+  "cost_index": 1.8,
+  "function": "sweetener",
+  "id": "HG-20",
+  "name": "HoneyGranule HG-20",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 82,
+   "fat_g": 0.1,
+   "kcal": 300,
+   "protein_g": 0.3,
+   "sodium_mg": 10,
+   "sugar_g": 80.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.2,
+  "usage_max": 8.0,
+  "usage_min": 1.0
+ },
+ {
+  "category": "sweetener",
+  "clean_label": true,
+  "cost_index": 1.7,
+  "function": "sweetener",
+  "id": "DS-15",
+  "name": "DateSugar DS-15",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 75,
+   "fat_g": 0.3,
+   "kcal": 290,
+   "protein_g": 1.5,
+   "sodium_mg": 15,
+   "sugar_g": 65.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.4,
+  "usage_max": 8.0,
+  "usage_min": 1.0
+ },
+ {
+  "category": "sweetener",
+  "clean_label": true,
+  "cost_index": 2.5,
+  "function": "sweetener",
+  "id": "SL-95",
+  "name": "SteviaLeaf Extract SL-95",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 5,
+   "fat_g": 0,
+   "kcal": 0,
+   "protein_g": 0,
+   "sodium_mg": 0,
+   "sugar_g": 5.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.3,
+  "usage_max": 0.5,
+  "usage_min": 0.05
+ },
+ {
+  "category": "sweetener",
+  "clean_label": true,
+  "cost_index": 0.9,
+  "function": "sweetener",
+  "id": "RCS-01",
+  "name": "RefinedCaneSugar RCS-01",
+  "natural": false,
+  "note": "DEMO: refined sugar counts as clean-label here but is NOT natural-claim eligible.",
+  "nutrition": {
+   "carbs_g": 100,
+   "fat_g": 0,
+   "kcal": 400,
+   "protein_g": 0,
+   "sodium_mg": 5,
+   "sugar_g": 99.8
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.5,
+  "usage_max": 30.0,
+  "usage_min": 1.0
+ },
+ {
+  "category": "sweetener",
+  "clean_label": false,
+  "cost_index": 0.8,
+  "function": "sweetener",
+  "id": "HFCS-42",
+  "name": "HighFructoseCornSyrup HFCS-42",
+  "natural": false,
+  "note": "DEMO non-clean-label ingredient.",
+  "nutrition": {
+   "carbs_g": 76,
+   "fat_g": 0,
+   "kcal": 280,
+   "protein_g": 0,
+   "sodium_mg": 10,
+   "sugar_g": 76.0
+  },
+  "regions": [
+   "NA",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.0,
+  "usage_max": 12.0,
+  "usage_min": 1.0
+ },
+ {
+  "category": "color",
+  "clean_label": true,
+  "cost_index": 2.0,
+  "function": "color",
+  "id": "BC-12",
+  "name": "BeetRoot Color BC-12",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 9,
+   "fat_g": 0.1,
+   "kcal": 40,
+   "protein_g": 1,
+   "sodium_mg": 50,
+   "sugar_g": 7.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.5,
+  "usage_max": 1.0,
+  "usage_min": 0.05
+ },
+ {
+  "category": "color",
+  "clean_label": true,
+  "cost_index": 1.9,
+  "function": "color",
+  "id": "TC-08",
+  "name": "TurmericColor TC-08",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 65,
+   "fat_g": 10.0,
+   "kcal": 350,
+   "protein_g": 9,
+   "sodium_mg": 40,
+   "sugar_g": 3.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.4,
+  "usage_max": 0.8,
+  "usage_min": 0.05
+ },
+ {
+  "category": "color",
+  "clean_label": true,
+  "cost_index": 2.4,
+  "function": "color",
+  "id": "SB-05",
+  "name": "SpirulinaBlue SB-05",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 24,
+   "fat_g": 7.0,
+   "kcal": 290,
+   "protein_g": 57,
+   "sodium_mg": 100,
+   "sugar_g": 3.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "APAC"
+  ],
+  "texture_impact": 0.4,
+  "usage_max": 0.5,
+  "usage_min": 0.05
+ },
+ {
+  "category": "color",
+  "clean_label": true,
+  "cost_index": 1.8,
+  "function": "color",
+  "id": "CO-22",
+  "name": "CarrotOrange CO-22",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 8,
+   "fat_g": 0.2,
+   "kcal": 35,
+   "protein_g": 0.8,
+   "sodium_mg": 60,
+   "sugar_g": 5.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.4,
+  "usage_max": 1.0,
+  "usage_min": 0.05
+ },
+ {
+  "category": "color",
+  "clean_label": false,
+  "cost_index": 1.0,
+  "function": "whitener",
+  "id": "TD-99",
+  "name": "TitaniumDioxide TD-99",
+  "natural": false,
+  "note": "DEMO non-clean-label ingredient: synthetic whitener.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 0,
+   "kcal": 0,
+   "protein_g": 0,
+   "sodium_mg": 0,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "LATAM"
+  ],
+  "texture_impact": 0.2,
+  "usage_max": 1.0,
+  "usage_min": 0.05
+ },
+ {
+  "category": "color",
+  "clean_label": false,
+  "cost_index": 0.9,
+  "function": "color",
+  "id": "R40",
+  "name": "Red40 Color R40",
+  "natural": false,
+  "note": "DEMO non-clean-label ingredient: synthetic color.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 0,
+   "kcal": 0,
+   "protein_g": 0,
+   "sodium_mg": 0,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "LATAM"
+  ],
+  "texture_impact": 0.3,
+  "usage_max": 0.5,
+  "usage_min": 0.05
+ },
+ {
+  "category": "emulsifier",
+  "clean_label": true,
+  "cost_index": 1.5,
+  "function": "emulsifier",
+  "id": "SL-70",
+  "name": "SunflowerLecithin SL-70",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 100.0,
+   "kcal": 800,
+   "protein_g": 0,
+   "sodium_mg": 10,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.0,
+  "usage_max": 2.0,
+  "usage_min": 0.2
+ },
+ {
+  "category": "emulsifier",
+  "clean_label": true,
+  "cost_index": 1.7,
+  "function": "stabilizer",
+  "id": "AG-100",
+  "name": "AcaciaGum AG-100",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 85,
+   "fat_g": 0.5,
+   "kcal": 350,
+   "protein_g": 2,
+   "sodium_mg": 20,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.8,
+  "usage_max": 3.0,
+  "usage_min": 0.2
+ },
+ {
+  "category": "emulsifier",
+  "clean_label": false,
+  "cost_index": 0.9,
+  "function": "emulsifier",
+  "id": "P60",
+  "name": "Polysorbate60 P60",
+  "natural": false,
+  "note": "DEMO non-clean-label ingredient: synthetic emulsifier.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 100.0,
+   "kcal": 800,
+   "protein_g": 0,
+   "sodium_mg": 10,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "LATAM"
+  ],
+  "texture_impact": 1.2,
+  "usage_max": 2.0,
+  "usage_min": 0.2
+ },
+ {
+  "category": "fat",
+  "clean_label": true,
+  "cost_index": 1.1,
+  "function": "fat",
+  "id": "HO-30",
+  "name": "HighOleicSunflowerOil HO-30",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 100.0,
+   "kcal": 884,
+   "protein_g": 0,
+   "sodium_mg": 0,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.6,
+  "usage_max": 20.0,
+  "usage_min": 2.0
+ },
+ {
+  "category": "fat",
+  "clean_label": true,
+  "cost_index": 1.2,
+  "function": "fat",
+  "id": "CO-45",
+  "name": "CoconutOil CO-45",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 100.0,
+   "kcal": 862,
+   "protein_g": 0,
+   "sodium_mg": 0,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.8,
+  "usage_max": 15.0,
+  "usage_min": 2.0
+ },
+ {
+  "category": "leavening",
+  "clean_label": true,
+  "cost_index": 0.7,
+  "function": "leavening",
+  "id": "BS-01",
+  "name": "BakingSoda BS-01",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 0,
+   "kcal": 0,
+   "protein_g": 0,
+   "sodium_mg": 27000,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.3,
+  "usage_max": 2.0,
+  "usage_min": 0.2
+ },
+ {
+  "category": "leavening",
+  "clean_label": true,
+  "cost_index": 1.4,
+  "function": "leavening",
+  "id": "CT-02",
+  "name": "CreamOfTartar CT-02",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 0,
+   "kcal": 0,
+   "protein_g": 0,
+   "sodium_mg": 50,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.3,
+  "usage_max": 1.5,
+  "usage_min": 0.2
+ },
+ {
+  "category": "preservative",
+  "clean_label": true,
+  "cost_index": 1.9,
+  "function": "preservative",
+  "id": "CD-55",
+  "name": "CulturedDextrose CD-55",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 100,
+   "fat_g": 0,
+   "kcal": 400,
+   "protein_g": 0,
+   "sodium_mg": 100,
+   "sugar_g": 10.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.0,
+  "usage_max": 2.0,
+  "usage_min": 0.2
+ },
+ {
+  "category": "preservative",
+  "clean_label": true,
+  "cost_index": 1.3,
+  "function": "preservative",
+  "id": "VP-33",
+  "name": "VinegarPowder VP-33",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 90,
+   "fat_g": 0,
+   "kcal": 350,
+   "protein_g": 0,
+   "sodium_mg": 200,
+   "sugar_g": 5.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.8,
+  "usage_max": 1.5,
+  "usage_min": 0.2
+ },
+ {
+  "category": "antioxidant",
+  "clean_label": true,
+  "cost_index": 2.2,
+  "function": "antioxidant",
+  "id": "RE-77",
+  "name": "RosemaryExtract RE-77",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 0,
+   "kcal": 0,
+   "protein_g": 0,
+   "sodium_mg": 0,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.3,
+  "usage_max": 0.5,
+  "usage_min": 0.05
+ },
+ {
+  "category": "preservative",
+  "clean_label": false,
+  "cost_index": 0.8,
+  "function": "preservative",
+  "id": "SBZ",
+  "name": "SodiumBenzoate SBZ",
+  "natural": false,
+  "note": "DEMO non-clean-label ingredient: synthetic preservative.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 0,
+   "kcal": 0,
+   "protein_g": 0,
+   "sodium_mg": 60000,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "LATAM"
+  ],
+  "texture_impact": 0.6,
+  "usage_max": 0.5,
+  "usage_min": 0.1
+ },
+ {
+  "category": "antioxidant",
+  "clean_label": false,
+  "cost_index": 0.9,
+  "function": "antioxidant",
+  "id": "TBHQ",
+  "name": "TBHQ Antioxidant TBHQ",
+  "natural": false,
+  "note": "DEMO non-clean-label ingredient: synthetic antioxidant.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 0,
+   "kcal": 0,
+   "protein_g": 0,
+   "sodium_mg": 0,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "LATAM"
+  ],
+  "texture_impact": 0.2,
+  "usage_max": 0.02,
+  "usage_min": 0.01
+ },
+ {
+  "category": "flavor",
+  "clean_label": true,
+  "cost_index": 2.0,
+  "function": "flavor",
+  "id": "NV-60",
+  "name": "NaturalVanilla NV-60",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 75,
+   "fat_g": 0,
+   "kcal": 300,
+   "protein_g": 0,
+   "sodium_mg": 10,
+   "sugar_g": 60.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.5,
+  "usage_max": 1.5,
+  "usage_min": 0.1
+ },
+ {
+  "category": "flavor",
+  "clean_label": true,
+  "cost_index": 1.6,
+  "function": "flavor",
+  "id": "NC-44",
+  "name": "NaturalCocoa NC-44",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 55,
+   "fat_g": 22.0,
+   "kcal": 400,
+   "protein_g": 20,
+   "sodium_mg": 20,
+   "sugar_g": 5.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.8,
+  "usage_max": 8.0,
+  "usage_min": 1.0
+ },
+ {
+  "category": "flavor",
+  "clean_label": false,
+  "cost_index": 0.8,
+  "function": "flavor",
+  "id": "AV-01",
+  "name": "ArtificialVanilla AV-01",
+  "natural": false,
+  "note": "DEMO non-clean-label ingredient: artificial flavor.",
+  "nutrition": {
+   "carbs_g": 75,
+   "fat_g": 0,
+   "kcal": 300,
+   "protein_g": 0,
+   "sodium_mg": 10,
+   "sugar_g": 60.0
+  },
+  "regions": [
+   "NA",
+   "LATAM"
+  ],
+  "texture_impact": 0.5,
+  "usage_max": 1.5,
+  "usage_min": 0.1
+ },
+ {
+  "category": "fiber",
+  "clean_label": true,
+  "cost_index": 1.8,
+  "function": "texture",
+  "id": "CF-18",
+  "name": "CitrusFiber CF-18",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 80,
+   "fat_g": 1.0,
+   "kcal": 200,
+   "protein_g": 5,
+   "sodium_mg": 50,
+   "sugar_g": 5.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.2,
+  "usage_max": 5.0,
+  "usage_min": 0.5
+ },
+ {
+  "category": "fiber",
+  "clean_label": true,
+  "cost_index": 1.4,
+  "function": "texture",
+  "id": "OFB-25",
+  "name": "OatFiber OFB-25",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 70,
+   "fat_g": 3.0,
+   "kcal": 250,
+   "protein_g": 8,
+   "sodium_mg": 30,
+   "sugar_g": 2.0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 1.0,
+  "usage_max": 5.0,
+  "usage_min": 0.5
+ },
+ {
+  "category": "acidulant",
+  "clean_label": true,
+  "cost_index": 0.9,
+  "function": "acidulant",
+  "id": "CA-10",
+  "name": "CitricAcid CA-10",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 0,
+   "kcal": 0,
+   "protein_g": 0,
+   "sodium_mg": 0,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.2,
+  "usage_max": 1.0,
+  "usage_min": 0.05
+ },
+ {
+  "category": "salt",
+  "clean_label": true,
+  "cost_index": 0.8,
+  "function": "flavor_enhancer",
+  "id": "SS-01",
+  "name": "SeaSalt SS-01",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 0,
+   "kcal": 0,
+   "protein_g": 0,
+   "sodium_mg": 39000,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.2,
+  "usage_max": 2.0,
+  "usage_min": 0.1
+ },
+ {
+  "category": "gum",
+  "clean_label": true,
+  "cost_index": 1.5,
+  "function": "thickener",
+  "id": "GG-20",
+  "name": "GuarGum GG-20",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 80,
+   "fat_g": 0.5,
+   "kcal": 350,
+   "protein_g": 5,
+   "sodium_mg": 50,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.8,
+  "usage_max": 1.0,
+  "usage_min": 0.1
+ },
+ {
+  "category": "gum",
+  "clean_label": true,
+  "cost_index": 1.9,
+  "function": "thickener",
+  "id": "LBG-10",
+  "name": "LocustBeanGum LBG-10",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 85,
+   "fat_g": 0.5,
+   "kcal": 350,
+   "protein_g": 4,
+   "sodium_mg": 30,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "APAC"
+  ],
+  "texture_impact": 0.9,
+  "usage_max": 1.0,
+  "usage_min": 0.1
+ },
+ {
+  "category": "water",
+  "clean_label": true,
+  "cost_index": 0.1,
+  "function": "moisture",
+  "id": "WTR-00",
+  "name": "Water WTR-00",
+  "natural": true,
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "carbs_g": 0,
+   "fat_g": 0,
+   "kcal": 0,
+   "protein_g": 0,
+   "sodium_mg": 0,
+   "sugar_g": 0
+  },
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "texture_impact": 0.0,
+  "usage_max": 80.0,
+  "usage_min": 1.0
+ },
+ {
+  "id": "AB-66",
+  "name": "ArtificialBerry Flavor AB-66",
+  "function": "flavor",
+  "category": "flavor",
+  "clean_label": false,
+  "natural": false,
+  "cost_index": 2.1,
+  "texture_impact": 1.0,
+  "usage_min": 0.05,
+  "usage_max": 1.0,
+  "regions": [
+   "NA",
+   "EU"
+  ],
+  "note": "Synthetic demo ingredient: artificial flavor.",
+  "nutrition": {
+   "kcal": 280,
+   "protein_g": 0.2,
+   "carbs_g": 70,
+   "sugar_g": 55,
+   "fat_g": 0.1,
+   "sodium_mg": 15
+  }
+ },
+ {
+  "id": "AO-67",
+  "name": "ArtificialOrange Flavor AO-67",
+  "function": "flavor",
+  "category": "flavor",
+  "clean_label": false,
+  "natural": false,
+  "cost_index": 2.0,
+  "texture_impact": 1.0,
+  "usage_min": 0.05,
+  "usage_max": 1.0,
+  "regions": [
+   "NA",
+   "EU"
+  ],
+  "note": "Synthetic demo ingredient: artificial flavor.",
+  "nutrition": {
+   "kcal": 270,
+   "protein_g": 0.2,
+   "carbs_g": 68,
+   "sugar_g": 52,
+   "fat_g": 0.1,
+   "sodium_mg": 12
+  }
+ },
+ {
+  "id": "BHA-68",
+  "name": "ButylShield Antioxidant BHA-68",
+  "function": "antioxidant",
+  "category": "additive",
+  "clean_label": false,
+  "natural": false,
+  "cost_index": 1.8,
+  "texture_impact": 0.5,
+  "usage_min": 0.02,
+  "usage_max": 0.2,
+  "regions": [
+   "NA"
+  ],
+  "note": "Synthetic demo ingredient: synthetic antioxidant.",
+  "nutrition": {
+   "kcal": 0,
+   "protein_g": 0,
+   "carbs_g": 0,
+   "sugar_g": 0,
+   "fat_g": 0,
+   "sodium_mg": 0
+  }
+ },
+ {
+  "id": "YS-58",
+  "name": "SunsetYellow Color YS-58",
+  "function": "color",
+  "category": "color",
+  "clean_label": false,
+  "natural": false,
+  "cost_index": 2.4,
+  "texture_impact": 0.3,
+  "usage_min": 0.02,
+  "usage_max": 0.3,
+  "regions": [
+   "NA"
+  ],
+  "note": "Synthetic demo ingredient: synthetic color.",
+  "nutrition": {
+   "kcal": 0,
+   "protein_g": 0,
+   "carbs_g": 0,
+   "sugar_g": 0,
+   "fat_g": 0,
+   "sodium_mg": 5
+  }
+ },
+ {
+  "id": "CAF-71",
+  "name": "CaffeineBoost CAF-71",
+  "function": "stimulant",
+  "category": "additive",
+  "clean_label": false,
+  "natural": false,
+  "cost_index": 3.2,
+  "texture_impact": 0.2,
+  "usage_min": 0.05,
+  "usage_max": 0.5,
+  "regions": [
+   "NA"
+  ],
+  "note": "Synthetic demo ingredient: synthetic caffeine.",
+  "nutrition": {
+   "kcal": 0,
+   "protein_g": 0,
+   "carbs_g": 0,
+   "sugar_g": 0,
+   "fat_g": 0,
+   "sodium_mg": 0
+  }
+ },
+ {
+  "id": "SPS-72",
+  "name": "SweetPlus Sweetener SPS-72",
+  "function": "sweetener",
+  "category": "sweetener",
+  "clean_label": false,
+  "natural": false,
+  "cost_index": 4.5,
+  "texture_impact": 1.5,
+  "usage_min": 0.1,
+  "usage_max": 2.0,
+  "regions": [
+   "NA",
+   "EU"
+  ],
+  "note": "Synthetic demo ingredient: synthetic high-intensity sweetener.",
+  "nutrition": {
+   "kcal": 0,
+   "protein_g": 0,
+   "carbs_g": 5,
+   "sugar_g": 0,
+   "fat_g": 0,
+   "sodium_mg": 0
+  }
+ },
+ {
+  "id": "RCE-76",
+  "name": "RiceConcentrate Color RCE-76",
+  "function": "color",
+  "category": "color",
+  "clean_label": true,
+  "natural": true,
+  "cost_index": 3.0,
+  "texture_impact": 0.8,
+  "usage_min": 0.05,
+  "usage_max": 1.0,
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "kcal": 300,
+   "protein_g": 1.0,
+   "carbs_g": 75,
+   "sugar_g": 8,
+   "fat_g": 0.2,
+   "sodium_mg": 20
+  }
+ },
+ {
+  "id": "MNK-77",
+  "name": "MonkFruit Sweetener MNK-77",
+  "function": "sweetener",
+  "category": "sweetener",
+  "clean_label": true,
+  "natural": true,
+  "cost_index": 5.5,
+  "texture_impact": 1.2,
+  "usage_min": 0.05,
+  "usage_max": 1.5,
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "kcal": 0,
+   "protein_g": 0,
+   "carbs_g": 2,
+   "sugar_g": 0,
+   "fat_g": 0,
+   "sodium_mg": 0
+  }
+ },
+ {
+  "id": "PEP-74",
+  "name": "PeaProteinCrisp PEP-74",
+  "function": "protein_enrichment",
+  "category": "protein",
+  "clean_label": true,
+  "natural": true,
+  "cost_index": 3.8,
+  "texture_impact": 2.5,
+  "usage_min": 1.0,
+  "usage_max": 8.0,
+  "regions": [
+   "NA",
+   "EU",
+   "LATAM",
+   "APAC"
+  ],
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "kcal": 380,
+   "protein_g": 55,
+   "carbs_g": 25,
+   "sugar_g": 3,
+   "fat_g": 5,
+   "sodium_mg": 300
+  }
+ },
+ {
+  "id": "CB-79",
+  "name": "ColaSpice Blend CB-79",
+  "function": "flavor",
+  "category": "flavor",
+  "clean_label": true,
+  "natural": true,
+  "cost_index": 2.8,
+  "texture_impact": 0.5,
+  "usage_min": 0.05,
+  "usage_max": 1.0,
+  "regions": [
+   "NA"
+  ],
+  "note": "Synthetic demo ingredient.",
+  "nutrition": {
+   "kcal": 250,
+   "protein_g": 1.0,
+   "carbs_g": 60,
+   "sugar_g": 20,
+   "fat_g": 0.5,
+   "sodium_mg": 30
+  }
+ }
+]

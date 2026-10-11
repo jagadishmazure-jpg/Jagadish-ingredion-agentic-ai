@@ -17,6 +17,36 @@ SHELF_LIFE_IMPACT_FACTOR = 0.2
 TEXTURE_RISK_THRESHOLD = 85.0
 SHELF_LIFE_TARGET_DAYS = 7.0
 
+# Categories with elevated texture/shelf-stability sensitivity in the demo.
+# Rationale (paraphrased from public clean-label manufacturer research):
+# shelf-life anxiety is a top barrier to conversion, especially in bakery
+# where gums and functional starches drive stability. The demo therefore
+# emits an extra advisory flag for these categories whenever a reformulation
+# introduces any texture impact — the numeric prediction is unchanged so
+# existing regression expectations stay intact.
+BAKERY_CATEGORIES = {"bakery", "bread"}
+
+
+def bakery_stability_advisory(
+    formula: Dict[str, Any], prediction: Dict[str, Any]
+) -> List[str]:
+    """Advisory shelf-stability flags for bakery/bread reformulations (demo).
+
+    Returns extra human-readable advisories; empty when the category is not
+    bakery/bread or when the reformulation introduced no texture impact.
+    """
+    if formula.get("category") not in BAKERY_CATEGORIES:
+        return []
+    if prediction.get("substitutions_evaluated", 0) <= 0:
+        return []
+    total_impact = 100.0 - prediction.get("texture_match_pct", 100.0)
+    if total_impact <= 0:
+        return []
+    return [
+        "bakery advisory: elevated texture/shelf-stability sensitivity — "
+        "schedule benchtop texture and accelerated shelf-life checks before scale-up (demo)"
+    ]
+
 
 def predict(
     formula: Dict[str, Any], substitutions: List[Dict[str, Any]]

@@ -14,6 +14,31 @@ from ingredion_ai.data.loader import get_ingredient
 REDUCED_SUGAR_MIN_REDUCTION = 0.25  # >=25% less sugar vs baseline
 HIGH_PROTEIN_MIN_G = 10.0  # per 100 g, demo threshold
 
+# Claim priority for pursuit order.
+# Rationale (paraphrased from public clean-label consumer research):
+# "natural / all natural" ranks as the most important packaged-food claim,
+# followed by no-artificial-ingredient cues, then reduced-sugar and
+# high-protein cues. The demo uses this ordering when several claims are
+# candidates so the highest-value claim is pursued first.
+CLAIM_PRIORITY = [
+    "natural",
+    "no artificial ingredients",
+    "reduced sugar",
+    "high protein",
+]
+
+
+def prioritize_claims(claims: List[str]) -> List[str]:
+    """Order *claims* by consumer-research priority (unknown claims last)."""
+    def _rank(claim: str) -> tuple:
+        normalized = claim.strip().lower()
+        try:
+            return (CLAIM_PRIORITY.index(normalized), normalized)
+        except ValueError:
+            return (len(CLAIM_PRIORITY), normalized)
+
+    return sorted(claims, key=_rank)
+
 # Demo EU rule: only these synthetic-DB colors are permitted with "natural".
 EU_PERMITTED_COLORS = {"BC-12", "TC-08", "SB-05", "CO-22"}
 

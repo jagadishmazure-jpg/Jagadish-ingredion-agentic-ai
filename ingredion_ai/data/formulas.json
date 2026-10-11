@@ -1,1 +1,341 @@
-[{"category":"bakery","demo":true,"id":"sweet_bakery_cake","ingredients":[{"id":"WF-01","pct":32.0},{"id":"RCS-01","pct":24.0},{"id":"HO-30","pct":14.0},{"id":"MCS-10","pct":6.0},{"id":"HFCS-42","pct":8.0},{"id":"AV-01","pct":1.5},{"id":"TD-99","pct":0.3},{"id":"R40","pct":0.2},{"id":"SBZ","pct":0.4},{"id":"P60","pct":1.0},{"id":"BS-01","pct":1.2},{"id":"SS-01","pct":0.8},{"id":"CA-10","pct":0.6},{"id":"WTR-00","pct":10.0}],"name":"Demo Sweet Bakery Cake (conventional baseline)","servings":10},{"category":"bread","demo":true,"id":"gluten_free_bread","ingredients":[{"id":"AG-30","pct":38.0},{"id":"PF-200","pct":12.0},{"id":"VP-80","pct":6.0},{"id":"HO-30","pct":8.0},{"id":"FS-40","pct":5.0},{"id":"CD-55","pct":1.5},{"id":"BS-01","pct":1.5},{"id":"CT-02","pct":1.0},{"id":"SS-01","pct":1.2},{"id":"CF-18","pct":3.0},{"id":"WTR-00","pct":22.8}],"name":"Demo Gluten-Free Bread","servings":12},{"category":"beverage","demo":true,"id":"plant_beverage","ingredients":[{"id":"OF-50","pct":10.0},{"id":"RP-60","pct":3.0},{"id":"FS-40","pct":6.0},{"id":"HO-30","pct":2.5},{"id":"NV-60","pct":0.5},{"id":"AG-100","pct":0.4},{"id":"SS-01","pct":0.2},{"id":"CA-10","pct":0.15},{"id":"WTR-00","pct":77.25}],"name":"Demo Plant-Based Beverage","servings":4}]
+[
+ {
+  "category": "bakery",
+  "demo": true,
+  "id": "sweet_bakery_cake",
+  "ingredients": [
+   {
+    "id": "WF-01",
+    "pct": 32.0
+   },
+   {
+    "id": "RCS-01",
+    "pct": 24.0
+   },
+   {
+    "id": "HO-30",
+    "pct": 14.0
+   },
+   {
+    "id": "MCS-10",
+    "pct": 6.0
+   },
+   {
+    "id": "HFCS-42",
+    "pct": 8.0
+   },
+   {
+    "id": "AV-01",
+    "pct": 1.5
+   },
+   {
+    "id": "TD-99",
+    "pct": 0.3
+   },
+   {
+    "id": "R40",
+    "pct": 0.2
+   },
+   {
+    "id": "SBZ",
+    "pct": 0.4
+   },
+   {
+    "id": "P60",
+    "pct": 1.0
+   },
+   {
+    "id": "BS-01",
+    "pct": 1.2
+   },
+   {
+    "id": "SS-01",
+    "pct": 0.8
+   },
+   {
+    "id": "CA-10",
+    "pct": 0.6
+   },
+   {
+    "id": "WTR-00",
+    "pct": 10.0
+   }
+  ],
+  "name": "Demo Sweet Bakery Cake (conventional baseline)",
+  "servings": 10
+ },
+ {
+  "category": "bread",
+  "demo": true,
+  "id": "gluten_free_bread",
+  "ingredients": [
+   {
+    "id": "AG-30",
+    "pct": 38.0
+   },
+   {
+    "id": "PF-200",
+    "pct": 12.0
+   },
+   {
+    "id": "VP-80",
+    "pct": 6.0
+   },
+   {
+    "id": "HO-30",
+    "pct": 8.0
+   },
+   {
+    "id": "FS-40",
+    "pct": 5.0
+   },
+   {
+    "id": "CD-55",
+    "pct": 1.5
+   },
+   {
+    "id": "BS-01",
+    "pct": 1.5
+   },
+   {
+    "id": "CT-02",
+    "pct": 1.0
+   },
+   {
+    "id": "SS-01",
+    "pct": 1.2
+   },
+   {
+    "id": "CF-18",
+    "pct": 3.0
+   },
+   {
+    "id": "WTR-00",
+    "pct": 22.8
+   }
+  ],
+  "name": "Demo Gluten-Free Bread",
+  "servings": 12
+ },
+ {
+  "category": "beverage",
+  "demo": true,
+  "id": "plant_beverage",
+  "ingredients": [
+   {
+    "id": "OF-50",
+    "pct": 10.0
+   },
+   {
+    "id": "RP-60",
+    "pct": 3.0
+   },
+   {
+    "id": "FS-40",
+    "pct": 6.0
+   },
+   {
+    "id": "HO-30",
+    "pct": 2.5
+   },
+   {
+    "id": "NV-60",
+    "pct": 0.5
+   },
+   {
+    "id": "AG-100",
+    "pct": 0.4
+   },
+   {
+    "id": "SS-01",
+    "pct": 0.2
+   },
+   {
+    "id": "CA-10",
+    "pct": 0.15
+   },
+   {
+    "id": "WTR-00",
+    "pct": 77.25
+   }
+  ],
+  "name": "Demo Plant-Based Beverage",
+  "servings": 4
+ },
+ {
+  "id": "savory_bakery_crackers",
+  "name": "Savory Bakery Crackers (conventional baseline)",
+  "category": "bakery",
+  "demo": true,
+  "ingredients": [
+   {
+    "id": "WF-01",
+    "pct": 55.0
+   },
+   {
+    "id": "HO-30",
+    "pct": 12.0
+   },
+   {
+    "id": "SS-01",
+    "pct": 2.5
+   },
+   {
+    "id": "MCS-10",
+    "pct": 4.0
+   },
+   {
+    "id": "TBHQ",
+    "pct": 0.2
+   },
+   {
+    "id": "YS-58",
+    "pct": 0.1
+   },
+   {
+    "id": "BS-01",
+    "pct": 1.0
+   },
+   {
+    "id": "WTR-00",
+    "pct": 25.2
+   }
+  ]
+ },
+ {
+  "id": "cola_soft_drink",
+  "name": "Cola Soft Drink (conventional baseline)",
+  "category": "beverage",
+  "demo": true,
+  "ingredients": [
+   {
+    "id": "HFCS-42",
+    "pct": 10.0
+   },
+   {
+    "id": "CB-79",
+    "pct": 0.3
+   },
+   {
+    "id": "CA-10",
+    "pct": 0.3
+   },
+   {
+    "id": "CAF-71",
+    "pct": 0.1
+   },
+   {
+    "id": "SBZ",
+    "pct": 0.05
+   },
+   {
+    "id": "WTR-00",
+    "pct": 89.25
+   }
+  ]
+ },
+ {
+  "id": "energy_drink",
+  "name": "Energy Drink (conventional baseline)",
+  "category": "beverage",
+  "demo": true,
+  "ingredients": [
+   {
+    "id": "HFCS-42",
+    "pct": 8.0
+   },
+   {
+    "id": "CAF-71",
+    "pct": 0.15
+   },
+   {
+    "id": "BHA-68",
+    "pct": 0.05
+   },
+   {
+    "id": "SPS-72",
+    "pct": 2.0
+   },
+   {
+    "id": "CA-10",
+    "pct": 0.4
+   },
+   {
+    "id": "YS-58",
+    "pct": 0.05
+   },
+   {
+    "id": "WTR-00",
+    "pct": 89.35
+   }
+  ]
+ },
+ {
+  "id": "flavored_water",
+  "name": "Berry Flavored Water (conventional baseline)",
+  "category": "beverage",
+  "demo": true,
+  "ingredients": [
+   {
+    "id": "FS-40",
+    "pct": 3.0
+   },
+   {
+    "id": "AB-66",
+    "pct": 0.2
+   },
+   {
+    "id": "SBZ",
+    "pct": 0.03
+   },
+   {
+    "id": "CA-10",
+    "pct": 0.2
+   },
+   {
+    "id": "WTR-00",
+    "pct": 96.57
+   }
+  ]
+ },
+ {
+  "id": "nutritional_shake",
+  "name": "Nutritional Shake (conventional baseline)",
+  "category": "beverage",
+  "demo": true,
+  "ingredients": [
+   {
+    "id": "VP-80",
+    "pct": 8.0
+   },
+   {
+    "id": "OF-50",
+    "pct": 6.0
+   },
+   {
+    "id": "FS-40",
+    "pct": 4.0
+   },
+   {
+    "id": "AV-01",
+    "pct": 0.3
+   },
+   {
+    "id": "P60",
+    "pct": 0.2
+   },
+   {
+    "id": "HO-30",
+    "pct": 2.0
+   },
+   {
+    "id": "MNK-77",
+    "pct": 0.5
+   },
+   {
+    "id": "WTR-00",
+    "pct": 79.0
+   }
+  ]
+ }
+]
