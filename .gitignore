@@ -10,3 +10,9 @@ dist/
 build/
 .env
 .DS_Store
+# Playwright QA artifacts
+qa/node_modules/
+qa/playwright-report/
+qa/test-results/
+qa/results.xml
+qa/dist/

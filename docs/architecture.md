@@ -34,10 +34,27 @@
                                    │
                     ┌──────────────▼───────────────┐
                     │   Synthetic data layer       │
-                    │  ingredients.json (45)       │
-                    │  formulas.json (3)           │
+                    │  ingredients.json (55)       │
+                    │  formulas.json (8)           │
                     │  demand.csv · esg_readings   │
+                    │  glossary.md (semantic layer)│
                     └──────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│ Cross-cutting layers (used by every agent)                       │
+├──────────────┬───────────────────┬──────────────────────────────┤
+│ Governance   │ Observability     │ Interop                      │
+│ - policy     │ - JSON logging    │ - A2A agent cards + tasks    │
+│ - HITL gates │ - OTel tracing    │ - MCP server (tools/list)    │
+│ - audit JSONL│ - cost/latency    │ - CRM/SAP adapter interfaces │
+│ - sanitizer  │ - incident metrics│ - scoped-token auth          │
+│ - PII scrub  │                   │                              │
+├──────────────┴───────────────────┴──────────────────────────────┤
+│ Engineering layers                                               │
+│ - rag/ (ingest→embed→retrieve) · context/ (assemble+budget)      │
+│ - harness/ (retries/timeouts/circuit breaker)                    │
+│ - loops/ (reflection, HITL) · graph/ (nodes/edges/conditionals)  │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ### How it runs
@@ -71,6 +88,27 @@ deployment for an interview conversation:
 | Docs / reports              | Generated artifacts stored in Blob / SharePoint         |
 | pytest + CI                 | GitHub Actions (this repo) → Azure DevOps pipelines    |
 | Tracing (task results)      | Azure Monitor + Log Analytics                          |
+| OTel tracing hooks          | Application Insights (see foundry-deployment §7)        |
+| Agent cards / A2A tasks     | Foundry Agent Service inter-agent calls                |
+| MCP server                  | External copilots/IDEs invoking domain tools           |
+| CRM/SAP demo adapters       | Salesforce/Dynamics, S/4HANA via managed identity      |
+| Scoped tokens (demo JWT)    | Entra ID OIDC tokens, workload identity in AKS         |
+| In-memory vector store      | Azure AI Search                                        |
+| Hash embeddings (offline)   | Azure OpenAI embeddings (live)                         |
+
+### Layer map
+
+| Layer | Purpose | Key modules |
+|---|---|---|
+| Framework | MAF 1.0 agents, function-tools, WorkflowBuilder | `framework/` |
+| Domain agents | Deterministic business logic per specialty | `agents/` |
+| Data + semantic | Synthetic datasets + governed glossary | `data/`, `docs/glossary.md` |
+| RAG / context | Grounded retrieval, prompt assembly, budgeting | `rag/`, `context/` |
+| Harness / loops / graph | Resilient execution, reflection, orchestration | `harness/`, `loops/`, `graph/` |
+| Governance | Policy, HITL, audit, security, identity | `governance/` |
+| Observability | Logging, tracing, costs, incident metrics | `observability/` |
+| Evaluation | Regression + accuracy-style eval suites | `evaluation/`, `evals/` |
+| Interop | A2A, MCP, CRM/SAP adapters | `interop/`, `integrations/` |
 
 ### Design choices
 

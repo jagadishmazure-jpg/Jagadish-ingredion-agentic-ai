@@ -1,0 +1,21 @@
+# Keep the image lean: only the package + its metadata are copied.
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+.git/
+.gitignore
+.env
+.DS_Store
+tests/
+evals/
+docs/
+.github/
+infra/
+workspace/
