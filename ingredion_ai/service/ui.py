@@ -2,7 +2,7 @@
 
 Plain HTML+JS, no build step. This page is the Playwright UI-test target
 (stable element ids: #scenario-select, #token-input, #run-button,
-#results, #status) and the interview demo surface.
+#results, #status) and the primary demo surface.
 """
 
 from __future__ import annotations

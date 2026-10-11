@@ -28,7 +28,7 @@
   the analogue is the reflection loop (`loops/reflection.py`) — draft →
   critique → revise — applied to formulation quality, not threat hunting.
 
-## Interview line
+## Why this transfers
 
 "If you can build triage, evidence trails, human gates, and honest metrics
 for a manufacturing demo, you can build them for a SOC — the engineering

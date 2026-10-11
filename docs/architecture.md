@@ -73,7 +73,7 @@
 ### Conceptual Azure mapping
 
 This repo is intentionally offline, but each piece maps 1:1 to an Azure
-deployment for an interview conversation:
+deployment discussion:
 
 | Demo component              | Azure equivalent (conceptual)                          |
 |-----------------------------|--------------------------------------------------------|

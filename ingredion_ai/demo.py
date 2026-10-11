@@ -8,7 +8,7 @@ The demo runs the Microsoft Agent Framework 1.0 workflow: the R&D
 formulation agent executes its 6-step tool phase, then fans out
 concurrently to the supply-chain, ESG, and customer advisor agents. All
 domain tools run the deterministic offline pipeline, so the offline run
-is byte-identical every time — an interview-ready narrative of the
+is byte-identical every time — a consistent, repeatable narrative of the
 multi-agent workflow.
 """
 

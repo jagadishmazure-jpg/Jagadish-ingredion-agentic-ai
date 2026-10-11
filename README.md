@@ -6,7 +6,7 @@
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
 A from-scratch, multi-agent AI system for **clean-label ingredient
-manufacturing** — built as an interview-ready portfolio demo.
+manufacturing** — a portfolio-grade reference implementation.
 
 > **Live demo:** after deployment — run `./scripts/deploy-azure.sh` (see
 > [DEPLOYMENT.md](DEPLOYMENT.md)).
@@ -168,7 +168,7 @@ benchmarking pattern, not real market data.
 
 Cross-cutting: **governance** (policy engine, HITL approval gates, hash-chained audit, sanitizer/PII scrubber, scoped-token identity), **observability** (JSON logs, OTel tracing, cost/latency, incident metrics), **evaluation** (20-case accuracy suite + demo regression), **interop** (A2A cards/tasks with auth, MCP server, CRM/SAP adapters), **engineering layers** (RAG, context assembly/budgeting, harness, loops, graph orchestration).
 
-## Interview demo guide
+## Demo guide
 
 The 7-step talk track lives in [docs/demo-guide.md](docs/demo-guide.md). The
 30-second version:

@@ -45,7 +45,7 @@ Bus (🔵, noted in `docs/architecture.md`).
 ## 4. Channels → ✅ + ⏳
 
 - ✅ **Web UI** — single-page demo UI at `GET /` (`service/ui.py`), the
-  Playwright UI-test target and interview demo surface.
+  Playwright UI-test target and primary demo surface.
 - ✅ **API** — REST endpoints (`POST /api/reformulate`,
   `POST /api/agents/{agent}/run`, `GET /api/agent-cards`,
   `GET /.well-known/agent.json`).

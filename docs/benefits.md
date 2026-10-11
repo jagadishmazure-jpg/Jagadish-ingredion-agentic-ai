@@ -26,7 +26,7 @@ ebook (paraphrased):
 - `ingredion_ai/agents/rd_formulation/regulatory.py` — claim hierarchy / priority
 - `ingredion_ai/agents/customer_advisor/pricing.py` — willingness-to-pay band
 
-## Honest framing for interviews
+## Scope and honest framing
 
 This demo *illustrates* where agents would attack the pain points; it does
 not prove ROI. The numbers in the demo (92.2% texture match, 8.2-day

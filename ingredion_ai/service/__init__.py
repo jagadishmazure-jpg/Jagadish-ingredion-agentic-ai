@@ -7,7 +7,7 @@ OIDC validation in production — see ``docs/identity.md``).
 
 Endpoints:
 
-- ``GET /`` — demo web UI (single page, interview demo surface).
+- ``GET /`` — demo web UI (single page).
 - ``GET /api/health`` — liveness/readiness probe (public).
 - ``GET /api/scenarios`` — available demo scenarios (public).
 - ``GET /api/agent-cards`` — the four A2A agent cards (public discovery).

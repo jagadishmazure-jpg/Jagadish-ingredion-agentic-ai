@@ -1,7 +1,7 @@
-# Interview Demo Talk Track
+# Demo Talk Track
 
 A step-by-step script for the live demo. Run offline — deterministic, so it
-never surprises you mid-interview.
+never surprises you mid-demo.
 
 > **Disclaimer.** Independent portfolio demo; all data synthetic; not
 > affiliated with Ingredion Incorporated.
