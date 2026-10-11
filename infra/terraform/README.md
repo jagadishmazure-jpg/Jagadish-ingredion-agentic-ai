@@ -18,6 +18,11 @@ variable/output shapes).
 | Azure AI Services account (`AIServices`) + OpenAI deployment | Foundry + chat model for live mode |
 | API Management (Developer SKU) | Edge gateway: OpenAPI import, Entra ID JWT validation, rate limiting, CORS; backend = AKS ingress |
 | Front Door (Standard) + WAF | Global entry point: load balancing, TLS, bot/OWASP rules → APIM |
+| Service Bus (Basic) | `reformulation-jobs` queue (+DLQ) and `job-results` topic |
+| Event Grid topic | Domain-event fan-out (`reformulation.completed`, …) |
+| Event Hubs (Basic) | `run-telemetry` hub for run metrics |
+| Function App (Consumption) | HTTP/SB-queue/timer triggers for the agent workloads |
+| Logic App (Consumption) | Human-approval workflow (definition in `infra/logicapps/`) |
 
 RBAC wiring: AKS kubelet → `AcrPull` on ACR; workload identity →
 `Key Vault Secrets User` and `Cognitive Services OpenAI User`.

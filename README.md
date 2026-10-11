@@ -74,7 +74,7 @@ Run the tests:
 uv run pytest -q        # or: python -m pytest -q
 ```
 
-Expected: **511 tests, all passing, fully offline** — no network, no API
+Expected: **545 tests, all passing, fully offline** — no network, no API
 keys. The framework agents run against the scripted `FakeChatClient`.
 
 ## Deploy on Foundry
@@ -242,6 +242,11 @@ ingredion_ai/
   guardrails/      input/output safety: injection + jailbreak detection,
                    PII detection, domain-scope enforcement, claim grounding,
                    confidence thresholds; strictness policies via env
+  azure_integration/ Azure integration services (offline fakes + prod swap):
+                   CloudEvents lifecycle schemas, Service Bus job queue +
+                   topics + DLQ, Event Grid domain fan-out, Event Hubs
+                   telemetry batching, Functions triggers (HTTP/SB/timer),
+                   Logic Apps callbacks + approval workflow, queue worker
   demo.py          Runnable end-to-end narrative: python -m ingredion_ai.demo
                    (--live for Azure OpenAI; --scenario …; --audit-log …)
 evals/             Regression expectations for the demo (deterministic)
@@ -250,10 +255,13 @@ docs/              Architecture, Foundry deployment, identity, governance,
                    architecture alignment, attachments coverage, usecases,
                    context-engineering, harness, loops, graph, reliability,
                    deployment runbook, stack alignment, analytics, finops,
-                   monitoring
+                   monitoring, azure-integration
 infra/
   terraform/       Azure IaC: RG, ACR, AKS (zonal, workload identity),
                    Key Vault, App Insights, Foundry account + model
+                   deployment, Service Bus, Event Grid, Event Hubs,
+                   Function App, Logic App, least-privilege RBAC
+  logicapps/       Sample Logic Apps approval workflow definition
                    deployment, least-privilege RBAC
   k8s/             Kustomize manifests: namespace, PDB, anti-affinity,
                    HPA, probes, workload-identity SA, Key Vault CSI
