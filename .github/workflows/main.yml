@@ -1,1 +1,31 @@
+# NOTE: workflow files cannot be pushed via the GitHub API by the repo's
+# automation identity (403 on .github/workflows/*). Add this file manually
+# in the GitHub web UI at .github/workflows/ci.yml, then push.
+name: CI
 
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+      - name: Install dependencies
+        run: uv sync --group dev
+      - name: Run tests
+        run: uv run pytest -q
+
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bash syntax check on deploy scripts
+        run: |
+          bash -n scripts/deploy-azure.sh
+          bash -n scripts/deploy-local.sh
+      - name: Validate docker-compose.yml
+        run: python3 -c "import yaml; yaml.safe_load(open('docker-compose.yml'))"
