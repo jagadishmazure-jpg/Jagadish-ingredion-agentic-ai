@@ -183,6 +183,11 @@ SKILL_SCOPES: Dict[str, Dict[str, List[str]]] = {
     "mcp": {
         "invoke": ["mcp:invoke"],  # MCP tools/call when server auth is on
     },
+    "vendor_risk": {
+        # Third-party vendor agent skill (see interop/vendor_agents.py):
+        # the *vendor* declares this scope on its own agent card.
+        "supplier_credit_check": ["vendor:risk:read"],
+    },
 }
 
 #: Extra scopes for high-impact outputs (proposal/report generation).
