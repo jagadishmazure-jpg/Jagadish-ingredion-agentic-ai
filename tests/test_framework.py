@@ -79,6 +79,7 @@ def test_build_framework_agents_has_four_domains_with_tools():
         "calculate_nutrition",
         "validate_claims",
         "generate_documentation",
+        "lims_quality_lookup",  # composed OpenAPI (LIMS) tool chain
     ]
     assert names["supply_chain"] == ["forecast_demand"]
     assert names["esg"] == ["collect_esg", "esg_report"]
