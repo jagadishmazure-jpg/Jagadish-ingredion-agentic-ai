@@ -6,6 +6,7 @@ Static validation only — no docker/az binaries are exercised here.
 from __future__ import annotations
 
 import re
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -78,6 +79,8 @@ def test_compose_sets_guardrails_env():
 
 @pytest.mark.parametrize("script", [DEPLOY_AZURE, DEPLOY_LOCAL], ids=["azure", "local"])
 def test_scripts_pass_bash_syntax_check(script):
+    if shutil.which("bash") is None:
+        pytest.skip("bash is not installed here (e.g. Windows); syntax check runs in CI")
     result = subprocess.run(
         ["bash", "-n", str(script)], capture_output=True, text=True, timeout=30
     )
