@@ -1,0 +1,67 @@
+name: QA (Playwright E2E)
+
+# NOTE: GitHub Apps cannot push workflow files via the API (403 on
+# .github/workflows/*). Add this file to the repo manually at
+# .github/workflows/qa.yml, then push.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  playwright:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install service dependencies
+        run: |
+          pip install pytest pyyaml "agent-framework-core==1.0.1" \
+            "agent-framework-openai==1.0.1" "azure-identity>=1.0" \
+            fastapi uvicorn pydantic httpx
+
+      - name: Start agent service
+        run: |
+          SERVICE_RATE_LIMIT_PER_MIN=5 \
+            python -m uvicorn ingredion_ai.service.app:app \
+            --host 127.0.0.1 --port 8000 &
+          echo $! > uvicorn.pid
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: qa/package-lock.json
+
+      - name: Install QA dependencies
+        working-directory: qa
+        run: npm ci
+
+      - name: Install Playwright browsers
+        working-directory: qa
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright tests
+        working-directory: qa
+        env:
+          QA_RATE_LIMIT: "5"
+          QA_PYTHON: python
+        run: npx playwright test --project=chromium
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: qa/playwright-report/
+          retention-days: 14
+
+      - name: Stop agent service
+        if: always()
+        run: kill "$(cat uvicorn.pid)" || true
