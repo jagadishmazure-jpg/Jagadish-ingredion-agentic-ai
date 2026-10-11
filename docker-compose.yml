@@ -1,0 +1,33 @@
+# Local demo: FastAPI agent service + demo UI on http://localhost:8000
+#
+# Usage:  docker compose up --build -d     (or ./scripts/deploy-local.sh)
+# Stop:   docker compose down
+#
+# The container runs fully offline by default (deterministic synthetic demo).
+# For live Azure OpenAI mode, create a .env file from .env.example and
+# uncomment the env_file line below.
+
+name: ingredion-agentic-ai
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ingredion-agentic-ai:local
+    container_name: ingredion-agentic-ai
+    ports:
+      - "8000:8000"
+    environment:
+      PORT: "8000"
+      PYTHONUNBUFFERED: "1"
+      GUARDRAILS_STRICTNESS: standard
+    # env_file:
+    #   - .env
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=4)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+    restart: unless-stopped

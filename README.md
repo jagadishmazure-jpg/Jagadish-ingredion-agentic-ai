@@ -1,7 +1,15 @@
 # Jagadish Ingredion Agentic AI (Demo)
 
+[![CI](https://github.com/jagadishmazure-jpg/Jagadish-ingredion-agentic-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/jagadishmazure-jpg/Jagadish-ingredion-agentic-ai/actions/workflows/ci.yml)
+![Python 3.12](https://img.shields.io/badge/python-3.12-blue)
+![Tests](https://img.shields.io/badge/tests-568%20passing-brightgreen)
+![License: MIT](https://img.shields.io/badge/license-MIT-green)
+
 A from-scratch, multi-agent AI system for **clean-label ingredient
 manufacturing** — built as an interview-ready portfolio demo.
+
+> **Live demo:** after deployment — run `./scripts/deploy-azure.sh` (see
+> [DEPLOYMENT.md](DEPLOYMENT.md)).
 
 > **Disclaimer — read first.** This is an **independent portfolio project**.
 > It is **not affiliated with, endorsed by, or connected to Ingredion
@@ -74,8 +82,18 @@ Run the tests:
 uv run pytest -q        # or: python -m pytest -q
 ```
 
-Expected: **545 tests, all passing, fully offline** — no network, no API
+Expected: **568 tests, all passing, fully offline** — no network, no API
 keys. The framework agents run against the scripted `FakeChatClient`.
+
+## Deploy
+
+```bash
+./scripts/deploy-local.sh    # local demo → http://localhost:8000
+./scripts/deploy-azure.sh    # Azure Container Apps (needs your own `az login`)
+```
+
+Full runbook (prereqs, costs, troubleshooting, teardown, AKS/Terraform
+enterprise path): [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Deploy on Foundry
 
@@ -267,8 +285,29 @@ infra/
                    HPA, probes, workload-identity SA, Key Vault CSI
   monitoring/      Prometheus alert rules, Grafana dashboard JSON
 Dockerfile         Multi-stage service image (python:3.12-slim, non-root)
-tests/             510+ offline pytest tests
+tests/             568 offline pytest tests (+ Playwright API/UI QA in qa/)
 ```
+
+## Deploy
+
+Local: `./scripts/deploy-local.sh` · Cloud: `./scripts/deploy-azure.sh`
+(Container Apps, idempotent) · Enterprise: `infra/terraform/` (AKS) —
+runbook: [DEPLOYMENT.md](DEPLOYMENT.md).
+
+## Portfolio
+
+Part of an agentic-AI engineering portfolio by
+[jagadishmazure-jpg](https://github.com/jagadishmazure-jpg):
+
+| Repo | What it is | Tests |
+|---|---|---|
+| [Jagadish-multi-agent-orchestration](https://github.com/jagadishmazure-jpg/Jagadish-multi-agent-orchestration) | Orchestration patterns as code (supervisor, router, blackboard, …) | 124 |
+| [Jagadish-agent-security-redteam](https://github.com/jagadishmazure-jpg/Jagadish-agent-security-redteam) | Red-teaming suite: attack catalog, layered defenses, risk scoring | 206 |
+| [Jagadish-llm-evals-observability](https://github.com/jagadishmazure-jpg/Jagadish-llm-evals-observability) | LLM evals + observability as code (judges, regression, tracing) | 111 |
+| **This repo** | End-to-end multi-agent platform on Microsoft Agent Framework 1.0 | 568 |
+
+> **Live demo:** published after deployment — see
+> [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Key design decisions
 
