@@ -274,18 +274,52 @@ class A2AAdapter:
         self._run(task, message_text, context or {})
         return {"task": self._public_task(task)}
 
-    def tasks_get(self, task_id: str) -> Dict[str, Any]:
-        """``tasks/get``: poll a task's status and artifacts."""
+    def _check_task_access(
+        self, task_id: str, token: Optional[str]
+    ) -> tuple[Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
+        """Authorize access to a task.
+
+        Returns ``(task, None)`` when allowed, ``(None, error_dict)``
+        otherwise. The caller must present the token whose subject created
+        the task, or hold the ``a2a:admin`` scope. Task IDs are unguessable
+        (48-bit) but that is defense-in-depth, not authorization.
+        """
         task = self._tasks.get(task_id)
         if task is None:
-            return self._error_response(task_id, "task not found")
+            return None, self._error_response(task_id, "task not found")
+        try:
+            identity = authenticate_and_authorize(token, [])
+        except AuthenticationError as exc:
+            return None, {"error": {"code": 401, "message": str(exc)},
+                          "task_id": task_id}
+        owner = (task.get("caller") or {}).get("subject")
+        if identity.subject != owner and "a2a:admin" not in identity.scopes:
+            return None, {"error": {"code": 403, "message":
+                                    "not the task owner"}, "task_id": task_id}
+        return task, None
+
+    def tasks_get(
+        self, task_id: str, *, token: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """``tasks/get``: poll a task's status and artifacts.
+
+        Requires the Bearer <redacted> of the task's creator (or ``a2a:admin``).
+        """
+        task, error = self._check_task_access(task_id, token)
+        if error is not None:
+            return error
         return {"task": self._public_task(task)}
 
-    def tasks_cancel(self, task_id: str) -> Dict[str, Any]:
-        """``tasks/cancel``: mark a non-terminal task canceled."""
-        task = self._tasks.get(task_id)
-        if task is None:
-            return self._error_response(task_id, "task not found")
+    def tasks_cancel(
+        self, task_id: str, *, token: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """``tasks/cancel``: mark a non-terminal task canceled.
+
+        Requires the Bearer <redacted> of the task's creator (or ``a2a:admin``).
+        """
+        task, error = self._check_task_access(task_id, token)
+        if error is not None:
+            return error
         if task["status"]["state"] in ("completed", "failed", "canceled"):
             return {"task": self._public_task(task)}
         task["status"] = {"state": "canceled", "timestamp": _now()}
@@ -377,7 +411,9 @@ class FakeTransport:
                 skill_id=params.get("skill_id"),
             )
         if method == "tasks/get":
-            return self.adapter.tasks_get(params["task_id"])
+            return self.adapter.tasks_get(
+                params["task_id"], token=params.get("token"))
         if method == "tasks/cancel":
-            return self.adapter.tasks_cancel(params["task_id"])
+            return self.adapter.tasks_cancel(
+                params["task_id"], token=params.get("token"))
         return {"error": {"code": -32601, "message": f"unknown method: {method}"}}

@@ -61,6 +61,7 @@ INDEX_HTML = """<!DOCTYPE html>
 </div>
 
 <div id="results"></div>
+<div id="analytics"></div>
 
 <script>
 const $ = (id) => document.getElementById(id);
@@ -77,8 +78,8 @@ async function loadScenarios() {
 }
 
 function esc(s) {
-  return String(s).replace(/[&<>"]/g, (c) =>
-    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  return String(s).replace(/[&<>"'`]/g, (c) =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;'}[c]));
 }
 
 function renderResults(bb) {
@@ -127,6 +128,97 @@ function renderResults(bb) {
   el.innerHTML = html;
 }
 
+function barChart(rows, unit) {
+  // rows: [{label, value, color}]; dependency-free SVG horizontal bars.
+  const max = Math.max.apply(null, rows.map((r) => r.value).concat([1]));
+  const W = 420, BH = 26, gap = 8;
+  const H = rows.length * (BH + gap) + 30;
+  let svg = '<svg width="' + W + '" height="' + H + '" role="img" aria-label="bar chart">';
+  rows.forEach((r, i) => {
+    const y = 24 + i * (BH + gap);
+    const w = Math.max(2, (r.value / max) * (W - 190));
+    svg += '<text x="0" y="' + (y + 17) + '" font-size="12">' + esc(r.label) + '</text>';
+    svg += '<rect x="150" y="' + y + '" width="' + w + '" height="' + BH +
+           '" fill="' + r.color + '" rx="4"/>';
+    svg += '<text x="' + (160 + w) + '" y="' + (y + 17) + '" font-size="12">' +
+           r.value + (unit ? ' ' + esc(unit) : '') + '</text>';
+  });
+  return svg + '</svg>';
+}
+
+function donut(pct, label) {
+  // pct 0-100; dependency-free SVG ring.
+  const c = Math.max(0, Math.min(100, pct));
+  const R = 54, CIRC = 2 * Math.PI * R;
+  const color = c >= 80 ? '#0a7a2f' : (c >= 50 ? '#d9930d' : '#b00020');
+  return '<svg width="140" height="140" role="img" aria-label="' + esc(label) + '">' +
+    '<circle cx="70" cy="70" r="' + R + '" fill="none" stroke="#eee" stroke-width="16"/>' +
+    '<circle cx="70" cy="70" r="' + R + '" fill="none" stroke="' + color +
+    '" stroke-width="16" stroke-dasharray="' + (CIRC * c / 100).toFixed(1) + ' ' + CIRC.toFixed(1) +
+    '" transform="rotate(-90 70 70)" stroke-linecap="round"/>' +
+    '<text x="70" y="76" text-anchor="middle" font-size="20" font-weight="bold">' +
+    c.toFixed(0) + '%</text></svg>';
+}
+
+function renderAnalytics(data) {
+  const el = $('analytics');
+  let html = '<div class="card"><h2>Analytics</h2>';
+  html += '<p class="hint">' + esc(data.synthetic_data_note || '') + '</p>';
+
+  const flags = data.anomaly_flags || [];
+  html += '<h3>Proactive flags (' + flags.length + ')</h3>';
+  if (!flags.length) {
+    html += '<p class="ok">No anomalies detected in this run.</p>';
+  } else {
+    html += '<ul>' + flags.map((f) =>
+      '<li class="' + (f.severity === 'critical' ? 'flag' : '') + '"><strong>[' +
+      esc(f.severity.toUpperCase()) + ']</strong> ' + esc(f.message) + '</li>').join('') + '</ul>';
+  }
+
+  const bench = {};
+  (data.peer_benchmarks || []).forEach((b) => { bench[b.metric] = b; });
+
+  html += '<h3>Cost vs synthetic peers</h3>';
+  if (bench.cost_per_kg_usd) {
+    const b = bench.cost_per_kg_usd;
+    html += barChart([
+      { label: 'Your run', value: b.value, color: '#0b5fff' },
+      { label: 'Peer p50', value: b.peer_p50, color: '#9e9e9e' },
+      { label: 'Peer p90', value: b.peer_p90, color: '#cfcfcf' },
+    ], b.unit) + '<p class="hint">Verdict: ' + esc(b.verdict) + ' · ' + esc(b.data_label) + '</p>';
+  }
+
+  html += '<h3>Shelf-life projection vs peers</h3>';
+  if (bench.shelf_life_days) {
+    const b = bench.shelf_life_days;
+    html += barChart([
+      { label: 'Your run', value: b.value, color: '#0b5fff' },
+      { label: 'Peer p50', value: b.peer_p50, color: '#9e9e9e' },
+    ], b.unit) + '<p class="hint">Verdict: ' + esc(b.verdict) + '</p>';
+  }
+
+  html += '<h3>Claim coverage</h3>';
+  const agg = data.aggregates || {};
+  if (agg.avg_claim_coverage_pct != null) {
+    html += donut(agg.avg_claim_coverage_pct, 'claim coverage');
+  }
+  html += '<p class="hint">Runs recorded: ' + (agg.run_count || 0) +
+          (agg.avg_cost_per_kg_usd != null ? ' · Avg cost $' + agg.avg_cost_per_kg_usd + '/kg' : '') +
+          (agg.avg_cycle_weeks != null ? ' · Avg cycle ' + agg.avg_cycle_weeks + ' weeks' : '') + '</p>';
+
+  el.innerHTML = html + '</div>';
+}
+
+async function loadAnalytics(token) {
+  try {
+    const res = await fetch('/api/analytics/summary', {
+      headers: { 'Authorization': 'Bearer ' + token },
+    });
+    if (!res.ok) { return; }
+    renderAnalytics(await res.json());
+  } catch (e) { /* analytics is best-effort in the demo UI */ }
+}
+
 async function runDemo() {
   const btn = $('run-button'), status = $('status'), results = $('results');
   const token = $('token-input').value.trim();
@@ -152,6 +244,7 @@ async function runDemo() {
         ' Session: ' + esc(data.session_id) +
         (data.grounding && data.grounding.length ? ' · grounded on ' + data.grounding.length + ' knowledge chunks.' : '');
       renderResults(data.blackboard);
+      loadAnalytics(token);
     }
   } catch (e) {
     status.textContent = 'Request failed: ' + e.message;

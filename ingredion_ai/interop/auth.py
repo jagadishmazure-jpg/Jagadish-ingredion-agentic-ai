@@ -180,6 +180,9 @@ SKILL_SCOPES: Dict[str, Dict[str, List[str]]] = {
     "customer_advisor": {
         "estimate-pricing": ["proposal:read"],
     },
+    "mcp": {
+        "invoke": ["mcp:invoke"],  # MCP tools/call when server auth is on
+    },
 }
 
 #: Extra scopes for high-impact outputs (proposal/report generation).

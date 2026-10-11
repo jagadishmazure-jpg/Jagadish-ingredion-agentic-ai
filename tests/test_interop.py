@@ -75,7 +75,7 @@ def test_tasks_get_roundtrip():
     adapter = _adapter()
     token = _token(["formulation:write"])
     task_id = adapter.message_send("rd_formulation", "hi", token=token)["task"]["id"]
-    got = adapter.tasks_get(task_id)
+    got = adapter.tasks_get(task_id, token=token)
     assert got["task"]["id"] == task_id
 
 
@@ -87,7 +87,7 @@ def test_tasks_cancel_terminal_task_is_idempotent():
     adapter = _adapter()
     token = _token(["formulation:write"])
     task_id = adapter.message_send("rd_formulation", "hi", token=token)["task"]["id"]
-    again = adapter.tasks_cancel(task_id)
+    again = adapter.tasks_cancel(task_id, token=token)
     assert again["task"]["status"]["state"] == "completed"
 
 

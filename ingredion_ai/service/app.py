@@ -27,16 +27,23 @@ from __future__ import annotations
 import asyncio
 import functools
 import json
+import os
 import time
 from typing import Any, Callable, Dict, List, Optional
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 from pydantic import BaseModel, Field
 
 from ingredion_ai.demo import SCENARIOS
 from ingredion_ai.framework.agents import AGENT_ORDER, build_framework_agents
 from ingredion_ai.framework.runner import build_demo_context, run_reformulation
+from ingredion_ai.analytics import (
+    AggregateStore,
+    PeerBenchmark,
+    extract_run_summary,
+    flag_anomalies,
+)
 from ingredion_ai.interop.a2a import build_agent_cards
 from ingredion_ai.interop.auth import (
     AuthenticationError,
@@ -45,11 +52,16 @@ from ingredion_ai.interop.auth import (
     required_scopes_for,
 )
 from ingredion_ai.service import reliability
+from ingredion_ai.service.metrics import registry as metrics_registry
 from ingredion_ai.service.pipeline import AgenticPipeline, PipelineRejected
 from ingredion_ai.service.ui import INDEX_HTML
 
 SERVICE_NAME = "ingredion-agentic-ai-demo"
 SERVICE_VERSION = "0.1.0"
+
+#: Run-aggregate analytics store (in-memory; reset between tests).
+analytics_store = AggregateStore()
+peer_benchmark = PeerBenchmark()
 
 #: Skill invoked by POST /api/agents/{agent}/run (matches interop/auth.py).
 AGENT_SKILL: Dict[str, str] = {
@@ -63,6 +75,127 @@ AGENT_SKILL: Dict[str, str] = {
 _LIVE_CONFIG_PREFIX = "Live mode needs Azure OpenAI configuration"
 
 app = FastAPI(title=SERVICE_NAME, version=SERVICE_VERSION)
+
+
+# ---------------------------------------------------------------------------
+# Prometheus metrics middleware
+# ---------------------------------------------------------------------------
+
+
+def _route_template(path: str) -> str:
+    """Normalize a request path to a low-cardinality route template."""
+    if path.startswith("/api/agents/") and path.endswith("/run"):
+        return "/api/agents/{agent}/run"
+    return path
+
+
+@app.middleware("http")
+async def _metrics_middleware(request: Request, call_next):
+    started = time.perf_counter()
+    response = await call_next(request)
+    elapsed = time.perf_counter() - started
+    route = _route_template(request.url.path)
+    labels = {
+        "method": request.method,
+        "route": route,
+        "status": str(response.status_code),
+    }
+    metrics_registry.inc("agent_service_http_requests_total", labels)
+    metrics_registry.observe_duration("agent_service_http_request_duration_seconds", elapsed)
+    if response.status_code >= 500:
+        metrics_registry.inc(
+            "agent_service_errors_total", {"route": route}
+        )
+    return response
+
+
+# ---------------------------------------------------------------------------
+# Security hardening middleware
+# ---------------------------------------------------------------------------
+
+#: Max request body size (bytes); oversized bodies → 413. Env-tunable.
+SERVICE_MAX_BODY_BYTES = int(os.environ.get("SERVICE_MAX_BODY_BYTES", str(1024 * 1024)))
+
+
+@app.middleware("http")
+async def _security_headers(request: Request, call_next):
+    """Attach baseline security headers to every response."""
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = (
+        "camera=(), microphone=(), geolocation=()"
+    )
+    return response
+
+
+@app.middleware("http")
+async def _body_size_limit(request: Request, call_next):
+    """Reject oversized request bodies before they reach handlers (413)."""
+    if request.method in ("POST", "PUT", "PATCH"):
+        content_length = request.headers.get("content-length")
+        if (content_length and content_length.isdigit()
+                and int(content_length) > SERVICE_MAX_BODY_BYTES):
+            return JSONResponse(
+                {"detail": "request body too large"},
+                status_code=413,
+            )
+    return await call_next(request)
+
+
+@app.exception_handler(Exception)
+async def _unhandled_exception(request: Request, exc: Exception):
+    """Last-resort handler: never leak tracebacks or internals to clients.
+
+    HTTPExceptions keep their status/detail; timeouts become 504;
+    everything else becomes a generic 500 while the full traceback is
+    logged server-side only.
+    """
+    if isinstance(exc, HTTPException):
+        return JSONResponse(
+            {"detail": exc.detail},
+            status_code=exc.status_code,
+            headers=exc.headers,
+        )
+    if isinstance(exc, (asyncio.TimeoutError, TimeoutError)):
+        return JSONResponse({"detail": "request timed out"}, status_code=504)
+    import logging as _logging
+
+    _logging.getLogger("ingredion_ai.service.app").exception(
+        "unhandled exception for %s %s", request.method, request.url.path
+    )
+    return JSONResponse({"detail": "Internal Server Error"}, status_code=500)
+
+
+# CORS: disabled by default (same-origin only — the demo UI is served by
+# this same app). Set SERVICE_CORS_ORIGINS to a comma-separated allowlist
+# to enable cross-origin access; never use "*" with credentials.
+_cors_origins = [
+    o.strip()
+    for o in os.environ.get("SERVICE_CORS_ORIGINS", "").split(",")
+    if o.strip()
+]
+if _cors_origins:
+    from fastapi.middleware.cors import CORSMiddleware
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=_cors_origins,
+        allow_methods=["GET", "POST"],
+        allow_headers=[
+            "Authorization", "Content-Type", "Idempotency-Key", "X-Session-Id",
+        ],
+        max_age=600,
+    )
+
+
+@app.get("/metrics", include_in_schema=False)
+async def metrics() -> Response:
+    """Prometheus text exposition (public; standard scrape target)."""
+    return Response(
+        metrics_registry.render(), media_type="text/plain; version=0.0.4"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -385,8 +518,63 @@ async def reformulate(
     headers = {"X-Session-Id": body["session_id"]}
     if body.get("degraded"):
         headers["X-Service-Degraded"] = "true"
+        metrics_registry.inc("agent_service_live_fallback_total", {})
+    # Analytics: record the run summary (never breaks the response).
+    try:
+        summary = extract_run_summary(
+            body.get("blackboard", {}) or {},
+            scenario=req.scenario,
+            formula_id=ctx["formula_id"],
+            region=ctx["region"],
+            elapsed_ms=body.get("elapsed_ms"),
+        )
+        analytics_store.record(summary)
+        for agent_name in AGENT_ORDER:
+            metrics_registry.inc(
+                "agent_service_agent_runs_total", {"agent": agent_name}
+            )
+    except Exception:  # noqa: BLE001 - analytics is best-effort
+        pass
     _remember_idempotent(request, identity.subject, 200, body)
     return JSONResponse(body, headers=headers)
+
+
+@app.get("/api/analytics/summary")
+async def analytics_summary(
+    identity=Depends(protected(["analytics:read"])),
+) -> Dict[str, Any]:
+    """Run-aggregate analytics: counts, averages, peer benchmarks, flags.
+
+    Requires the ``analytics:read`` scope. Benchmarks are computed against
+    deterministic synthetic peer distributions (labeled as such).
+    """
+    agg = analytics_store.summary()
+    latest = agg["runs"][-1] if agg["runs"] else None
+    benchmarks = peer_benchmark.compare_summary(latest) if latest else []
+    flags = (
+        [f.to_dict() for f in flag_anomalies(_summary_from_dict(latest), peer_benchmark)]
+        if latest
+        else []
+    )
+    return {
+        "aggregates": {k: v for k, v in agg.items() if k != "runs"},
+        "latest_run": latest,
+        "peer_benchmarks": benchmarks,
+        "anomaly_flags": flags,
+        "synthetic_data_note": (
+            "All figures derive from synthetic demo runs; peer benchmarks "
+            "use deterministic synthetic distributions."
+        ),
+    }
+
+
+def _summary_from_dict(data: Dict[str, Any] | None):
+    """Rebuild a RunSummary from its dict form (for flagging)."""
+    from ingredion_ai.analytics.aggregates import RunSummary as _RS
+
+    if not data:
+        return _RS(scenario="", formula_id="", region="")
+    return _RS(**{k: data.get(k) for k in _RS.__dataclass_fields__})
 
 
 def _register_agent_routes() -> None:
@@ -448,6 +636,10 @@ def _register_agent_routes() -> None:
             headers = {"X-Session-Id": body["session_id"]}
             if body.get("degraded"):
                 headers["X-Service-Degraded"] = "true"
+                metrics_registry.inc("agent_service_live_fallback_total", {})
+            metrics_registry.inc(
+                "agent_service_agent_runs_total", {"agent": _agent_name}
+            )
             _remember_idempotent(request, identity.subject, 200, body)
             return JSONResponse(body, headers=headers)
 

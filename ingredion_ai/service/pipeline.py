@@ -5,8 +5,8 @@ Mirrors the Microsoft Azure Agentic AI Stack reference loop:
 1. **Request Intake** — normalize/auth/validate (auth + rate limiting live
    in the FastAPI dependencies; intake normalizes here).
 2. **Intent Understanding + Guardrails** — classify intent; input
-   guardrails via :mod:`ingredion_ai.governance.security` (prompt-injection
-   patterns fail closed with 400).
+   guardrails via :mod:`ingredion_ai.guardrails` (prompt-injection,
+   jailbreak, PII, domain-scope, and length checks; fail closed with 400).
 3. **Memory/State read** — load session state from the
    :mod:`ingredion_ai.service.memory` store.
 4. **Retrieve + Ground (RAG)** — retrieve grounding chunks from the
@@ -14,7 +14,9 @@ Mirrors the Microsoft Azure Agentic AI Stack reference loop:
 5. **Tool Selection & Execution** — run the agent workflow/tools through
    the resilient runner (retry + breaker + graceful fallback).
 6. **Generate Response (+ output guardrails)** — assemble the response;
-   output guardrails scrub PII-shaped strings.
+   output guardrails (:mod:`ingredion_ai.guardrails`) scrub PII, check
+   claim grounding against RAG citations, and enforce confidence
+   thresholds.
 7. **Memory/State write** — persist session state (turn count, last intent,
    result keys).
 8. **Feedback Loop (eval/log)** — structured JSON log line per request
@@ -34,7 +36,7 @@ from pathlib import Path
 from typing import Any, Awaitable, Callable, Dict, List, Optional
 
 from ingredion_ai.governance.audit import AuditTrail
-from ingredion_ai.governance.security import sanitize_input, scrub_pii
+from ingredion_ai.guardrails import check_input, check_output, load_policy
 from ingredion_ai.observability.logging import get_json_logger
 from ingredion_ai.rag.retrieval import Retriever
 from ingredion_ai.service.memory import SessionStore, session_store as default_store
@@ -196,23 +198,44 @@ class AgenticPipeline:
     # -- stage 2: intent + input guardrails ----------------------------------
 
     async def stage_intent_guardrails(self, ctx: PipelineContext) -> None:
-        """Classify intent; fail closed on prompt-injection patterns."""
+        """Classify intent; fail closed on guardrail violations."""
         req = ctx.request
         if req.kind == "reformulate":
             target = req.params.get("scenario") or req.params.get("formula_id", "?")
             ctx.intent = f"reformulation:{target}"
         else:
             ctx.intent = f"agent:{req.agent_name}"
+        # Domain-scope enforcement applies to reformulate requests (checked
+        # once over the combined inputs: identifiers alone like
+        # "cola_soft_drink" carry little signal, but the request as a whole
+        # must read as food-manufacturing). agent_run messages address an
+        # already domain-scoped agent (its instructions are the scope), so
+        # only injection/PII/length checks apply there.
+        policy = load_policy(req.agent_name)
         flags: List[str] = []
         for field_name, text in req.text_fields.items():
-            _, found = sanitize_input(text or "")
-            flags.extend(f"{field_name}:{f}" for f in found)
-        ctx.guardrail_flags = flags
-        if flags:
-            raise PipelineRejected(
-                400,
-                "input rejected by guardrails: " + "; ".join(sorted(set(flags))),
+            verdict = check_input(
+                text or "", policy=policy, field_name=field_name,
+                check_domain=False,
             )
+            flags.extend(verdict.flags)
+            if not verdict.allowed:
+                ctx.guardrail_flags = sorted(set(flags))
+                raise PipelineRejected(
+                    400, verdict.refusal or "input rejected by guardrails",
+                )
+        if req.kind == "reformulate":
+            combined = " ".join(str(v or "") for v in req.text_fields.values())
+            domain_verdict = check_input(
+                combined, policy=policy, field_name="request", check_domain=True,
+            )
+            flags.extend(domain_verdict.flags)
+            if not domain_verdict.allowed:
+                ctx.guardrail_flags = sorted(set(flags))
+                raise PipelineRejected(
+                    400, domain_verdict.refusal or "input rejected by guardrails",
+                )
+        ctx.guardrail_flags = sorted(set(flags))
 
     # -- stage 3: memory read -------------------------------------------------
 
@@ -267,8 +290,18 @@ class AgenticPipeline:
             body.update(ctx.result)
         else:
             body["result"] = ctx.result
-        # Output guardrails: scrub PII-shaped strings from the whole payload.
-        ctx.response_body = json.loads(scrub_pii(json.dumps(body, default=str)))
+        # Output guardrails: PII scrubbing, prompt-leak scan, claim
+        # grounding against the RAG citations, confidence thresholds.
+        out_verdict = check_output(
+            json.dumps(body, default=str),
+            citations=[g["excerpt"] for g in ctx.grounding],
+            policy=load_policy(ctx.request.agent_name),
+        )
+        ctx.response_body = json.loads(out_verdict.text)
+        if out_verdict.flags:
+            ctx.response_body["output_guardrail_flags"] = sorted(
+                set(out_verdict.flags)
+            )
 
     # -- stage 7: memory write --------------------------------------------------
 
