@@ -2,8 +2,7 @@
 
 import pytest
 
-from ingredion_ai.agents.supply_chain import SupplyChainAgent
-from ingredion_ai.agents.supply_chain import forecaster, inventory, quality, scheduler
+from food_ingredients_ai.agents.supply_chain import SupplyChainAgent, forecaster, inventory, quality, scheduler
 
 
 def _agent():

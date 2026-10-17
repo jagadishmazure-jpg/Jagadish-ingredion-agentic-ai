@@ -18,7 +18,7 @@ metric definitions, never by improvising business logic.**
 
 ## The answer in this repo
 
-`ingredion_ai/semantics/` is the governed middle layer between agents and
+`food_ingredients_ai/semantics/` is the governed middle layer between agents and
 data:
 
 | Component | File | Job |

@@ -1,7 +1,7 @@
 # Security
 
 Threat model, controls inventory, residual risks, and the production
-hardening checklist for the Ingredion agentic AI demo. All data is
+hardening checklist for the food-ingredients agentic AI demo. All data is
 synthetic; the demo signing key is a non-secret dev constant.
 
 ## 1. Threat model

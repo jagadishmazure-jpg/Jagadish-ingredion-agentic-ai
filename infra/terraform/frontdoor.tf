@@ -37,11 +37,11 @@ resource "azurerm_cdn_frontdoor_origin_group" "apim" {
 }
 
 resource "azurerm_cdn_frontdoor_origin" "apim" {
-  name                          = "apim-origin"
-  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.apim.id
-  host_name                     = azurerm_api_management.main.gateway_url
+  name                           = "apim-origin"
+  cdn_frontdoor_origin_group_id  = azurerm_cdn_frontdoor_origin_group.apim.id
+  host_name                      = azurerm_api_management.main.gateway_url
   certificate_name_check_enabled = true
-  enabled                       = true
+  enabled                        = true
 
   http_port  = 80
   https_port = 443

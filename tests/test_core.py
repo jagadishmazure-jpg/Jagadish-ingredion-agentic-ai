@@ -2,11 +2,11 @@
 
 import pytest
 
-from ingredion_ai.core.agent import Agent
-from ingredion_ai.core.fake_llm import FakeLLM
-from ingredion_ai.core.planner import Orchestrator
-from ingredion_ai.core.tools import Tool, ToolRegistry
-from ingredion_ai.core.types import Message, Task, TaskResult, TaskState
+from food_ingredients_ai.core.agent import Agent
+from food_ingredients_ai.core.fake_llm import FakeLLM
+from food_ingredients_ai.core.planner import Orchestrator
+from food_ingredients_ai.core.tools import Tool, ToolRegistry
+from food_ingredients_ai.core.types import Message, Task, TaskResult, TaskState
 
 
 class _EchoAgent(Agent):

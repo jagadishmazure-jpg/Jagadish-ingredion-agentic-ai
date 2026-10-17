@@ -1,14 +1,14 @@
 # Use Cases
 
 > **Disclaimer.** Independent portfolio demo; all data synthetic; not
-> affiliated with Ingredion Incorporated. Ebook stats are paraphrased
-> briefly as pain-point context, not copied claims.
+> affiliated with any real company. Figures quoted as pain points are demo
+> assumptions, not sourced statistics.
 
 Each use case: **user → business pain → implementing module(s)**.
 
 ## Knowledge layers
 
-1. **Consumer insights (ATLAS-style):** claim recognition, willingness-to-pay, ingredient acceptability
+1. **Consumer insights:** claim recognition, willingness-to-pay, ingredient acceptability
 2. **Formulation/R&D:** substitution rules, texture/shelf-life know-how
 3. **Ingredient portfolio:** functional starches/flours, sweeteners, plant proteins, natural certifications
 4. **Regulatory/claims:** per-region claim rules and hierarchy

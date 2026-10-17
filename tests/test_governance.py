@@ -1,12 +1,11 @@
 """Tests for the governance package: policy, approvals, audit, security, identity."""
 
 import json
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 import pytest
 
-from ingredion_ai.governance import approvals, audit, identity, policy, security
-
+from food_ingredients_ai.governance import approvals, audit, identity, policy, security
 
 # -- policy engine -----------------------------------------------------------
 
@@ -136,7 +135,7 @@ def test_require_env_reads_environment(monkeypatch):
 
 def test_require_env_missing_raises(monkeypatch):
     monkeypatch.delenv("DEMO_MISSING_SECRET_XYZ", raising=False)
-    with pytest.raises(Exception):
+    with pytest.raises(RuntimeError):
         security.require_env("DEMO_MISSING_SECRET_XYZ")
 
 

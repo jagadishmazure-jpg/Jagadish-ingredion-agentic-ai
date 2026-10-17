@@ -7,7 +7,7 @@ import time
 
 import pytest
 
-from ingredion_ai.legacy import (
+from food_ingredients_ai.legacy import (
     L0_MANUAL,
     L1_ASSIST,
     L2_AUGMENT,
@@ -19,10 +19,8 @@ from ingredion_ai.legacy import (
     CatalogError,
     ChangeFeed,
     CRMBridge,
-    LegacyBridge,
     LegacyError,
     LegacyEvent,
-    PromotionCriteria,
     SAPBridge,
     SimulatedEventSource,
     SyntheticLegacyBridge,

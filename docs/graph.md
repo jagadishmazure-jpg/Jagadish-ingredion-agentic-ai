@@ -1,4 +1,4 @@
-# Graph-based orchestration (`ingredion_ai/graph/`)
+# Graph-based orchestration (`food_ingredients_ai/graph/`)
 
 A tiny, stdlib-only, fully offline graph runtime plus a graph-based variant
 of the reformulation demo. Deterministic: insertion order decides the start
@@ -24,7 +24,7 @@ only channel between nodes.
   the final state.
 
 ```python
-from ingredion_ai.graph import Graph
+from food_ingredients_ai.graph import Graph
 
 graph = Graph()
 graph.add_node("greet", lambda state: {"msg": f"hi {state['name']}"})
@@ -40,7 +40,7 @@ Error behavior: empty graph → `ValueError`; edge to an unknown node →
 ## Walkthrough: the reformulation graph
 
 `run_reformulation_graph(formula_id="sweet_bakery_cake", ...)` replays the
-reformulation demo as a graph (`ingredion_ai/graph/reformulation_graph.py`):
+reformulation demo as a graph (`food_ingredients_ai/graph/reformulation_graph.py`):
 
 ```
 analyze -> substitute -> validate --(invalid claims AND revisits left)--> revise_substitutions
@@ -66,7 +66,7 @@ its revisit budget and moves on. In a live deployment the revise node would
 take corrective action (relax a constraint, try the next-best candidate),
 and the budget + `max_steps` guard is what keeps that loop safe.
 
-Payload shapes mirror `ingredion_ai/framework/tools.py`: the agent
+Payload shapes mirror `food_ingredients_ai/framework/tools.py`: the agent
 `execute()` calls take `formula_id`/`target_claims`/`region` plus a
 `blackboard` keyed by task name, so graph results are byte-identical to the
 sequential pipeline — only the control flow differs.

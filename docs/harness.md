@@ -1,14 +1,14 @@
 # Harness Engineering
 
-> Demo project. All data synthetic and fictional. Not affiliated with Ingredion.
+> Demo project. All data synthetic and fictional. Not affiliated with any real company.
 
 The model is only half the system. The **harness** is everything around it:
 retries, timeouts, failure isolation, guardrails, and the observability hooks
-that make runs measurable. `ingredion_ai.harness` wraps agent `execute()` calls
+that make runs measurable. `food_ingredients_ai.harness` wraps agent `execute()` calls
 (or any callable) with that machinery.
 
 ```python
-from ingredion_ai.harness import Harness, policy_guardrail
+from food_ingredients_ai.harness import Harness, policy_guardrail
 
 harness = Harness(max_retries=2, base_delay=0.2, timeout_seconds=10.0)
 harness.pre_hooks.append(policy_guardrail("analyze_ingredients", agent="rd_formulation"))
@@ -47,7 +47,7 @@ persistently failing dependency so retries don't become a self-inflicted DDoS:
   cooldown restarts.
 
 ```python
-from ingredion_ai.harness import CircuitBreaker
+from food_ingredients_ai.harness import CircuitBreaker
 
 breaker = CircuitBreaker(failure_threshold=3, cooldown_seconds=30.0)
 result = breaker.call(flaky_tool, payload)   # raises CircuitOpenError when open
@@ -61,7 +61,7 @@ result = breaker.call(flaky_tool, payload)   # raises CircuitOpenError when open
 - **Post-hooks** (`harness.post_hooks`) run as `hook(fn_name, result)` after
   a successful attempt. They only observe; they cannot veto.
 - **`policy_guardrail(action_name, agent=...)`** builds a pre-hook from
-  `ingredion_ai.governance.policy`: it calls `check_action(agent,
+  `food_ingredients_ai.governance.policy`: it calls `check_action(agent,
   action_name)` and vetoes anything the policy doesn't allow-list. The denial
   reason is kept on the hook as `last_reason`. This is how demo policy ("agents
   never place orders, modify SAP, or publish claims") is enforced at the

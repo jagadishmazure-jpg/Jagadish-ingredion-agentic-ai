@@ -7,11 +7,10 @@ terminate and return per-node results in the final state.
 
 from __future__ import annotations
 
-from ingredion_ai.governance.approvals import ApprovalGate
-from ingredion_ai.graph.invoice_graph import run_invoice_graph
-from ingredion_ai.graph.procurement_graph import run_procurement_graph
-from ingredion_ai.observability.costs import forecast_spend
-
+from food_ingredients_ai.governance.approvals import ApprovalGate
+from food_ingredients_ai.graph.invoice_graph import run_invoice_graph
+from food_ingredients_ai.graph.procurement_graph import run_procurement_graph
+from food_ingredients_ai.observability.costs import forecast_spend
 
 # -- procurement ------------------------------------------------------------
 

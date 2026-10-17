@@ -13,15 +13,15 @@ import yaml
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
-from ingredion_ai.interop.a2a import A2AAdapter
-from ingredion_ai.interop.auth import (
+from food_ingredients_ai.interop.a2a import A2AAdapter
+from food_ingredients_ai.interop.auth import (
     describe_auth_requirements,
     issue_token,
     required_scopes_for,
 )
-from ingredion_ai.interop.mcp import InProcessClient, MCPServer
-from ingredion_ai.service import app as app_module
-from ingredion_ai.service.app import app
+from food_ingredients_ai.interop.mcp import InProcessClient, MCPServer
+from food_ingredients_ai.service import app as app_module
+from food_ingredients_ai.service.app import app
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -90,9 +90,8 @@ def test_tasks_get_requires_token():
 
 def test_tasks_get_rejects_wrong_subject():
     adapter, task_id, _ = _a2a_task()
-    other = _token(["formulation:write"])
     # same scopes but different subject ("svc:test" both?) -> use distinct sub
-    from ingredion_ai.interop.auth import issue_token as _issue
+    from food_ingredients_ai.interop.auth import issue_token as _issue
     intruder = _issue("svc:intruder", ["formulation:write"])
     resp = adapter.tasks_get(task_id, token=intruder)
     assert resp["error"]["code"] == 403
@@ -217,5 +216,5 @@ def test_dockerfile_base_image_digest_pinned():
 
 
 def test_ui_escapes_single_quotes():
-    from ingredion_ai.service.ui import INDEX_HTML
+    from food_ingredients_ai.service.ui import INDEX_HTML
     assert "&#39;" in INDEX_HTML

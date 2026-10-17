@@ -5,17 +5,15 @@ enforcement, input length limits, strictness levels, claim grounding,
 confidence abstention, and output safety. All offline.
 """
 
-import os
 
 import pytest
 
-from ingredion_ai.guardrails import (
+from food_ingredients_ai.guardrails import (
     Strictness,
     check_input,
     check_output,
     load_policy,
 )
-from ingredion_ai.guardrails.policies import GuardrailPolicy
 
 
 @pytest.fixture(autouse=True)

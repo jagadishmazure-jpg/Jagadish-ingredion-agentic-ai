@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ingredion-agent-svc
-  namespace: ingredion-ai
+  name: food-ingredients-agent-svc
+  namespace: food-ingredients-ai
   labels:
-    app: ingredion-agent-svc
+    app: food-ingredients-agent-svc
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: ingredion-agent-svc
+      app: food-ingredients-agent-svc
   template:
     metadata:
       labels:
-        app: ingredion-agent-svc
+        app: food-ingredients-agent-svc
         azure.workload.identity/use: "true"
     spec:
-      serviceAccountName: ingredion-svc
+      serviceAccountName: food-ingredients-svc
       # Reliability: spread replicas across nodes (with zones on the node
       # pool, also across availability zones) so a single node/zone failure
       # can't take down all replicas. HPA (2-6 replicas) + PDB(minAvailable: 1)
@@ -30,7 +30,7 @@ spec:
                   matchExpressions:
                     - key: app
                       operator: In
-                      values: [ingredion-agent-svc]
+                      values: [food-ingredients-agent-svc]
                 topologyKey: kubernetes.io/hostname
       securityContext:
         runAsNonRoot: true
@@ -41,7 +41,7 @@ spec:
         - name: svc
           # CI substitutes the real image on deploy (see .github/workflows/deploy.yml).
           # Production: pin the image digest (img:tag@sha256:...) for immutability.
-          image: __ACR_LOGIN_SERVER__/ingredion-agentic-ai:__IMAGE_TAG__
+          image: __ACR_LOGIN_SERVER__/food-ingredients-agentic-ai:__IMAGE_TAG__
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
@@ -60,7 +60,7 @@ spec:
             - name: AZURE_OPENAI_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: ingredion-secrets
+                  name: food-ingredients-secrets
                   key: AZURE_OPENAI_API_KEY
                   optional: true
           livenessProbe:
@@ -92,4 +92,4 @@ spec:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: ingredion-kv
+              secretProviderClass: food-ingredients-kv

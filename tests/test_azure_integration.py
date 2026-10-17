@@ -7,19 +7,18 @@ Event Hub batching, Functions triggers, Logic Apps callbacks, and the
 queue-consumer worker.
 """
 
-import json
 
 import pytest
 
-from ingredion_ai.azure_integration import events as lifecycle
-from ingredion_ai.azure_integration import (
+from food_ingredients_ai.azure_integration import (
     eventgrid,
     eventhub,
     functions,
     logicapps,
     servicebus,
 )
-from ingredion_ai.azure_integration.events import (
+from food_ingredients_ai.azure_integration import events as lifecycle
+from food_ingredients_ai.azure_integration.events import (
     ANOMALY_FLAGGED,
     APPROVAL_GRANTED,
     APPROVAL_REQUESTED,
@@ -387,7 +386,7 @@ def test_build_approval_request_emits_event(_fresh_publisher):
 
 
 def test_worker_main_runs_demo_job(capsys):
-    from ingredion_ai.azure_integration import worker
+    from food_ingredients_ai.azure_integration import worker
 
     rc = worker.main()
     assert rc == 0
@@ -402,8 +401,8 @@ def test_worker_main_runs_demo_job(capsys):
 def test_pipeline_emits_lifecycle_events(_fresh_publisher):
     import asyncio
 
-    from ingredion_ai.service.memory import InMemorySessionStore
-    from ingredion_ai.service.pipeline import AgenticPipeline
+    from food_ingredients_ai.service.memory import InMemorySessionStore
+    from food_ingredients_ai.service.pipeline import AgenticPipeline
 
     async def fake_executor(ctx):
         ctx.result = {"ok": True}

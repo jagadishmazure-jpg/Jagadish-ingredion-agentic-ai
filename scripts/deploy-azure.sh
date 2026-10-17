@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Deploy the Ingredion agentic-AI demo service to Azure Container Apps.
+# Deploy the food-ingredients agentic AI demo service to Azure Container Apps.
 #
 # This is the simplest reliable portfolio target: serverless containers with
 # scale-to-zero. The repo also ships an enterprise AKS + Terraform path
@@ -25,9 +25,9 @@ set -euo pipefail
 # --------------------------------------------------------------------------
 # Configuration
 # --------------------------------------------------------------------------
-RESOURCE_GROUP="${RESOURCE_GROUP:-ingredion-agents-rg}"
+RESOURCE_GROUP="${RESOURCE_GROUP:-food-ingredients-agents-rg}"
 LOCATION="${LOCATION:-eastus}"
-APP_NAME="${APP_NAME:-ingredion-agentic-ai}"
+APP_NAME="${APP_NAME:-food-ingredients-agentic-ai}"
 ENV_NAME="${APP_NAME}-env"
 IMAGE_TAG="${IMAGE_TAG:-latest}"
 LIVE_MODE=false
@@ -51,7 +51,7 @@ log "Using subscription: $SUBSCRIPTION_ID"
 
 # ACR names must be globally unique: derive a stable suffix from the subscription id.
 SUFFIX="$(echo "$SUBSCRIPTION_ID" | tr -d '-' | tail -c 7)"
-ACR_NAME="${ACR_NAME:-ingredionagents${SUFFIX}}"
+ACR_NAME="${ACR_NAME:-foodingredagents${SUFFIX}}"
 IMAGE="${ACR_NAME}.azurecr.io/${APP_NAME}:${IMAGE_TAG}"
 
 if [[ "$LIVE_MODE" == "true" ]]; then

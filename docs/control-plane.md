@@ -9,7 +9,7 @@ well-spoken agent that takes too many actions, spends too much money,
 calls tools it was never meant to touch, or keeps running when it should
 have stopped.
 
-Content guardrails (`ingredion_ai/guardrails/`) screen *what* goes in and
+Content guardrails (`food_ingredients_ai/guardrails/`) screen *what* goes in and
 out of an agent. The control plane governs *behavior* at runtime: what an
 agent is allowed to **do**, how often, at what cost — and gives a human an
 immediate halt button.
@@ -54,7 +54,7 @@ in-memory state, no network calls. The 25+ tests in
 ## Usage: wiring the gate around tool execution
 
 ```python
-from ingredion_ai.controlplane import (
+from food_ingredients_ai.controlplane import (
     BudgetManager, CircuitBreaker, ControlLedger, EnforcementGate, KillSwitch,
 )
 

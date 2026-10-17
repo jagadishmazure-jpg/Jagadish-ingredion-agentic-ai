@@ -1,4 +1,4 @@
-"""Root conftest: make the ``ingredion_ai`` package importable in tests."""
+"""Root conftest: make the ``food_ingredients_ai`` package importable in tests."""
 
 import sys
 from pathlib import Path

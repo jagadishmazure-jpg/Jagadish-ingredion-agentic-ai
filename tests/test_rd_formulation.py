@@ -2,13 +2,15 @@
 
 import pytest
 
-from ingredion_ai.agents.rd_formulation import RDFormulationAgent
-from ingredion_ai.agents.rd_formulation import analyzer, nutrition, predictor, regulatory, substitution
-from ingredion_ai.agents.rd_formulation.documentation import (
-    generate_formulation_spec,
-    generate_technical_sheet,
+from food_ingredients_ai.agents.rd_formulation import (
+    RDFormulationAgent,
+    analyzer,
+    nutrition,
+    predictor,
+    regulatory,
+    substitution,
 )
-from ingredion_ai.data.loader import get_formula
+from food_ingredients_ai.data.loader import get_formula
 
 CAKE = "sweet_bakery_cake"
 CONTEXT = {
@@ -225,7 +227,7 @@ def test_agent_unknown_task_raises():
 
 
 def test_agent_run_wraps_errors():
-    from ingredion_ai.core.types import Task
+    from food_ingredients_ai.core.types import Task
 
     agent = _agent()
     result = agent.run(Task("analyze_ingredients", "rd_formulation"), {})

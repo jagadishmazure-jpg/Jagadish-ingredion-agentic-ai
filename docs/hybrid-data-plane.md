@@ -11,7 +11,7 @@ on-premises or private cloud in the last year.
 The hybrid data plane implements the report's central thesis —
 **bring AI to the data, wherever it lives** — as code:
 
-1. **Environments** (`ingredion_ai/datalayer/hybrid/environments.py`):
+1. **Environments** (`food_ingredients_ai/datalayer/hybrid/environments.py`):
    every place data can live or a workload can run has a kind
    (`public_cloud | private_cloud | on_prem | edge | sovereign`), a region,
    and a residency zone (`EU | US | APAC`).

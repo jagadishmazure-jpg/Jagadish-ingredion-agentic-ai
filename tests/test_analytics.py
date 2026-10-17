@@ -4,17 +4,17 @@ import asyncio
 
 import pytest
 
-from ingredion_ai.analytics import (
+from food_ingredients_ai.analytics import (
+    SYNTHETIC_LABEL,
     AggregateStore,
     PeerBenchmark,
-    SYNTHETIC_LABEL,
     delta_vs_previous,
     extract_run_summary,
     flag_anomalies,
     moving_average,
 )
-from ingredion_ai.analytics.aggregates import RunSummary
-from ingredion_ai.framework.runner import build_demo_context, run_reformulation
+from food_ingredients_ai.analytics.aggregates import RunSummary
+from food_ingredients_ai.framework.runner import build_demo_context, run_reformulation
 
 
 @pytest.fixture()

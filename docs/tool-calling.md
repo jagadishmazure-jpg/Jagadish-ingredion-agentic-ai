@@ -1,8 +1,8 @@
 # Tool Calling: Patterns, Failure Modes, and When to Use Which
 
-The `ingredion_ai/tools/` package is the project's tool-calling deep layer:
+The `food_ingredients_ai/tools/` package is the project's tool-calling deep layer:
 generation, composition, resilience, and sandboxing. Plain function-tools
-(`ingredion_ai/framework/tools.py`) remain the default; reach for these when
+(`food_ingredients_ai/framework/tools.py`) remain the default; reach for these when
 the simple path isn't enough.
 
 ## Patterns

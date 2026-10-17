@@ -2,14 +2,13 @@
 
 import pytest
 
-from ingredion_ai.agents import CustomerAdvisorAgent, SupplyChainAgent
-from ingredion_ai.integrations import (
+from food_ingredients_ai.agents import CustomerAdvisorAgent, SupplyChainAgent
+from food_ingredients_ai.integrations import (
     DemoCRMAdapter,
     DemoSAPAdapter,
     crm_from_env,
     sap_from_env,
 )
-
 
 # -- CRM -----------------------------------------------------------------------
 
@@ -95,7 +94,7 @@ def test_sap_from_env_unknown_raises(monkeypatch):
 
 
 def _formula_payload():
-    from ingredion_ai.data.loader import get_formula
+    from food_ingredients_ai.data.loader import get_formula
 
     return {"formula": get_formula("sweet_bakery_cake"), "valid_claims": []}
 

@@ -5,17 +5,17 @@ from __future__ import annotations
 
 import pytest
 
-from ingredion_ai.core.tools import ToolRegistry
-from ingredion_ai.graph.metric_insight_graph import run_metric_insight_graph
-from ingredion_ai.semantics.agent_tools import (
+from food_ingredients_ai.core.tools import ToolRegistry
+from food_ingredients_ai.graph.metric_insight_graph import run_metric_insight_graph
+from food_ingredients_ai.semantics.agent_tools import (
     DEMO_PERIOD_DATA,
     build_semantic_tools,
     register_semantic_tools,
 )
-from ingredion_ai.semantics.explainer import explain_change, summarize
-from ingredion_ai.semantics.lineage import explain_lineage
-from ingredion_ai.semantics.metrics import DEMO_METRICS, MetricDefinition
-from ingredion_ai.semantics.registry import MetricRegistry, default_metric_registry
+from food_ingredients_ai.semantics.explainer import explain_change, summarize
+from food_ingredients_ai.semantics.lineage import explain_lineage
+from food_ingredients_ai.semantics.metrics import MetricDefinition
+from food_ingredients_ai.semantics.registry import MetricRegistry, default_metric_registry
 
 
 def _reg() -> MetricRegistry:

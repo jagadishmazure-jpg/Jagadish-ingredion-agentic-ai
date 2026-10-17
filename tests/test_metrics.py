@@ -3,10 +3,10 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from ingredion_ai.interop.auth import issue_token
-from ingredion_ai.service import app as app_module
-from ingredion_ai.service.app import app
-from ingredion_ai.service.metrics import registry
+from food_ingredients_ai.interop.auth import issue_token
+from food_ingredients_ai.service import app as app_module
+from food_ingredients_ai.service.app import app
+from food_ingredients_ai.service.metrics import registry
 
 client = TestClient(app)
 

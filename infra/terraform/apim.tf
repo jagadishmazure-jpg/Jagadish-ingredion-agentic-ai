@@ -26,15 +26,15 @@ resource "azurerm_api_management" "main" {
 
 # Import the agent service API from the FastAPI-generated OpenAPI document.
 # Regenerate infra/apim/openapi.json after changing service routes:
-#   python -c "import json; from ingredion_ai.service.app import app;
+#   python -c "import json; from food_ingredients_ai.service.app import app;
 #              json.dump(app.openapi(), open('infra/apim/openapi.json','w'), indent=2)"
 resource "azurerm_api_management_api" "agents" {
-  name                = "ingredion-agent-api"
-  resource_group_name = azurerm_resource_group.main.name
-  api_management_name = azurerm_api_management.main.name
-  revision            = "1"
-  display_name        = "Ingredion Agentic AI"
-  description         = "Multi-agent reformulation service (R&D, supply chain, ESG, customer advisor)."
+  name                  = "food-ingredients-agent-api"
+  resource_group_name   = azurerm_resource_group.main.name
+  api_management_name   = azurerm_api_management.main.name
+  revision              = "1"
+  display_name          = "food-ingredients agentic AI"
+  description           = "Multi-agent reformulation service (R&D, supply chain, ESG, customer advisor)."
   path                  = "v1"
   protocols             = ["https"]
   subscription_required = true

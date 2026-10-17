@@ -1,6 +1,6 @@
 """Tests for the context-engineering package (assembler + budget)."""
 
-from ingredion_ai.context import ContextAssembler, ContextBudget, summarize_blackboard
+from food_ingredients_ai.context import ContextAssembler, ContextBudget, summarize_blackboard
 
 
 def test_assembler_includes_all_sections():

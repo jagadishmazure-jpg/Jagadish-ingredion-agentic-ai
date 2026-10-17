@@ -1,7 +1,6 @@
 """Tests for the evaluation package: metrics, datasets, runner."""
 
-from ingredion_ai.evaluation import datasets, metrics, runner
-
+from food_ingredients_ai.evaluation import datasets, metrics, runner
 
 # -- metrics -------------------------------------------------------------------
 

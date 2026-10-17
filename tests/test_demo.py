@@ -5,14 +5,14 @@ from contextlib import redirect_stdout
 
 import yaml
 
-from ingredion_ai.agents import (
+from food_ingredients_ai.agents import (
     CustomerAdvisorAgent,
     ESGAgent,
     RDFormulationAgent,
     SupplyChainAgent,
 )
-from ingredion_ai.core.planner import Orchestrator
-from ingredion_ai.demo import FORMULA_ID, REGION, TARGET_CLAIMS, build_orchestrator, main
+from food_ingredients_ai.core.planner import Orchestrator
+from food_ingredients_ai.demo import FORMULA_ID, REGION, TARGET_CLAIMS, build_orchestrator, main
 
 
 def _run_demo() -> str:
@@ -25,7 +25,7 @@ def _run_demo() -> str:
 def test_demo_runs_and_completes():
     output = _run_demo()
     assert "DEMO COMPLETE" in output
-    assert "not affiliated with ingredion" in output.lower()
+    assert "not affiliated with any real company" in output.lower()
 
 
 def test_demo_is_deterministic():

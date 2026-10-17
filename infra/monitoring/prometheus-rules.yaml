@@ -1,7 +1,7 @@
 # Example Prometheus alert rules for the agent service.
 #
 # The service exposes GET /metrics in Prometheus text format (see
-# ingredion_ai/service/metrics.py). Point a Prometheus scrape job at the
+# food_ingredients_ai/service/metrics.py). Point a Prometheus scrape job at the
 # service (or at the AKS ServiceMonitor) and load these rules.
 #
 # Thresholds are demo starting points — tune from the burn-rate guidance

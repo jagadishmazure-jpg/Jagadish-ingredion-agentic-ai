@@ -1,8 +1,8 @@
 # Architecture Alignment (Agentic-AI Architecture Principles)
 
 > **Disclaimer.** Independent portfolio demo; synthetic data only. Principles
-> below are paraphrased in our own words from the agentic-AI architecture
-> ebook — no passages copied.
+> below are in my own words; background reading: Databricks, *The New
+> Architecture of Agentic AI*. No passages copied.
 
 ## 1. Outcome-first design
 
@@ -25,9 +25,9 @@ AI is only as smart as its data layer. The project's semantic layer:
 
 - **`docs/glossary.md`** — governed business definitions (clean label,
   natural, no-artificial, reduced sugar, …) that agents and validators share.
-- **`ingredion_ai/data/`** — the synthetic dataset (ingredients, formulas,
+- **`food_ingredients_ai/data/`** — the synthetic dataset (ingredients, formulas,
   demand, ESG readings) with a single loader; one source of truth.
-- **`ingredion_ai/rag/`** — retrieval over project knowledge so agents
+- **`food_ingredients_ai/rag/`** — retrieval over project knowledge so agents
   ground answers in docs/glossary instead of hallucinating definitions.
   Production swap: Azure AI Search (documented in `rag/store.py`).
 
@@ -58,7 +58,7 @@ Treat agents like data assets: versioned, evaluated, observable.
 
 ## 5. Evaluation from day one
 
-`python -m ingredion_ai.evaluation.runner` → 20 labeled synthetic cases
+`python -m food_ingredients_ai.evaluation.runner` → 20 labeled synthetic cases
 with a pass/fail summary. New capabilities ship with new eval cases
 (datasets in `evaluation/datasets.py`), mirroring the "eval from day one"
 discipline: if you can't measure it, you can't ship it.

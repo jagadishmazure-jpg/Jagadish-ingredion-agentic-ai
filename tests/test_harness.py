@@ -4,8 +4,8 @@ import time
 
 import pytest
 
-import ingredion_ai.harness.runner as runner_module
-from ingredion_ai.harness import (
+import food_ingredients_ai.harness.runner as runner_module
+from food_ingredients_ai.harness import (
     CircuitBreaker,
     CircuitOpenError,
     GuardrailViolation,

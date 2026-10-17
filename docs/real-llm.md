@@ -1,6 +1,6 @@
 # Going Live with a Real LLM
 
-Everything in this repo runs **offline by default**: the 568 tests, the
+Everything in this repo runs **offline by default**: the test suite, the
 demo service, and all four business-flow graphs use a scripted
 `FakeChatClient` — deterministic, free, no API keys. This guide covers
 switching to a **real LLM** for live demos.
@@ -33,7 +33,7 @@ Azure resource for path 1.
    ```
 4. Build the client in code:
    ```python
-   from ingredion_ai.framework.clients import build_chat_client
+   from food_ingredients_ai.framework.clients import build_chat_client
    client = build_chat_client(live=True)   # direct OpenAI, model gpt-4o-mini
    ```
 
@@ -47,8 +47,8 @@ precisely so development and CI stay free.
 Cost hygiene for live runs:
 
 - Start with `gpt-4o-mini` (much cheaper than `gpt-4o`) until prompts are stable.
-- Keep the context budget tight — see `ingredion_ai/context/budget.py`.
-- Watch `ingredion_ai/observability/costs.py`: token/cost attribution per agent.
+- Keep the context budget tight — see `food_ingredients_ai/context/budget.py`.
+- Watch `food_ingredients_ai/observability/costs.py`: token/cost attribution per agent.
 - Set a billing limit / alert in your OpenAI account dashboard.
 - Never run the full test suite in live mode — tests are written for fakes.
 

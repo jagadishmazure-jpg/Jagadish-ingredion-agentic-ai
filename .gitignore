@@ -16,3 +16,11 @@ qa/playwright-report/
 qa/test-results/
 qa/results.xml
 qa/dist/
+
+# Terraform local state
+infra/terraform/.terraform/
+infra/terraform/.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+.ruff_cache/
+*.pdf

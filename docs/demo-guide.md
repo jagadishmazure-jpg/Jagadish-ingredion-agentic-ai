@@ -4,12 +4,12 @@ A step-by-step script for the live demo. Run offline — deterministic, so it
 never surprises you mid-demo.
 
 > **Disclaimer.** Independent portfolio demo; all data synthetic; not
-> affiliated with Ingredion Incorporated.
+> affiliated with any real company.
 
 ## Setup (1 min)
 
 ```bash
-uv run python -m ingredion_ai.demo
+uv run python -m food_ingredients_ai.demo
 ```
 
 **Say:** "Four specialist agents on Microsoft Agent Framework 1.0, one
@@ -65,7 +65,7 @@ claims they value."
 customer proposals need human approval, every action lands in a
 hash-chained audit log, and agent-to-agent calls carry short-lived scoped
 tokens verified per skill. Try the eval suite for the engineering rigor:
-`python -m ingredion_ai.evaluation.runner` — 20 labeled cases, precision /
+`python -m food_ingredients_ai.evaluation.runner` — 20 labeled cases, precision /
 recall on claim validation, top-1 accuracy on substitutions."
 
 ## STEP 7 — Close
@@ -77,13 +77,13 @@ governed by design, deployable on Foundry."
 ## Alternate scenarios
 
 ```bash
-uv run python -m ingredion_ai.demo --scenario savory_bakery_crackers
-uv run python -m ingredion_ai.demo --scenario energy_drink
-uv run python -m ingredion_ai.demo --scenario flavored_water
-uv run python -m ingredion_ai.demo --scenario nutritional_shake
-uv run python -m ingredion_ai.demo --scenario cola_soft_drink
-uv run python -m ingredion_ai.demo --audit-log /tmp/demo-audit.jsonl
+uv run python -m food_ingredients_ai.demo --scenario savory_bakery_crackers
+uv run python -m food_ingredients_ai.demo --scenario energy_drink
+uv run python -m food_ingredients_ai.demo --scenario flavored_water
+uv run python -m food_ingredients_ai.demo --scenario nutritional_shake
+uv run python -m food_ingredients_ai.demo --scenario cola_soft_drink
+uv run python -m food_ingredients_ai.demo --audit-log /tmp/demo-audit.jsonl
 ```
 
 Scenarios cover sweet/savory bakery and carbonated/energy/flavored-water/
-nutritional beverages — the ebook's priority categories.
+nutritional beverages, two categories where clean-label work is common.

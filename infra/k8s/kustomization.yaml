@@ -3,7 +3,7 @@
 # (see docs/deployment-runbook.md) before the first manual apply.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: ingredion-ai
+namespace: food-ingredients-ai
 resources:
   - namespace.yaml
   - serviceaccount.yaml
@@ -14,6 +14,6 @@ resources:
   - hpa.yaml
   - poddisruptionbudget.yaml
 images:
-  - name: __ACR_LOGIN_SERVER__/ingredion-agentic-ai
-    newName: __ACR_LOGIN_SERVER__/ingredion-agentic-ai
+  - name: __ACR_LOGIN_SERVER__/food-ingredients-agentic-ai
+    newName: __ACR_LOGIN_SERVER__/food-ingredients-agentic-ai
     newTag: __IMAGE_TAG__

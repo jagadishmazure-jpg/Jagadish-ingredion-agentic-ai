@@ -1,7 +1,7 @@
 # Reliability Strategy
 
 > **Disclaimer.** Independent portfolio demo; all data synthetic; not
-> affiliated with Ingredion Incorporated.
+> affiliated with any real company.
 
 How the agent service stays up, what breaks gracefully, and what fails
 closed. Three layers: service (app), Kubernetes, Azure (Terraform).
@@ -18,7 +18,7 @@ closed. Three layers: service (app), Kubernetes, Azure (Terraform).
 These are demo targets, not contractual SLAs. Tune `SERVICE_*` env vars
 (see below) before any real load.
 
-## Service layer (`ingredion_ai/service/`)
+## Service layer (`food_ingredients_ai/service/`)
 
 | Mechanism | Where | Behavior |
 |---|---|---|

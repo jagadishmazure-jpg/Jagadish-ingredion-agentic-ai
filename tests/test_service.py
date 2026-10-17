@@ -3,9 +3,9 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from ingredion_ai.interop.auth import issue_token
-from ingredion_ai.service.app import AGENT_ORDER, AGENT_SKILL, app
-from ingredion_ai.service.ui import INDEX_HTML
+from food_ingredients_ai.interop.auth import issue_token
+from food_ingredients_ai.service.app import AGENT_ORDER, AGENT_SKILL, app
+from food_ingredients_ai.service.ui import INDEX_HTML
 
 client = TestClient(app)
 
@@ -157,7 +157,7 @@ def test_reformulate_explicit_fields():
 
 @pytest.mark.parametrize("agent", AGENT_ORDER)
 def test_agent_run_each_agent(agent):
-    from ingredion_ai.interop.auth import required_scopes_for
+    from food_ingredients_ai.interop.auth import required_scopes_for
 
     scopes = required_scopes_for(agent, AGENT_SKILL[agent])
     r = client.post(f"/api/agents/{agent}/run", json={}, headers=_auth(scopes))

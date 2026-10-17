@@ -2,8 +2,7 @@
 
 import pytest
 
-from ingredion_ai.observability import costs
-from ingredion_ai.observability.costs import (
+from food_ingredients_ai.observability.costs import (
     BudgetTracker,
     CostTracker,
     recommend_optimizations,

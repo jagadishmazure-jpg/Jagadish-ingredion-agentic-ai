@@ -7,7 +7,7 @@ import { defineConfig, devices } from '@playwright/test';
  *         ENV=dev   npx playwright test
  *
  * Required env for authenticated tests: QA_TOKEN (mint with
- * `python -m ingredion_ai.service.mint_token --scopes formulation:write,supply:read,esg:read,proposal:read`)
+ * `python -m food_ingredients_ai.service.mint_token --scopes formulation:write,supply:read,esg:read,proposal:read`)
  * Optional: QA_TOKEN_READONLY, QA_TOKEN_RATELIMIT, QA_RATE_LIMIT.
  */
 const environments: Record<string, { baseURL: string }> = {

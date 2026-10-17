@@ -2,7 +2,7 @@
 
 import pytest
 
-from ingredion_ai.datalayer import (
+from food_ingredients_ai.datalayer import (
     DatasetRegistry,
     DatasetVersion,
     FieldSpec,

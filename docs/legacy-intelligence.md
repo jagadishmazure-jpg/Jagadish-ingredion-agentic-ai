@@ -19,16 +19,16 @@ Agent  →  Capability Catalog  →  LegacyBridge  →  Traditional system
                                     health checks)
 ```
 
-1. **Bridge** (`ingredion_ai/legacy/bridge.py`) — one wrapper per system.
+1. **Bridge** (`food_ingredients_ai/legacy/bridge.py`) — one wrapper per system.
    Request/response mapping, timeout enforcement, error translation into a
    stable `LegacyError` code, health checks. The agent never sees transport
    details.
-2. **Catalog** (`ingredion_ai/legacy/catalog.py`) — legacy operations become
+2. **Catalog** (`food_ingredients_ai/legacy/catalog.py`) — legacy operations become
    versioned, JSON-schema-described function-tools. Deprecation is explicit,
    so consumers migrate on a schedule.
-3. **CDC** (`ingredion_ai/legacy/cdc.py`) — legacy events (DB changes, webhooks)
+3. **CDC** (`food_ingredients_ai/legacy/cdc.py`) — legacy events (DB changes, webhooks)
    become agent triggers via a deduplicating change feed.
-4. **Autonomy ladder** (`ingredion_ai/legacy/autonomy.py`) — L0→L3 with
+4. **Autonomy ladder** (`food_ingredients_ai/legacy/autonomy.py`) — L0→L3 with
    evidence-driven promotion.
 
 The existing CRM/SAP adapters were migrated onto `LegacyBridge` as the first

@@ -1,9 +1,9 @@
 # Multi-Agent Business Flows
 
-Four end-to-end orchestration flows in `ingredion_ai/graph/`, each wiring
+Four end-to-end orchestration flows in `food_ingredients_ai/graph/`, each wiring
 multiple specialist agents into one business scenario. They follow the
 exact pattern of `reformulation_graph.py`: nodes are `fn(state) -> dict`,
-edges/conditionals come from `ingredion_ai/graph/graph.py`, and every
+edges/conditionals come from `food_ingredients_ai/graph/graph.py`, and every
 agent call uses the same deterministic `Agent.execute()` paths as the
 sequential demos — the graphs only change *control flow*.
 

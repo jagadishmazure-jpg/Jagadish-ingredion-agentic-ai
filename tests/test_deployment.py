@@ -180,14 +180,13 @@ def test_runbook_covers_costs_and_aks_path():
     assert "terraform" in text.lower()
 
 
-# -- .github/workflows (manual-add deliverables; validated locally) ---------
+# -- .github/workflows (validated locally) ------------------------------------
 
 WORKFLOWS = REPO / ".github" / "workflows"
 
 
 def _ci_workflow_path() -> Path:
-    # The CI workflow is added manually via the GitHub web UI, which names
-    # the file main.yml unless the user renames it — accept either name.
+    # The CI workflow is ci.yml; main.yml is accepted for older checkouts.
     for name in ("ci.yml", "main.yml"):
         candidate = WORKFLOWS / name
         if candidate.is_file():
@@ -196,11 +195,11 @@ def _ci_workflow_path() -> Path:
 
 
 def _optional_workflow(name: str) -> Path:
-    # deploy.yml / qa.yml are manual-add deliverables for the deployment
-    # phase; validate them when present, skip otherwise.
+    # deploy.yml is planned (not in the repo yet); validate it when present,
+    # skip otherwise.
     path = WORKFLOWS / name
     if not path.is_file():
-        pytest.skip(f"{name} is a manual-add deliverable and is not in the repo yet")
+        pytest.skip(f"{name} is planned and not in the repo yet")
     return path
 
 

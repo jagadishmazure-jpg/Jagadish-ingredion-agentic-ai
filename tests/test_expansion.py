@@ -1,14 +1,14 @@
-"""Tests for the Part A expansion: new data, ebook-grounded heuristics."""
+"""Tests for the Part A expansion: new data, demo-assumption heuristics."""
 
-from ingredion_ai.agents.customer_advisor import pricing
-from ingredion_ai.agents.rd_formulation import (
+from food_ingredients_ai.agents.customer_advisor import pricing
+from food_ingredients_ai.agents.rd_formulation import (
     analyzer,
     cycle_time,
     predictor,
     regulatory,
     substitution,
 )
-from ingredion_ai.data.loader import get_formula, load_formulas, load_ingredients
+from food_ingredients_ai.data.loader import get_formula, load_formulas, load_ingredients
 
 NEW_INGREDIENT_IDS = {
     "AB-66", "AO-67", "BHA-68", "YS-58", "CAF-71",
@@ -139,7 +139,7 @@ def test_cycle_time_estimate_shape():
         {"risk_flags": ["x"]},
     )
     assert "estimated_weeks" in out and "estimated_months" in out
-    assert "baseline_months" in out  # 5-7 month public baseline (paraphrased)
+    assert "baseline_months" in out  # 5-7 month demo baseline
     assert out["baseline_months"] == [5.0, 7.0]
     assert out["estimated_weeks"] > 0
 
@@ -154,7 +154,7 @@ def test_cycle_time_more_substitutions_takes_longer():
 
 
 def test_demo_scenarios_registry_covers_categories():
-    from ingredion_ai.demo import SCENARIOS
+    from food_ingredients_ai.demo import SCENARIOS
 
     assert "sweet_bakery_cake" in SCENARIOS  # default unchanged
     assert "savory_bakery_crackers" in SCENARIOS

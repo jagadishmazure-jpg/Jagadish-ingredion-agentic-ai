@@ -3,7 +3,7 @@ import { join } from 'path';
 
 /**
  * Demo token minting. Tokens are synthetic JWTs minted by the service's own
- * CLI (`python -m ingredion_ai.service.mint_token`) — no secrets involved.
+ * CLI (`python -m food_ingredients_ai.service.mint_token`) — no secrets involved.
  * Each call uses a unique subject, which also gives every test its own
  * rate-limit budget (the limiter is keyed by token subject).
  */
@@ -14,7 +14,7 @@ export function mintToken(subject: string, scopes: string): string {
   const python = process.env.QA_PYTHON ?? 'python3';
   const out = execFileSync(
     python,
-    ['-m', 'ingredion_ai.service.mint_token', '--subject', subject, '--scopes', scopes],
+    ['-m', 'food_ingredients_ai.service.mint_token', '--subject', subject, '--scopes', scopes],
     { cwd: REPO_ROOT, encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] },
   );
   const token = out.trim().split('\n').pop() ?? '';

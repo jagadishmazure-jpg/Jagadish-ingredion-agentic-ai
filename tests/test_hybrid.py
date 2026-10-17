@@ -3,10 +3,9 @@ workload routing, and the movement ledger."""
 
 import pytest
 
-from ingredion_ai.datalayer.hybrid import (
+from food_ingredients_ai.datalayer.hybrid import (
     DataPlacement,
     Environment,
-    EnvironmentRegistry,
     HybridPolicyEngine,
     MovementLog,
     PlacementRegistry,
@@ -14,7 +13,7 @@ from ingredion_ai.datalayer.hybrid import (
     default_environments,
     route_workload,
 )
-from ingredion_ai.datalayer.hybrid.placement import PlacementError
+from food_ingredients_ai.datalayer.hybrid.placement import PlacementError
 
 
 @pytest.fixture()

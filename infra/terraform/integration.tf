@@ -23,9 +23,9 @@ resource "azurerm_servicebus_namespace" "jobs" {
 }
 
 resource "azurerm_servicebus_queue" "reformulation_jobs" {
-  name                      = "reformulation-jobs"
-  namespace_id              = azurerm_servicebus_namespace.jobs.id
-  max_delivery_count        = 3 # poison -> DLQ after 3 deliveries
+  name                                 = "reformulation-jobs"
+  namespace_id                         = azurerm_servicebus_namespace.jobs.id
+  max_delivery_count                   = 3 # poison -> DLQ after 3 deliveries
   dead_lettering_on_message_expiration = true
 }
 
@@ -125,10 +125,10 @@ resource "azurerm_linux_function_app" "agents" {
   app_settings = {
     # Connection via managed identity in production (no secrets here):
     # SERVICEBUS_FQDN = azurerm_servicebus_namespace.jobs.name + ".servicebus.windows.net"
-    SERVICEBUS_QUEUE        = azurerm_servicebus_queue.reformulation_jobs.name
-    EVENTGRID_TOPIC         = azurerm_eventgrid_topic.domain_events.name
-    EVENTHUB_NAME           = azurerm_eventhub.run_telemetry.name
-    AZURE_OPENAI_ENDPOINT   = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.main.name};SecretName=azure-openai-endpoint)"
+    SERVICEBUS_QUEUE                      = azurerm_servicebus_queue.reformulation_jobs.name
+    EVENTGRID_TOPIC                       = azurerm_eventgrid_topic.domain_events.name
+    EVENTHUB_NAME                         = azurerm_eventhub.run_telemetry.name
+    AZURE_OPENAI_ENDPOINT                 = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.main.name};SecretName=azure-openai-endpoint)"
     APPLICATIONINSIGHTS_CONNECTION_STRING = azurerm_application_insights.main.connection_string
   }
 }
@@ -173,10 +173,15 @@ resource "azurerm_logic_app_workflow" "reformulation_approval" {
   #   az logic workflow update -g <rg> -n <name> \
   #     --definition @infra/logicapps/reformulation-approval.json
 
-  parameters = {
-    agentApiBaseUrl = {
-      defaultValue = "https://<apim-gateway-host>/ingredion"
+  # Parameter definitions are JSON strings; values are plain strings.
+  workflow_parameters = {
+    agentApiBaseUrl = jsonencode({
       type         = "String"
-    }
+      defaultValue = "https://<apim-gateway-host>/food-ingredients"
+    })
+  }
+
+  parameters = {
+    agentApiBaseUrl = "https://<apim-gateway-host>/food-ingredients"
   }
 }

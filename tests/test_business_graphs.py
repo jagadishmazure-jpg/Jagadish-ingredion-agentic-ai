@@ -8,13 +8,12 @@ return per-node results in the final state.
 
 from __future__ import annotations
 
-from ingredion_ai.graph.cost_spike_graph import run_cost_spike_graph
-from ingredion_ai.graph.product_launch_graph import run_product_launch_graph
-from ingredion_ai.graph.quality_issue_graph import run_quality_issue_graph
-from ingredion_ai.graph.supply_disruption_graph import (
+from food_ingredients_ai.graph.cost_spike_graph import run_cost_spike_graph
+from food_ingredients_ai.graph.product_launch_graph import run_product_launch_graph
+from food_ingredients_ai.graph.quality_issue_graph import run_quality_issue_graph
+from food_ingredients_ai.graph.supply_disruption_graph import (
     run_supply_disruption_graph,
 )
-
 
 # -- supply disruption ------------------------------------------------------
 

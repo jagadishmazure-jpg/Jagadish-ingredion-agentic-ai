@@ -5,7 +5,7 @@
 
 ## LLM cost tracking (in code)
 
-`ingredion_ai/observability/costs.py`:
+`food_ingredients_ai/observability/costs.py`:
 
 - **Per-model price table** (`MODEL_PRICE_TABLE`): configurable USD-per-1k-token
   rates per model/deployment name (`demo-cheap`, `demo-standard`,

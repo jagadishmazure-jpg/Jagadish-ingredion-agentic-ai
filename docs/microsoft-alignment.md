@@ -26,13 +26,13 @@ path. This project's production-readiness surface:
 Microsoft's pattern (Fabric, Azure AI, Copilot Studio): agents are only
 as good as the business context they are grounded in.
 
-- **Context engineering** (`ingredion_ai/context/`) — assembles the
+- **Context engineering** (`food_ingredients_ai/context/`) — assembles the
   briefing pack per request under a token budget (`budget.py`), so the
   agent sees the most relevant information first.
-- **Governed data layer** (`ingredion_ai/datalayer/`) — versioned dataset
+- **Governed data layer** (`food_ingredients_ai/datalayer/`) — versioned dataset
   registry, schema contracts, lineage: the "trusted data" foundation
   agents consume safely.
-- **RAG** (`ingredion_ai/rag/`) — ingest → embeddings → vector store →
+- **RAG** (`food_ingredients_ai/rag/`) — ingest → embeddings → vector store →
   retrieval, exposed as agent tools so claims are grounded in documents,
   not hallucinated.
 
@@ -40,7 +40,7 @@ as good as the business context they are grounded in.
 
 Aligned to the agentic-ERP theme (Dynamics 365, Copilot, autonomous
 finance operations), this project implements two deterministic
-multi-agent finance flows in `ingredion_ai/graph/`:
+multi-agent finance flows in `food_ingredients_ai/graph/`:
 
 - **`procurement_graph.py`** — requisition intake → supply-chain demand
   validation → policy/budget check → automatic PO below the approval
@@ -57,7 +57,7 @@ Both terminate on all paths and run fully offline with synthetic data.
 Microsoft's FinOps guidance: forecast spend, govern usage, optimize cost
 per outcome — before costs scale.
 
-- **Cost tracking** (`ingredion_ai/observability/costs.py`) — per-agent,
+- **Cost tracking** (`food_ingredients_ai/observability/costs.py`) — per-agent,
   per-operation token and cost attribution with a configurable price
   table, budget alerts, and rule-based optimization recommendations.
 - **Spend forecasting** (`forecast_spend`) — projects 30-day spend from
@@ -79,12 +79,12 @@ Key Vault), and GitHub Actions as the delivery mechanism with OIDC
 Microsoft's observability theme: teams must be able to spot and resolve
 agent failures quickly.
 
-- **Distributed tracing** (`ingredion_ai/observability/tracing.py`) —
+- **Distributed tracing** (`food_ingredients_ai/observability/tracing.py`) —
   follow one request through agents, tools, and guardrails.
 - **Deterministic test suite** — 590+ pytest tests (offline, fake LLM
   clients) plus Playwright E2E; every incident class has a regression
   test.
 - **Failure-mode documentation** — `docs/reliability.md` catalogs
   failure modes, mitigations, and SLOs.
-- **Audit trail** (`ingredion_ai/governance/audit.py`) — hash-chained,
+- **Audit trail** (`food_ingredients_ai/governance/audit.py`) — hash-chained,
   tamper-evident record of every agent action for post-incident review.

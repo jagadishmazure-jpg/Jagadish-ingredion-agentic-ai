@@ -7,7 +7,7 @@ import time
 
 import pytest
 
-from ingredion_ai.tools import (
+from food_ingredients_ai.tools import (
     FallbackChain,
     RetryPolicy,
     call_with_retry,
@@ -20,7 +20,6 @@ from ingredion_ai.tools import (
     tools_from_openapi,
     validate_against_schema,
 )
-
 
 # -- sandbox -------------------------------------------------------------------
 
@@ -348,8 +347,8 @@ def test_fan_out_empty():
 def test_lims_tool_wired_into_rd_agent():
     import json
 
-    from ingredion_ai.framework.runner import build_demo_context
-    from ingredion_ai.framework.tools import build_tool_functions
+    from food_ingredients_ai.framework.runner import build_demo_context
+    from food_ingredients_ai.framework.tools import build_tool_functions
 
     ctx = build_demo_context(
         "sweet_bakery_cake",
@@ -367,7 +366,7 @@ def test_lims_tool_wired_into_rd_agent():
 
 
 def test_lims_tool_allowed_by_policy():
-    from ingredion_ai.governance.policy import check_action
+    from food_ingredients_ai.governance.policy import check_action
 
     allowed, _ = check_action("rd_formulation", "lims_quality_lookup")
     assert allowed is True

@@ -4,16 +4,16 @@ import json
 
 import pytest
 
-from ingredion_ai.interop import a2a, auth
-from ingredion_ai.interop.a2a import A2AAdapter, FakeTransport
-from ingredion_ai.interop.auth import (
+from food_ingredients_ai.interop import a2a, auth
+from food_ingredients_ai.interop.a2a import A2AAdapter, FakeTransport
+from food_ingredients_ai.interop.auth import (
     AuthenticationError,
     AuthorizationError,
     authenticate_and_authorize,
     issue_token,
     verify_token,
 )
-from ingredion_ai.interop.mcp import InProcessClient, MCPServer
+from food_ingredients_ai.interop.mcp import InProcessClient, MCPServer
 
 ECHO_EXECUTOR = lambda message, context: {"echo": message}  # noqa: E731
 
@@ -177,7 +177,7 @@ def test_required_scopes_for_unknown_skill():
 def test_mcp_initialize_handshake():
     client = InProcessClient()
     result = client.initialize()
-    assert result["serverInfo"]["name"] == "ingredion-agentic-ai-mcp"
+    assert result["serverInfo"]["name"] == "food-ingredients-agentic-ai-mcp"
     assert "tools" in result["capabilities"]
 
 

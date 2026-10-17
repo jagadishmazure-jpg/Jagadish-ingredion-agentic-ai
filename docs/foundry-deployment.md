@@ -7,7 +7,7 @@ is structured so the same agents can be hosted on **Azure AI Foundry**.
 
 > Synthetic-data disclaimer: every ingredient, formula, reading, and number in
 > this repo is fictional demo data. This is an independent portfolio project,
-> not affiliated with Ingredion.
+> not affiliated with any real company.
 
 ## 1. Create the Foundry project
 
@@ -46,12 +46,12 @@ Verify locally:
 
 ```bash
 uv sync
-uv run python -m ingredion_ai.demo --live
+uv run python -m food_ingredients_ai.demo --live
 ```
 
 ## 4. How the live path works
 
-`ingredion_ai/framework/clients.py::build_chat_client(live=True)` builds the
+`food_ingredients_ai/framework/clients.py::build_chat_client(live=True)` builds the
 framework's unified `OpenAIChatClient`:
 
 ```python
@@ -63,8 +63,8 @@ OpenAIChatClient(
 )
 ```
 
-The same four domain agents (`ingredion_ai/framework/agents.py`) and the
-`WorkflowBuilder` workflow (`ingredion_ai/framework/workflow.py`) run
+The same four domain agents (`food_ingredients_ai/framework/agents.py`) and the
+`WorkflowBuilder` workflow (`food_ingredients_ai/framework/workflow.py`) run
 unchanged — only the chat client is swapped. The offline fake client
 (`FakeChatClient`) implements the framework's `BaseChatClient` interface,
 which is why CI and tests need no secrets.
@@ -82,7 +82,7 @@ Options, in increasing order of managed-ness:
 
 2. **Azure AI Foundry Agent Service.** Foundry's Agent Service can host
    agents built with Microsoft Agent Framework. Package each domain agent's
-   instructions + function-tools (see `ingredion_ai/framework/agents.py`
+   instructions + function-tools (see `food_ingredients_ai/framework/agents.py`
    and `tools.py`) as a Foundry agent definition, pointing tools at Azure
    Functions/Logic Apps that wrap the deterministic domain modules. The
    `WorkflowBuilder` topology in `workflow.py` maps 1:1 to a Foundry

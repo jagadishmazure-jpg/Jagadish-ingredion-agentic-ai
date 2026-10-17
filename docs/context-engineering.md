@@ -1,10 +1,10 @@
 # Context Engineering
 
-> Demo project. All data synthetic and fictional. Not affiliated with Ingredion.
+> Demo project. All data synthetic and fictional. Not affiliated with any real company.
 
 Context engineering is everything that happens *around* the model call: what we
 put into the prompt, in what order, and how we keep it under the token budget.
-The `ingredion_ai.context` package implements this for the demo agents in two
+The `food_ingredients_ai.context` package implements this for the demo agents in two
 steps: **assemble** the context, then **budget** it.
 
 ## What goes into the context
@@ -25,7 +25,7 @@ placeholder headers. Order is fixed (instructions → glossary → retrieved →
 state → query) so prompt construction is deterministic and easy to debug.
 
 ```python
-from ingredion_ai.context import ContextAssembler
+from food_ingredients_ai.context import ContextAssembler
 
 prompt = ContextAssembler().assemble(
     instructions="You are a formulation advisor. Answer concisely.",
@@ -66,7 +66,7 @@ assembly:
    so the caller knows context was shortened and can, e.g., log it or warn.
 
 ```python
-from ingredion_ai.context import ContextBudget
+from food_ingredients_ai.context import ContextBudget
 
 budget = ContextBudget(max_tokens=4000)
 fitted = budget.fit({"instructions": "...", "query": "...", "state": "..."})

@@ -8,19 +8,18 @@ import asyncio
 
 import pytest
 import yaml
-
 from agent_framework import Agent
 
-from ingredion_ai.framework.agents import (
+from food_ingredients_ai.framework.agents import (
     AGENT_ORDER,
     agent_tool_names,
     build_framework_agents,
 )
-from ingredion_ai.framework.clients import FakeChatClient, build_chat_client
-from ingredion_ai.framework.runner import build_demo_context, run_reformulation
-from ingredion_ai.framework.scripts import DEMO_SCRIPTS
-from ingredion_ai.framework.tools import build_tool_functions
-from ingredion_ai.framework.workflow import build_reformulation_workflow
+from food_ingredients_ai.framework.clients import FakeChatClient, build_chat_client
+from food_ingredients_ai.framework.runner import build_demo_context, run_reformulation
+from food_ingredients_ai.framework.scripts import DEMO_SCRIPTS
+from food_ingredients_ai.framework.tools import build_tool_functions
+from food_ingredients_ai.framework.workflow import build_reformulation_workflow
 
 
 def _ctx():

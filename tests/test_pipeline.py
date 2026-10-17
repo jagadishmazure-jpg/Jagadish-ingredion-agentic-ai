@@ -6,11 +6,11 @@ import time
 import pytest
 from fastapi.testclient import TestClient
 
-from ingredion_ai.interop.auth import issue_token
-from ingredion_ai.service import memory as memory_module
-from ingredion_ai.service.app import app
-from ingredion_ai.service.memory import InMemorySessionStore
-from ingredion_ai.service.pipeline import (
+from food_ingredients_ai.interop.auth import issue_token
+from food_ingredients_ai.service import memory as memory_module
+from food_ingredients_ai.service.app import app
+from food_ingredients_ai.service.memory import InMemorySessionStore
+from food_ingredients_ai.service.pipeline import (
     STAGES,
     AgenticPipeline,
     PipelineRejected,

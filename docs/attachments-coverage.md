@@ -1,13 +1,14 @@
 # Attachments Coverage Map
 
-Every uploaded reference is paraphrased (never copied at length) and
-covered *somewhere* concrete. Scope → coverage:
+Reading that shaped this demo, credited by name only, and where each theme
+is covered. Nothing is copied from these sources; any figures used in the
+code are demo assumptions.
 
-## 1. Ingredion "Unlocking growth through smarter clean label" ebook
+## 1. Public industry reading on clean-label reformulation
 
-Public stats used only as *commented rationale* for demo heuristics.
+Themes only; the numbers in the code are demo assumptions.
 
-| Ebook scope (paraphrase) | Covered in |
+| Theme | Covered in |
 |---|---|
 | Clean-label conversion lifts pricing/margins/revenue | `docs/benefits.md`, pricing WTP band (`customer_advisor/pricing.py`) |
 | Cost = #1 barrier → cost-aware decisions | `rd_formulation/substitution.py` (`rank_cost_aware`) |
@@ -16,14 +17,14 @@ Public stats used only as *commented rationale* for demo heuristics.
 | Claim hierarchy (natural top) | `rd_formulation/regulatory.py` (`CLAIM_PRIORITY`, `prioritize_claims`) |
 | 10%+ WTP premium for valued claims | `customer_advisor/pricing.py` (`wtp_band`) |
 | Priority categories: bakery + beverages | Demo scenarios (`demo.py::SCENARIOS`), new formulas/dataset entries |
-| ATLAS-style consumer insights | `docs/usecases.md` (ATLAS-style insights use case) |
+| consumer insights | `docs/usecases.md` (insights use case) |
 | ESG / regenerative-ag focus | `agents/esg/`, `docs/usecases.md` |
 
 ## 2. AI-powered SOC guide (Conifers)
 
 Principles mapped, not domain force-fit (manufacturing demo ≠ SOC).
 
-| Guide scope (paraphrase) | Covered in |
+| Theme | Covered in |
 |---|---|
 | Triage / prioritization | `docs/soc-alignment.md`; claim prioritization, cost-aware ranking |
 | Investigation quality / evidence trails | Blackboard + traceable ESG report; `docs/soc-alignment.md` |
@@ -33,7 +34,7 @@ Principles mapped, not domain force-fit (manufacturing demo ≠ SOC).
 
 ## 3. Auth0 omnichannel identity + identity-for-AI-agents ebook
 
-| Ebook scope (paraphrase) | Covered in |
+| Theme | Covered in |
 |---|---|
 | User auth, session context | `docs/identity.md` §1 (Entra ID/OIDC for the agent API) |
 | Short-lived scoped tokens | `interop/auth.py` (`issue_token`/`verify_token`), `governance/identity.py` (`ScopedToken`) |
@@ -44,15 +45,14 @@ Principles mapped, not domain force-fit (manufacturing demo ≠ SOC).
 
 ## 4. Databricks "The New Architecture of Agentic AI" ebook
 
-| Ebook scope (paraphrase) | Covered in |
+| Theme | Covered in |
 |---|---|
 | Outcome-first design | `docs/architecture-alignment.md` §1 |
-| Data / semantic layer | `docs/glossary.md`, `ingredion_ai/data/`, `ingredion_ai/rag/` |
+| Data / semantic layer | `docs/glossary.md`, `food_ingredients_ai/data/`, `food_ingredients_ai/rag/` |
 | Governance as engine, paved paths | `governance/`, `docs/architecture-alignment.md` §3 |
 | Agents as data assets with lifecycles | Agent cards, evals, observability; `docs/architecture-alignment.md` §4 |
 | Evaluation from day one | `evaluation/`, `docs/architecture-alignment.md` §5 |
 
-## 5. Playwright QA PDFs (3 files)
+## 5. Playwright QA reading
 
-Queued as a **later phase** (API + UI E2E tests against the agent service
-once it exists). Noted in project memory; not covered in this codebase yet.
+Covered by the Playwright API and UI suite in `qa/` (run by `.github/workflows/qa.yml`).

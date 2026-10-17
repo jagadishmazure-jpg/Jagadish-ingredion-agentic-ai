@@ -3,7 +3,7 @@
 ## Metrics endpoint
 
 `GET /metrics` (public, standard Prometheus scrape target) exposes
-Prometheus text format from `ingredion_ai/service/metrics.py` (stdlib
+Prometheus text format from `food_ingredients_ai/service/metrics.py` (stdlib
 only, no client library):
 
 | Metric | Type | Labels |

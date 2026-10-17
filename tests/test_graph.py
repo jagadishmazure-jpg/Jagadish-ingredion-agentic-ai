@@ -6,8 +6,7 @@ RDFormulationAgent execute() paths via run_reformulation_graph.
 
 import pytest
 
-from ingredion_ai.graph import Graph, run_reformulation_graph
-
+from food_ingredients_ai.graph import Graph, run_reformulation_graph
 
 # --- Graph runtime -----------------------------------------------------------
 

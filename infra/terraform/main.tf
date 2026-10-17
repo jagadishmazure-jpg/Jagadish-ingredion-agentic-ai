@@ -140,7 +140,7 @@ resource "azurerm_federated_identity_credential" "svc" {
 # failures, and gracefully degrades to the offline fake client — the API
 # stays up and keeps serving deterministic demo results, flagged with
 # `degraded: true` + `X-Service-Degraded`. See docs/reliability.md and
-# ingredion_ai/service/reliability.py. For production, add a second model
+# food_ingredients_ai/service/reliability.py. For production, add a second model
 # deployment (different region) and fail over at the client layer.
 # ---------------------------------------------------------------------------
 

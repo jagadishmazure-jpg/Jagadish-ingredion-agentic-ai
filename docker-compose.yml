@@ -7,15 +7,15 @@
 # For live Azure OpenAI mode, create a .env file from .env.example and
 # uncomment the env_file line below.
 
-name: ingredion-agentic-ai
+name: food-ingredients-agentic-ai
 
 services:
   api:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ingredion-agentic-ai:local
-    container_name: ingredion-agentic-ai
+    image: food-ingredients-agentic-ai:local
+    container_name: food-ingredients-agentic-ai
     ports:
       - "8000:8000"
     environment:

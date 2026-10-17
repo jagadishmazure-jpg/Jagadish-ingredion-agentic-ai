@@ -1,16 +1,16 @@
 # Agent → Business Pain-Point Mapping
 
-> **Disclaimer.** This is an independent portfolio demo, not affiliated with
-> Ingredion Incorporated. All data is synthetic. The ebook stats below are
-> **paraphrased public findings** used only as *commented rationale* for
-> demo heuristics — they are not copied from the ebook and should not be
-> cited as the ebook's claims.
+> **Disclaimer.** Independent portfolio demo, not affiliated with any real
+> company. All data is synthetic. The figures below (team expertise gaps,
+> cost as the main barrier, 5–7 month reformulation timelines, a 10%+ price
+> premium for valued claims) are **demo assumptions** that drive the
+> heuristics. They were inspired by public industry reading on clean-label
+> reformulation but are not sourced claims and should not be cited.
 
-Each of the four domain agents exists to address a documented industry pain
-point from Ingredion's public "Unlocking growth through smarter clean label"
-ebook (paraphrased):
+Each of the four domain agents exists to address a common pain point in
+clean-label reformulation:
 
-| Agent | Ebook pain point (paraphrase) | What the agent does (demo) |
+| Agent | Pain point (demo assumption) | What the agent does (demo) |
 |---|---|---|
 | **R&D Formulation** | Reformulation expertise gap (~1 in 3 teams report it) and multi-month project timelines (roughly 5–7 months average) | Analyzer flags non-clean-label ingredients; substitution engine ranks clean-label swaps **cost-aware** (cost is the #1 reported barrier); texture/stability predictor flags shelf-life risk up front; `cycle_time.py` estimates a project timeline off the 5–7 month baseline |
 | **R&D Formulation** | Shelf-life anxiety when removing familiar functional ingredients | `predictor.py` emits explicit stability risk flags — stronger for bakery, where crumb/chew textures are most affected |
@@ -20,11 +20,11 @@ ebook (paraphrased):
 
 ## Where the rationale lives in code
 
-- `ingredion_ai/agents/rd_formulation/substitution.py` — cost-barrier comment + cost-aware ranking
-- `ingredion_ai/agents/rd_formulation/predictor.py` — shelf-life risk flags (bakery-strong)
-- `ingredion_ai/agents/rd_formulation/cycle_time.py` — 5–7 month baseline estimator
-- `ingredion_ai/agents/rd_formulation/regulatory.py` — claim hierarchy / priority
-- `ingredion_ai/agents/customer_advisor/pricing.py` — willingness-to-pay band
+- `food_ingredients_ai/agents/rd_formulation/substitution.py` — cost-barrier comment + cost-aware ranking
+- `food_ingredients_ai/agents/rd_formulation/predictor.py` — shelf-life risk flags (bakery-strong)
+- `food_ingredients_ai/agents/rd_formulation/cycle_time.py` — 5–7 month baseline estimator
+- `food_ingredients_ai/agents/rd_formulation/regulatory.py` — claim hierarchy / priority
+- `food_ingredients_ai/agents/customer_advisor/pricing.py` — willingness-to-pay band
 
 ## Scope and honest framing
 

@@ -1,18 +1,17 @@
-# DEPLOYMENT.md — Ingredion Agentic AI: deployment runbook
+# DEPLOYMENT.md — food-ingredients agentic AI: deployment runbook
 
-**Primary deploy path: GitHub Actions** (`.github/workflows/deploy.yml`) —
-push to `main` and the service builds, deploys to Azure Container Apps, and
-smoke-tests itself. **Local fallback:** `./scripts/deploy-azure.sh`.
-The **AKS + Terraform** path is the enterprise story in `infra/terraform/`.
+> **Status: not deployed.** Nothing from this repo runs in Azure today. This
+> runbook describes how it *would* be deployed with your own subscription.
 
-> **Heads-up:** workflow files can't be pushed by the repo's automation
-> identity (GitHub API returns 403 on `.github/workflows/*`). Add
-> `.github/workflows/ci.yml`, `deploy.yml`, and `qa.yml` manually in the
-> GitHub web UI (repo → Add file → Upload files), then push. Everything else
-> in this repo is already pushed.
+**Deploy path today:** `./scripts/deploy-azure.sh` (Azure Container Apps,
+run by hand with your own `az login`). **Planned:** a GitHub Actions
+`deploy.yml` with OIDC login; it is not in the repo yet, and the sections
+below that mention it describe the planned workflow. The **AKS + Terraform**
+path is the enterprise option in `infra/terraform/` (validated in CI with
+`terraform validate`, never applied).
 
 > All data in this project is **synthetic and fictional**. This is an
-> independent portfolio project, not affiliated with Ingredion.
+> independent portfolio project, not affiliated with any real company.
 
 ## One-time setup: OIDC federated credentials (no stored secrets)
 
@@ -22,7 +21,7 @@ own `az login`:
 
 ```bash
 # 1. Entra app + service principal for GitHub Actions
-APP_NAME="github-ingredion-deploys"
+APP_NAME="github-food-ingredients-deploys"
 az ad app create --display-name "$APP_NAME"
 APP_ID=$(az ad app list --display-name "$APP_NAME" --query '[0].appId' -o tsv)
 az ad sp create --id "$APP_ID"
@@ -37,7 +36,7 @@ az role assignment create --assignee "$APP_ID" --role Contributor \
 az ad app federated-credential create --id "$APP_ID" --parameters "{
   \"name\": \"github-production\",
   \"issuer\": \"https://token.actions.githubusercontent.com\",
-  \"subject\": \"repo:jagadishmazure-jpg/Jagadish-ingredion-agentic-ai:environment:production\",
+  \"subject\": \"repo:jagadishmazure-jpg/Jagadish-food-ingredients-agentic-ai:environment:production\",
   \"audiences\": [\"api://AzureADTokenExchange\"]
 }"
 
@@ -56,7 +55,7 @@ variables, *not* secrets — OIDC mints short-lived tokens at runtime):
 | `AZURE_CLIENT_ID` | `$APP_ID` from setup above | yes |
 | `AZURE_TENANT_ID` | `$TENANT_ID` from setup above | yes |
 | `AZURE_SUBSCRIPTION_ID` | `$SUB_ID` from setup above | yes |
-| `AZURE_RESOURCE_GROUP` | `ingredion-agents-rg` | no (script default) |
+| `AZURE_RESOURCE_GROUP` | `food-ingredients-agents-rg` | no (script default) |
 | `AZURE_LOCATION` | `eastus` | no (script default) |
 
 Also create the **`production` environment** (Settings → Environments →
@@ -65,7 +64,7 @@ gate gives you a single approval/review checkpoint before Azure changes.
 
 ## How the deploy works
 
-1. Push to `main` touching `ingredion_ai/**`, `Dockerfile`,
+1. Push to `main` touching `food_ingredients_ai/**`, `Dockerfile`,
    `docker-compose.yml`, `scripts/deploy-azure.sh`, or `pyproject.toml`
    (or run it manually from the Actions tab via `workflow_dispatch`).
 2. `azure/login@v2` authenticates with OIDC (no secrets).
@@ -119,7 +118,7 @@ The script is **idempotent** — safe to re-run; it reuses existing resources
 and updates the container app in place. What it does:
 
 1. Verifies `az login` (fails fast with a clear error otherwise).
-2. Creates resource group `ingredion-agents-rg` (override: `RESOURCE_GROUP`).
+2. Creates resource group `food-ingredients-agents-rg` (override: `RESOURCE_GROUP`).
 3. Creates an ACR registry `Basic` SKU (globally-unique name derived from
    your subscription id; override: `ACR_NAME`).
 4. Builds and pushes the Docker image **in Azure** (`az acr build` — no local
@@ -150,7 +149,7 @@ running demo with light traffic is typically **under $10/month**.
 | --- | --- |
 | `Not logged in to Azure` | Run `az login` yourself, then re-run the script. |
 | `ACR name is already in use` | Set a custom `ACR_NAME` env var (must be globally unique, lowercase alphanumerics). |
-| Health check times out | `az containerapp logs show --name ingredion-agentic-ai --resource-group ingredion-agents-rg` — most often the image pull is still in progress; wait and re-run (idempotent). |
+| Health check times out | `az containerapp logs show --name food-ingredients-agentic-ai --resource-group food-ingredients-agents-rg` — most often the image pull is still in progress; wait and re-run (idempotent). |
 | `--live` returns 503 | `AZURE_OPENAI_ENDPOINT`/`AZURE_OPENAI_CHAT_DEPLOYMENT` missing or wrong — the service fails loudly instead of silently degrading; check the values. |
 | `docker: command not found` (local) | Install Docker Desktop; the Azure path doesn't need local Docker. |
 
@@ -177,7 +176,7 @@ terraform apply tfplan
 Container Apps path — deletes everything the script created:
 
 ```bash
-az group delete --name ingredion-agents-rg --yes --no-wait
+az group delete --name food-ingredients-agents-rg --yes --no-wait
 ```
 
 Local path:

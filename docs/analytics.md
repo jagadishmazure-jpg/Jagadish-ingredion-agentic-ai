@@ -4,7 +4,7 @@
 
 ## What's measured
 
-`ingredion_ai/analytics/` reduces every reformulation run to a `RunSummary`
+`food_ingredients_ai/analytics/` reduces every reformulation run to a `RunSummary`
 (`aggregates.py::extract_run_summary`) and aggregates across runs:
 
 | Metric | Source |

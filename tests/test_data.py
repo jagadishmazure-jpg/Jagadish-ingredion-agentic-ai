@@ -2,7 +2,7 @@
 
 import pytest
 
-from ingredion_ai.data import loader
+from food_ingredients_ai.data import loader
 
 REQUIRED_FIELDS = {
     "id",

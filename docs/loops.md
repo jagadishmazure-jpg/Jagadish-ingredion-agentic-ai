@@ -3,7 +3,7 @@
 Two small, composable control patterns used across the demo, both fully
 offline and deterministic (stdlib only, no network, no LLM calls).
 
-## Reflection loop (`ingredion_ai/loops/reflection.py`)
+## Reflection loop (`food_ingredients_ai/loops/reflection.py`)
 
 ```
 draft_fn() -> draft -> critique_fn(draft) -> approved? -yes-> result
@@ -48,10 +48,10 @@ revise steps); the iteration bound guarantees the loop cannot spin forever.
 - Iterative refinement where each pass can measurably improve the draft.
 - Anywhere you would otherwise hand-check agent output before release.
 
-## HITL gate loop (`ingredion_ai/loops/hitl.py`)
+## HITL gate loop (`food_ingredients_ai/loops/hitl.py`)
 
 `hitl_gate(action_name, payload, approver=None, max_rounds=3)` wraps the
-governance approval policy (`ingredion_ai/governance/approvals.py`):
+governance approval policy (`food_ingredients_ai/governance/approvals.py`):
 
 1. If `requires_approval(action_name)` is **false**, the action passes
    through immediately (`decision="approved"`, `rounds=0`).

@@ -6,7 +6,7 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from ingredion_ai.controlplane import (
+from food_ingredients_ai.controlplane import (
     ActionBudget,
     BehaviorDrift,
     BudgetManager,

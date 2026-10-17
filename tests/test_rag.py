@@ -1,4 +1,4 @@
-"""Tests for the offline RAG package (ingredion_ai.rag).
+"""Tests for the offline RAG package (food_ingredients_ai.rag).
 
 All fixtures here are synthetic demo data written inline; no real docs,
 no network, fully deterministic.
@@ -8,11 +8,10 @@ from __future__ import annotations
 
 import json
 import math
-from pathlib import Path
 
 import pytest
 
-from ingredion_ai.rag import (
+from food_ingredients_ai.rag import (
     HashEmbedding,
     InMemoryVectorStore,
     Retriever,
@@ -20,8 +19,8 @@ from ingredion_ai.rag import (
     ingest_docs,
     rag_lookup,
 )
-from ingredion_ai.rag.embeddings import AzureOpenAIEmbedding
-from ingredion_ai.rag.tools import _get_default_retriever
+from food_ingredients_ai.rag.embeddings import AzureOpenAIEmbedding
+from food_ingredients_ai.rag.tools import _get_default_retriever
 
 LONG_TEXT = (
     "Clean-label reformulation replaces synthetic ingredients with "

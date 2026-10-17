@@ -1,7 +1,7 @@
 # Microsoft Azure Agentic AI Stack — Alignment Map
 
 > **Disclaimer.** Independent portfolio demo; all data synthetic; not
-> affiliated with Ingredion Incorporated.
+> affiliated with any real company.
 
 This document maps every box of the **Microsoft Azure Agentic AI Stack**
 reference diagram to this project's implementation, its Terraform/K8s
@@ -19,7 +19,7 @@ resources, or its documented production path. Each box is marked:
 |---|---|
 | Documents, wikis, product catalogs | `docs/` (glossary, usecases, architecture) indexed by `rag/` at service startup for grounding |
 | Business systems (CRM, ERP/SAP) | `integrations/crm.py`, `integrations/sap.py` — adapter interfaces + synthetic offline doubles; real connectors are extension points (🟡) |
-| Consumer insights (ATLAS-style) | Synthetic insights dataset under `ingredion_ai/data/`; queried via the RAG retriever (🟡) |
+| Consumer insights | Synthetic insights dataset under `food_ingredients_ai/data/`; queried via the RAG retriever (🟡) |
 | Telemetry / plant readings | Synthetic ESG readings via `agents/esg/collector.py` (🟡) |
 
 ## 2. Event & Integration Sources → 🟡
@@ -75,7 +75,7 @@ mechanisms for the managed Safety services. See `docs/identity.md` and
 
 ## 6. The 8-Step Agentic Loop → ✅
 
-Implemented literally as `ingredion_ai/service/pipeline.py`
+Implemented literally as `food_ingredients_ai/service/pipeline.py`
 (`AgenticPipeline`), one named stage per loop step:
 
 | # | Loop step | Implementation |
@@ -146,7 +146,7 @@ offline ↔ `OpenAIChatClient` on Azure OpenAI). See `framework/`.
 
 - ✅ Service: bearer-token auth on write/run endpoints, per-skill scopes
   (`interop/auth.py`); 401/403 fail closed. Mint demo tokens with
-  `python -m ingredion_ai.service.mint_token`.
+  `python -m food_ingredients_ai.service.mint_token`.
 - ✅ Inter-agent: every A2A call authenticates the caller and enforces the
   skill scopes declared on the agent card.
 - 🟡 Production: `verify_token` keeps its interface and validates Entra
@@ -172,7 +172,7 @@ offline ↔ `OpenAIChatClient` on Azure OpenAI). See `framework/`.
 | Image | Multi-stage `Dockerfile` (python:3.12-slim, non-root, healthcheck) |
 | IaC | `infra/terraform/` — RG, ACR, AKS (zonal, workload identity), Key Vault (RBAC), App Insights, Foundry account + model deployment, least-privilege RBAC |
 | K8s | `infra/k8s/` — namespace, PDB, anti-affinity, HPA, probes, workload-identity SA, Key Vault CSI |
-| CI/CD | `.github/workflows/deploy.yml` — build → push to ACR → deploy (add manually; can't be pushed via API) |
+| CI/CD | planned `.github/workflows/deploy.yml` — build → push to ACR → deploy (not in the repo yet) |
 | Edge / load balancing | Azure Front Door (Standard, WAF Prevention) → APIM gateway → AKS ingress → service (`infra/terraform/frontdoor.tf`, `apim.tf`). Traffic path: Client → Front Door → APIM → AKS ingress → agent service |
 | Runbook | `docs/deployment-runbook.md` — provision → build → deploy → verify |
 

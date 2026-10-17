@@ -9,7 +9,7 @@ Complementary protocols:
 
 - **A2A** (this document): agent → agent delegation (task lifecycle).
 - **MCP** (`docs/integrations.md`): agent → tool invocation.
-- **Auth** (`ingredion_ai/interop/auth.py`): bearer tokens with per-skill
+- **Auth** (`food_ingredients_ai/interop/auth.py`): bearer tokens with per-skill
   scopes; OIDC/Entra ID in production, synthetic JWT in the demo.
 
 ## How two enterprise agents talk
@@ -44,10 +44,10 @@ vendor agent) so a vendor can never escalate into enterprise write scopes.
 
 ## Demo: cross-vendor handoff in procurement
 
-`ingredion_ai/interop/vendor_agents.py` defines a simulated third-party
+`food_ingredients_ai/interop/vendor_agents.py` defines a simulated third-party
 **vendor risk agent** (Dun & Bradstreet-style supplier credit scoring) with
 its own card, its own scope (`vendor:risk:read`), and a deterministic risk
-engine. `ingredion_ai/graph/vendor_risk_graph.py` runs the handoff:
+engine. `food_ingredients_ai/graph/vendor_risk_graph.py` runs the handoff:
 
 ```
 discover_vendor --> risk_check --(low/medium risk)--> procurement_handoff --> done
@@ -69,7 +69,7 @@ discover_vendor --> risk_check --(low/medium risk)--> procurement_handoff --> do
 Run it:
 
 ```python
-from ingredion_ai.graph.vendor_risk_graph import (
+from food_ingredients_ai.graph.vendor_risk_graph import (
     run_vendor_risk_graph, LOW_RISK_SUPPLIER, HIGH_RISK_SUPPLIER,
 )
 run_vendor_risk_graph(supplier=LOW_RISK_SUPPLIER)   # -> po_issued

@@ -5,12 +5,12 @@ import time
 import pytest
 from fastapi.testclient import TestClient
 
-from ingredion_ai.harness.runner import CircuitBreaker, CircuitOpenError
-from ingredion_ai.interop.auth import issue_token
-from ingredion_ai.service import app as app_module
-from ingredion_ai.service import reliability
-from ingredion_ai.service.app import app
-from ingredion_ai.service.reliability import (
+from food_ingredients_ai.harness.runner import CircuitBreaker, CircuitOpenError
+from food_ingredients_ai.interop.auth import issue_token
+from food_ingredients_ai.service import app as app_module
+from food_ingredients_ai.service import reliability
+from food_ingredients_ai.service.app import app
+from food_ingredients_ai.service.reliability import (
     IdempotencyStore,
     RateLimiter,
     RateLimitExceeded,

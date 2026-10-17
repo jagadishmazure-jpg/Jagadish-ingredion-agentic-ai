@@ -14,8 +14,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingredion-agent-svc
-  namespace: ingredion-ai
+  name: food-ingredients-agent-svc
+  namespace: food-ingredients-ai
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -28,6 +28,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ingredion-agent-svc
+                name: food-ingredients-agent-svc
                 port:
                   number: 80

@@ -4,10 +4,10 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: ingredion-agent-svc
-  namespace: ingredion-ai
+  name: food-ingredients-agent-svc
+  namespace: food-ingredients-ai
 spec:
   minAvailable: 1
   selector:
     matchLabels:
-      app: ingredion-agent-svc
+      app: food-ingredients-agent-svc

@@ -27,7 +27,7 @@ variable "tags" {
   description = "Tags applied to every resource."
   type        = map(string)
   default = {
-    project = "jagadish-ingredion-agentic-ai"
+    project = "jagadish-food-ingredients-agentic-ai"
     owner   = "demo"
   }
 }
@@ -71,13 +71,13 @@ variable "aks_availability_zones" {
 variable "k8s_namespace" {
   description = "Kubernetes namespace the service deploys into."
   type        = string
-  default     = "ingredion-ai"
+  default     = "food-ingredients-ai"
 }
 
 variable "k8s_service_account" {
   description = "Kubernetes ServiceAccount federated to the workload identity."
   type        = string
-  default     = "ingredion-svc"
+  default     = "food-ingredients-svc"
 }
 
 variable "apim_sku" {
@@ -89,7 +89,7 @@ variable "apim_sku" {
 variable "apim_publisher_name" {
   description = "APIM publisher display name."
   type        = string
-  default     = "Ingredion AI demo"
+  default     = "Food-ingredients AI demo"
 }
 
 variable "apim_publisher_email" {

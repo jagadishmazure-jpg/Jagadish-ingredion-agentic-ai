@@ -5,7 +5,7 @@ image → deploy to AKS → verify. Build-first, deploy-when-ready: every
 step below is a command you run; nothing here auto-deploys on its own.
 
 > **Disclaimer.** Independent portfolio demo; all data synthetic; not
-> affiliated with Ingredion Incorporated.
+> affiliated with any real company.
 
 ## 0. Prerequisites (manual, one time)
 
@@ -67,7 +67,7 @@ policy, and `-var app_host=<your-dns-name>` matching `__APP_HOST__` in
 service route change (a test fails if it drifts):
 
 ```bash
-python -c "import json; from ingredion_ai.service.app import app; \
+python -c "import json; from food_ingredients_ai.service.app import app; \
   json.dump(app.openapi(), open('infra/apim/openapi.json','w'), indent=2)"
 ```
 
@@ -77,8 +77,8 @@ python -c "import json; from ingredion_ai.service.app import app; \
 ACR=$(cd infra/terraform && terraform output -raw acr_login_server)
 az acr login --name "${ACR%%.*}"
 
-docker build -t "$ACR/ingredion-agentic-ai:0.1.0" .
-docker push "$ACR/ingredion-agentic-ai:0.1.0"
+docker build -t "$ACR/food-ingredients-agentic-ai:0.1.0" .
+docker push "$ACR/food-ingredients-agentic-ai:0.1.0"
 ```
 
 Image notes: multi-stage `python:3.12-slim`, non-root `appuser`,
@@ -116,22 +116,22 @@ helm install csi-secrets-store-provider-azure/csi-secrets-store-provider-azure \
 ```bash
 az aks get-credentials -g <resource-group> -n <aks-name>
 kubectl apply -k infra/k8s/
-kubectl rollout status deployment/ingredion-agent-svc -n ingredion-ai
+kubectl rollout status deployment/food-ingredients-agent-svc -n food-ingredients-ai
 ```
 
 Verify inside the cluster:
 
 ```bash
 # health
-kubectl run smoke --rm -i --restart=Never -n ingredion-ai \
+kubectl run smoke --rm -i --restart=Never -n food-ingredients-ai \
   --image=curlimages/curl:8.10.1 -- \
-  curl -fsS http://ingredion-agent-svc/api/health
+  curl -fsS http://food-ingredients-agent-svc/api/health
 # full workflow (mint a token first)
-TOKEN=$(python -m ingredion_ai.service.mint_token \
+TOKEN=$(python -m food_ingredients_ai.service.mint_token \
   --scopes formulation:write | tail -1)
-kubectl run demo --rm -i --restart=Never -n ingredion-ai \
+kubectl run demo --rm -i --restart=Never -n food-ingredients-ai \
   --image=curlimages/curl:8.10.1 -- \
-  curl -fsS -X POST http://ingredion-agent-svc/api/reformulate \
+  curl -fsS -X POST http://food-ingredients-agent-svc/api/reformulate \
     -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
     -d '{"scenario":"sweet_bakery_cake"}' | head -c 400
 ```
@@ -173,16 +173,15 @@ and use the client-credentials or auth-code flow against
 
 ## 6. CI/CD (optional)
 
-`.github/workflows/deploy.yml` automates steps 2–4 on push to `main`
-(build → push to ACR → `kubectl apply -k` → rollout check → smoke test).
-Workflow files can't be pushed via the repo's automation identity — add
-it manually, then set the repo secrets listed at the top of the file.
+**Planned, not in the repo yet:** a `.github/workflows/deploy.yml` that
+automates steps 2–4 on push to `main` (build → push to ACR → `kubectl apply -k`
+→ rollout check → smoke test) using OIDC federated credentials.
 
 ## 7. Rollback & teardown
 
 ```bash
 # rollback the service
-kubectl rollout undo deployment/ingredion-agent-svc -n ingredion-ai
+kubectl rollout undo deployment/food-ingredients-agent-svc -n food-ingredients-ai
 # tear everything down (destroys Azure resources)
 cd infra/terraform && terraform destroy -var environment=dev
 ```

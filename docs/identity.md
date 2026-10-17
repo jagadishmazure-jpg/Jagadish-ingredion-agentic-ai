@@ -1,7 +1,7 @@
 # Identity & Access
 
 > **Disclaimer.** Independent portfolio demo; all data synthetic; not
-> affiliated with Ingredion Incorporated. Identity concepts below are
+> affiliated with any real company. Identity concepts below are
 > paraphrased in our own words — no passages copied from vendor ebooks.
 
 This project demonstrates identity at **two layers**: (1) the agent API
@@ -34,7 +34,7 @@ approval for sensitive actions → identity-attributed audit):
 
 1. **Authenticate:** a calling agent presents a bearer token on every A2A
    `message/send` call. Offline/tests use the synthetic JWT-shaped token in
-   `ingredion_ai/interop/auth.py` (`issue_token` / `verify_token`, HMAC
+   `food_ingredients_ai/interop/auth.py` (`issue_token` / `verify_token`, HMAC
    demo key — not a secret). **Production swap:** `verify_token` keeps its
    interface but validates against Entra ID's OIDC JWKS endpoint; in AKS the
    caller is a workload-identity service account.
@@ -65,13 +65,13 @@ Write scopes are the high-impact set; see `interop/auth.py::HIGH_IMPACT_SCOPES`.
 
 - Terraform (`infra/terraform/`): user-assigned managed identity for the
   agent service, federated credential bound to the AKS service account
-  (`system:serviceaccount:ingredion-ai:ingredion-svc`), `azurerm_role_assignment`
+  (`system:serviceaccount:food-ingredients-ai:food-ingredients-svc`), `azurerm_role_assignment`
   for Azure OpenAI (`Cognitive Services OpenAI User`) + Key Vault
   (`Key Vault Secrets User`) + ACR (`AcrPull` for the kubelet).
 - Kubernetes (`infra/k8s/`): `ServiceAccount` annotated with the workload
   identity client ID, secrets via the Secrets Store CSI driver (never
   env-baked), PDB + anti-affinity + HPA for availability.
-- Service auth (`ingredion_ai/service/app.py`): HTTP Bearer <redacted> on
+- Service auth (`food_ingredients_ai/service/app.py`): HTTP Bearer <redacted> on
   `POST /api/reformulate` and `POST /api/agents/{agent}/run`, verified by
   `interop/auth.py` (demo synthetic JWT offline; production swaps
   `verify_token` for Entra ID OIDC/JWKS validation — same interface).

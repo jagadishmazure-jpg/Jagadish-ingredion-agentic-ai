@@ -4,9 +4,8 @@ All offline and deterministic; the domain-backed tests use the real
 RDFormulationAgent execute() paths and the real governance approvals API.
 """
 
-from ingredion_ai.governance.approvals import ApprovalGate, ApprovalRecord
-from ingredion_ai.loops import hitl_gate, reflection_loop, reflective_reformulate
-
+from food_ingredients_ai.governance.approvals import ApprovalGate, ApprovalRecord
+from food_ingredients_ai.loops import hitl_gate, reflection_loop, reflective_reformulate
 
 # --- reflection_loop with mock functions -----------------------------------
 

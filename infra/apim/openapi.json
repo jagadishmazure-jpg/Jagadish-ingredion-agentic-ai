@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "ingredion-agentic-ai-demo",
+    "title": "food-ingredients-agentic-ai-demo",
     "version": "0.1.0"
   },
   "paths": {
@@ -71,7 +71,7 @@
     "/api/reformulate": {
       "post": {
         "summary": "Reformulate",
-        "description": "Run the full 4-agent reformulation workflow (offline by default).\n\nRequest flows through the 8-stage agentic pipeline\n(:mod:`ingredion_ai.service.pipeline`). Supports ``Idempotency-Key``.\nLive failures degrade gracefully to the offline fake client\n(``degraded: true`` + ``X-Service-Degraded``).",
+        "description": "Run the full 4-agent reformulation workflow (offline by default).\n\nRequest flows through the 8-stage agentic pipeline\n(:mod:`food_ingredients_ai.service.pipeline`). Supports ``Idempotency-Key``.\nLive failures degrade gracefully to the offline fake client\n(``degraded: true`` + ``X-Service-Degraded``).",
         "operationId": "reformulate_api_reformulate_post",
         "parameters": [
           {

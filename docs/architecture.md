@@ -1,13 +1,13 @@
 # Architecture
 
-> Demo project. All data synthetic and fictional. Not affiliated with Ingredion.
+> Demo project. All data synthetic and fictional. Not affiliated with any real company.
 
 ## Multi-agent architecture (demo)
 
 ```text
                     ┌──────────────────────────────┐
                     │        User / Demo CLI       │
-                    │   python -m ingredion_ai.demo│
+                    │   python -m food_ingredients_ai.demo│
                     └──────────────┬───────────────┘
                                    │
                     ┌──────────────▼───────────────┐

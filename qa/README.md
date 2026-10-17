@@ -1,6 +1,6 @@
 # Playwright QA — API + UI end-to-end tests
 
-TypeScript Playwright framework for the agent service (`ingredion_ai/service/`)
+TypeScript Playwright framework for the agent service (`food_ingredients_ai/service/`)
 and the demo UI (`GET /`). Follows the repo's QA guides: Page Object Model,
 fixtures, test data separated from logic, multi-environment config, API+UI
 integration, parallel execution, and CI-friendly reporting.
@@ -24,9 +24,9 @@ qa/
 ```bash
 # 1. Start the service (from the repo root). Use a small rate-limit budget
 #    so the 429 test runs fast; default 60/min otherwise.
-cd ~/workspace/github-scaffolds/Jagadish-ingredion-agentic-ai
+cd ~/workspace/github-scaffolds/Jagadish-food-ingredients-agentic-ai
 SERVICE_RATE_LIMIT_PER_MIN=5 \
-  ~/.venvs/qav/bin/python -m uvicorn ingredion_ai.service.app:app --port 8000 &
+  ~/.venvs/qav/bin/python -m uvicorn food_ingredients_ai.service.app:app --port 8000 &
 
 # 2. Point the framework at a Python with the service deps installed.
 #    Tokens are minted automatically per test (unique subjects → isolated
