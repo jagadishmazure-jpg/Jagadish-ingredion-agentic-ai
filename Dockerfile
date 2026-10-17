@@ -7,7 +7,7 @@
 
 # Base image pinned by digest (python:3.12-slim, amd64, resolved 2026-10-11).
 # Re-pin on rebuilds: docker buildx imagetools inspect python:3.12-slim.
-FROM python:3.12-slim@sha256:2b4f19dae3a777dfc3b76730bda1e82e1f66ab2a2686fa93ca78edbfb4f04ffe AS builder
+FROM python:3.14-slim@sha256:a2b82f3c48559aa0a8446d9af49826b6e2b2016f4cd2afabfe6013ec53729170 AS builder
 
 COPY --from=ghcr.io/astral-sh/uv:0.7 /uv /uvx /bin/
 
@@ -18,7 +18,7 @@ COPY pyproject.toml README.md LICENSE ./
 COPY food_ingredients_ai ./food_ingredients_ai
 RUN uv pip install --system --no-cache .
 
-FROM python:3.12-slim@sha256:2b4f19dae3a777dfc3b76730bda1e82e1f66ab2a2686fa93ca78edbfb4f04ffe AS runtime
+FROM python:3.14-slim@sha256:a2b82f3c48559aa0a8446d9af49826b6e2b2016f4cd2afabfe6013ec53729170 AS runtime
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
